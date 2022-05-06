@@ -11,16 +11,18 @@
 		</header>
 
 
+		<!-- menu -->
 		<nav>
-			<button id="welcomeOption">Welcome</button>
-			<button id="registerOption">Registration</button>
-			<button id="logineOption">Login</button>
-			<button id="settingsOption">Settings</button>
-			<button id="aboutOption">About</button>
-			<button id="gameOption">Game</button>
+			<button id="welcomeOption" onclick="showWelcome()">Welcome</button>
+			<button id="registerOption" onclick="showRegister()">Registration</button>
+			<button id="loginOption" onclick="showLogin()">Login</button>
+			<button id="settingsOption" onclick="showSettings()">Settings</button>
+			<button id="aboutOption" onclick="showAbout()">About</button>
+			<button id="gameOption" onclick="showGame()">Game</button>
 		</nav>
 
 
+		<!-- body -->
 		<section>
 			<!-- Welcome Page -->
 			<div id="welcome">
@@ -29,7 +31,14 @@
 
 			<!-- Registration Page -->
 			<div id="register">
-
+				<form id="registerForm">
+					<input type="text" placeholder="Username"> <br>
+					<input type="text" placeholder="Password"> <br>
+					<input type="text" placeholder="Full Name"> <br>
+					<input type="text" placeholder="Email Address"> <br>
+					<input type="date" placeholder="Date of Birth"> <br>
+					<input type="submit" value="Submit" onclick="doSubmit()">
+				</form>
 			</div>
 
 			<!-- Login Page -->

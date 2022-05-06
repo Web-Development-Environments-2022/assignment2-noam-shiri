@@ -6,42 +6,18 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+// dictionary of users and their passoword, initialize "k" user:
+var users = [
+	{
+	username: "k",
+	password: "k"
+	}
+];
 
 $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();
 	$("#welcome").show();
-	// set hide and show functions for menu:
-	$("#welcomeOption").click( function(){
-		hideAllPages();
-		$("#welcome").show();
-		}
-	);
-	$("#registerOption").click( function(){
-		hideAllPages();
-		$("#register").show();
-		}
-	);
-	$("#loginOption").click( function(){
-		hideAllPages();
-		$("#login").show();
-		}
-	);
-	$("#settingsOption").click( function(){
-		hideAllPages();
-		$("#settings").show();
-		}
-	);
-	$("#aboutOption").click( function(){
-		hideAllPages();
-		$("#about").show();
-		}
-	);
-	$("#gameOption").click( function(){
-		hideAllPages();
-		$("#game").show();
-		}
-	);
 	// this is from the original code:
 	context = canvas.getContext("2d");
 	Start();
@@ -215,3 +191,39 @@ function hideAllPages(){
 	$("#about").hide();
 	$("#game").hide();
 }
+
+// set hide and show functions for menu:
+function showWelcome(){
+	hideAllPages();
+	$("#welcome").show();
+}
+
+function showRegister(){
+	hideAllPages();
+	$("#register").show();
+}
+
+function showLogin(){
+	hideAllPages();
+	$("#login").show();
+}
+
+function showSettings(){
+	hideAllPages();
+	$("#settings").show();
+}
+
+function showAbout(){
+	hideAllPages();
+	$("#about").show();
+}
+
+function showGame(){
+	hideAllPages();
+	$("#game").show();
+}
+
+// asign function for submit button
+function doSubmit(event) {
+	console.log(`Form Submitted!`);
+  }
