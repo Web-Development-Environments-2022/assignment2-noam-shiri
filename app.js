@@ -203,6 +203,7 @@ function showWelcome(){
 function showRegister(){
 	hideAllPages();
 	$("#register").show();
+	$("#register").find('span,select').each(function(){$(this).hide();}); //hide error messages on fields as default
 }
 
 function showLogin(){
@@ -227,20 +228,31 @@ function showGame(){
 
 //register check inputs validation:
 function registerCheck(){
+	$("#register").find('span,select').each(function(){$(this).hide();});
 	var isValid = true;
 	$("#registerForm").find('input[type!=submit],select').each(function(){ // check if all inputs contain data
 		if($(this).val() ===""){
 			isValid = false;
-			return;
+			$("#errormissing").show();
 		}
 	})
-	if(checkPassword($('#regPassword').val()) == false)    
+	if(checkPassword($('#regPassword').val()) == false)  {  
 		isValid = false;
-	if(checkFullName($('#fullName').val()) == false){
-		isValid = false;}
-	if(checkEmail($('#email').val()) == false)
+		$("#errorpassword").show();
+	}
+	if(checkFullName($('#regFullName').val()) == false){
 		isValid = false;
-	if(isValid){ //need to add to users
+		$("#errorname").show();
+	}
+	if(checkEmail($('#regEmail').val()) == false){
+		isValid = false;
+		$("#erroremail").show();
+	}
+	if(isValid){ 
+		users.push({
+			username: $('#regUsername').val(),
+			password: $('#regPassword').val()
+			});
 		alert("successful");
 	}
 }
