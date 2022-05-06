@@ -6,8 +6,21 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+// dictionary of users and their passoword, initialize "k" user:
+var users = [
+	{
+	username: "k",
+	password: "k"
+	}
+];
 
 $(document).ready(function() {
+	// hide all divs except from Welcome
+	hideAllPages();
+	$("#welcome").show();
+	//register submit button
+	$("#registerForm").on("submit", registerCheck);
+	// this is from the original code:
 	context = canvas.getContext("2d");
 	Start();
 });
@@ -169,4 +182,98 @@ function UpdatePosition() {
 	} else {
 		Draw();
 	}
+}
+
+function hideAllPages(){
+	// this function hides all the pages
+	$("#welcome").hide();
+	$("#register").hide();
+	$("#login").hide();
+	$("#settings").hide();
+	$("#about").hide();
+	$("#game").hide();
+}
+
+// set hide and show functions for menu:
+function showWelcome(){
+	hideAllPages();
+	$("#welcome").show();
+}
+
+function showRegister(){
+	hideAllPages();
+	$("#register").show();
+	$("#register").find('span,select').each(function(){$(this).hide();}); //hide error messages on fields as default
+}
+
+function showLogin(){
+	hideAllPages();
+	$("#login").show();
+}
+
+function showSettings(){
+	hideAllPages();
+	$("#settings").show();
+}
+
+function showAbout(){
+	hideAllPages();
+	$("#about").show();
+}
+
+function showGame(){
+	hideAllPages();
+	$("#game").show();
+}
+
+//register check inputs validation:
+function registerCheck(){
+	$("#register").find('span,select').each(function(){$(this).hide();});
+	var isValid = true;
+	$("#registerForm").find('input[type!=submit],select').each(function(){ // check if all inputs contain data
+		if($(this).val() ===""){
+			isValid = false;
+			$("#errormissing").show();
+		}
+	})
+	if(checkPassword($('#regPassword').val()) == false)  {  
+		isValid = false;
+		$("#errorpassword").show();
+	}
+	if(checkFullName($('#regFullName').val()) == false){
+		isValid = false;
+		$("#errorname").show();
+	}
+	if(checkEmail($('#regEmail').val()) == false){
+		isValid = false;
+		$("#erroremail").show();
+	}
+	if(isValid){ 
+		users.push({
+			username: $('#regUsername').val(),
+			password: $('#regPassword').val()
+			});
+		alert("successful");
+	}
+}
+
+function checkPassword(password){
+	var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+	if(passwordPattern.test(password))
+		return true;
+	return false;
+	}
+
+function checkFullName(fullName){
+	var usernamePattern = /^[A-Za-z ]{1,20}$/;
+	if(usernamePattern.test(fullName))
+		return true;
+	return false;
+	}
+
+function checkEmail(email){
+	var emailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+	if(emailPattern.test(email))
+		return true;
+	return false;
 }

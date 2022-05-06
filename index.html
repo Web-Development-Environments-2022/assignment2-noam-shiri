@@ -6,16 +6,85 @@
 	</head>
 
 	<body>
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
-		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
-		</div>
-		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
-		</div>
+		<header>
+			
+		</header>
+
+
+		<!-- menu -->
+		<nav>
+			<button id="welcomeOption" onclick="showWelcome()">Welcome</button>
+			<button id="registerOption" onclick="showRegister()">Registration</button>
+			<button id="loginOption" onclick="showLogin()">Login</button>
+			<button id="settingsOption" onclick="showSettings()">Settings</button>
+			<button id="aboutOption" onclick="showAbout()">About</button>
+			<button id="gameOption" onclick="showGame()">Game</button>
+		</nav>
+
+
+		<!-- body -->
+		<section>
+			<!-- Welcome Page -->
+			<div id="welcome">
+				
+			</div>
+
+			<!-- Registration Page -->
+			<div id="register">
+				<form id="registerForm">
+					<label>Username: </label>
+					<input id="regUsername" type="text" placeholder="Enter username"> <br>
+					<label>Password: </label>
+					<input id="regPassword" type="password" placeholder="Enter Password" passwordCheck="passwordCheck"> <br>
+					<span class="errorMsg" id="errorpassword">*Please provide valid Password.</span> <br>
+					<label>Full Name: </label>
+					<input id="regFullName" type="text" placeholder="Enter Full Name"> <br>
+					<span class="errorMsg" id="errorname">*Please provide valid Full Name.</span> <br>
+					<label>Email Address: </label>
+					<input id="regEmail" type="text" placeholder="Enter Email Address"> <br>
+					<span class="errorMsg" id="erroremail">*Please provide valid Email.</span> <br>
+					<label>Date of Birth: </label>
+					<input id="regDate" type="date"> <br>
+					<input type="submit" class="button" value="Submit">
+					<span class="errorMsg" id="errormissing">*Please fill all the data.</span> <br>
+					<!--  onclick="doSubmitcheck()" -->
+				</form>
+			</div>
+
+			<!-- Login Page -->
+			<div id="login">
+
+			</div>
+
+			<!-- Settings Page  -->
+			<div id="settings">
+
+			</div>
+
+			<!-- About Page  -->
+			<div id="about">
+
+			</div>
+
+			<!-- Game Page -->
+			<div id="game"> 
+				<div id="score">
+					<label for="lblScore">SCORE:</label>
+					<input id="lblScore" type="text" />
+				</div>
+				<div id="time">
+					<label for="lblTime">TIME:</label>
+					<input id="lblTime" type="text" />
+				</div>
+				<div id="game">
+					<canvas id="canvas" height="600" width="600"></canvas>
+				</div>
+			</div>
+		</section>
+
+
+		<footer>
+			
+		</footer>
 	</body>
 </html>
