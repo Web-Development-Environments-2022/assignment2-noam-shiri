@@ -32,12 +32,18 @@
 			<!-- Registration Page -->
 			<div id="register">
 				<form id="registerForm">
-					<input type="text" placeholder="Username"> <br>
-					<input type="text" placeholder="Password"> <br>
-					<input type="text" placeholder="Full Name"> <br>
-					<input type="text" placeholder="Email Address"> <br>
-					<input type="date" placeholder="Date of Birth"> <br>
-					<input type="submit" value="Submit" onclick="doSubmit()">
+					<label>Username: </label>
+					<input type="text" placeholder="Enter username"> <br>
+					<label>Password: </label>
+					<input id="regPassword" type="password" placeholder="Enter Password" passwordCheck="passwordCheck"> <br>
+					<label>Full Name: </label>
+					<input id="fullName" type="text" placeholder="Enter Full Name"> <br>
+					<label>Email Address: </label>
+					<input id="email" type="text" placeholder="Enter Email Address"> <br>
+					<label>Date of Birth: </label>
+					<input id="regDate" type="date"> <br>
+					<input type="submit" class="button" value="Submit">
+					<!--  onclick="doSubmitcheck()" -->
 				</form>
 			</div>
 
