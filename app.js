@@ -8,6 +8,41 @@ var time_elapsed;
 var interval;
 
 $(document).ready(function() {
+	// hide all divs except from Welcome
+	hideAllPages();
+	$("#welcome").show();
+	// set hide and show functions for menu:
+	$("#welcomeOption").click( function(){
+		hideAllPages();
+		$("#welcome").show();
+		}
+	);
+	$("#registerOption").click( function(){
+		hideAllPages();
+		$("#register").show();
+		}
+	);
+	$("#loginOption").click( function(){
+		hideAllPages();
+		$("#login").show();
+		}
+	);
+	$("#settingsOption").click( function(){
+		hideAllPages();
+		$("#settings").show();
+		}
+	);
+	$("#aboutOption").click( function(){
+		hideAllPages();
+		$("#about").show();
+		}
+	);
+	$("#gameOption").click( function(){
+		hideAllPages();
+		$("#game").show();
+		}
+	);
+	// this is from the original code:
 	context = canvas.getContext("2d");
 	Start();
 });
@@ -169,4 +204,14 @@ function UpdatePosition() {
 	} else {
 		Draw();
 	}
+}
+
+function hideAllPages(){
+	// this function hides all the pages
+	$("#welcome").hide();
+	$("#register").hide();
+	$("#login").hide();
+	$("#settings").hide();
+	$("#about").hide();
+	$("#game").hide();
 }
