@@ -115,3 +115,11 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+  input[type="radio"]{
+    margin: 0 0 0 20px;
+  }
+
+#settings{
+  font-size: 20px;
+}

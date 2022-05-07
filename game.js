@@ -1,14 +1,20 @@
-var left = 37
-var up = 38;
-var right = 39
-var down = 40
+var left;
+var up;
+var right;
+var down;
+var food_requested;
+var maxGameTime;
+var monsters;
+var color5points;
+var color15points;
+var color25points;
 
 function Start() {
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;
-	var food_remain = 50;
+	var food_remain = food_requested;
 	var pacman_remain = 1;
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
@@ -60,7 +66,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 120);
 }
 
 function findRandomEmptyCell(board) {
@@ -157,7 +163,12 @@ function UpdatePosition() {
 	if (score == 50) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
-	} else {
+	}
+	if(maxGameTime <= time_elapsed){
+		window.clearInterval(interval);
+		window.alert("You lost!");
+	}
+	else {
 		Draw();
 	}
 }
