@@ -1,9 +1,23 @@
-*{
-    background-color:#FFE4E1
-    ;
+
+.page{
+    background-color:#1f2029;
+    position: absolute;
+    height: 100%;
+    width: 100%;
     font-family: Arial, Verdana, sans-serif;
 }
+ 
 
+#logoimage{
+    position:relative;
+    top: 10px;
+}
+
+.homePagebtn{
+    position:relative;
+    font-size: 30px;
+    top: 20px;
+}
 .menu {
     overflow: hidden;
     background-color: #333;
@@ -14,15 +28,47 @@
     font-size: 16px;
 }
 
+/* 
+.loginForm {
+    max-width: 200px;
+    min-height: 200px;
+    margin: 80px auto;
+    padding: 40px 30px 30px 30px;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+    font-size: 16px;
+    text-align: left;
+    
+}
+
+#loginSubmit{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 300%);
+    width: 50%;
+    height:30px;
+    background-color:RosyBrown ;
+    color: #fff;
+    border-radius: 25px;
+    border-color:IndianRed;
+    box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+}
+
+#loginSubmit:hover {
+    background-color: rgb(198, 127, 103);
+}
+ */
+
 .copyrights{
     position: absolute;
-    bottom: 8px;
+    bottom: 5px;
     left: 16px;
     font-size: 18px;
   }
-.homePage {
+
+#welcome {
     position: absolute;
-    top: 50%;
+    height: 100%;
     width: 100%;
     text-align: center;
     font-size: 18px;

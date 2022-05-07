@@ -37,6 +37,7 @@ function hideAllPages(){
 	$("#settings").hide();
 	$("#about").hide();
 	$("#game").hide();
+	$("#enter").hide();
 }
 
 // set hide and show functions for menu:
@@ -61,6 +62,12 @@ function showLogin(){
 	hideAllPages();
 	$('#homeOption').show();
 	$("#login").show();
+}
+
+function enterGame(){
+	hideAllPages();
+	$('#homeOption').show();
+	$("#enter").show();
 }
 
 function showSettings(){
