@@ -14,14 +14,16 @@ var users = [
 	}
 ];
 
+var userLogged = false;
+
 $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();
 	$("#welcome").show();
 	$('#homeOption').hide();
+	$("#gameOption").hide();
 	// this is from the original code:
 	context = canvas.getContext("2d");
-	Start();
 });
 
 function Start() {
@@ -197,6 +199,10 @@ function hideAllPages(){
 function showHome(){
 	hideAllPages();
 	$('#homeOption').hide();
+	if(userLogged == false)
+		$("#gameOption").hide();
+	else
+		$("#gameOption").show();
 	$("#welcome").show();
 }
 
@@ -220,15 +226,38 @@ function showSettings(){
 }
 
 function showAbout(){
-	hideAllPages();
+	//hideAllPages();
 	$('#homeOption').show();
 	$("#about").show();
+	// Get the modal
+	var modal = document.getElementById("about");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+	// When the user clicks on ESC key, close modal
+	$(document).keydown(function(event) { 
+		if (event.keyCode == 27) { 
+			modal.style.display = "none";
+		}
+	  });
 }
 
 function showGame(){
 	hideAllPages();
 	$('#homeOption').show();
 	$("#game").show();
+	Start();
 }
 
 //register check inputs validation:
@@ -294,16 +323,21 @@ function loginCheck(){
 		if(users[i].username==u){
 			if(users[i].password==p){
 				found = true;
-				showGame();//GO TOGAME
+				loggedIn();//GO TOGAME
 			}
 			if (!found){
-				alert("Wrong password. Please try again.")
-				return ;
+				alert("Wrong password. Please try again.");
+				return;
 			}
 		}
 	}
 	if (!found){
-		alert("Username not found. Please try again.")
-		return ;
+		alert("Username not found. Please try again.");
 	}
+}
+
+//login check validation:
+function loggedIn(){
+	userLogged = true;
+	showGame();
 }
