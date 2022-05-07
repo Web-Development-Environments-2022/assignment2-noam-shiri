@@ -6,6 +6,7 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+
 // dictionary of users and their passoword, initialize "k" user:
 var users = [
 	{
@@ -22,6 +23,8 @@ $(document).ready(function() {
 	$("#welcome").show();
 	$('#homeOption').hide();
 	$("#gameOption").hide();
+	//set listeners
+	addSettingsListeners();
 	// this is from the original code:
 	context = canvas.getContext("2d");
 });
