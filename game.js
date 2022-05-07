@@ -1,3 +1,8 @@
+var left = 37
+var up = 38;
+var right = 39
+var down = 40
+
 function Start() {
 	board = new Array();
 	score = 0;
@@ -69,16 +74,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[up]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[down]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[left]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[right]) {
 		return 4;
 	}
 }
