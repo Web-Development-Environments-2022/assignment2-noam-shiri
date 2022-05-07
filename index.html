@@ -3,6 +3,7 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 	</head>
 
 	<body>
@@ -13,11 +14,13 @@
 
 		<!-- menu -->
 		<nav>
+			<div class="menu">
 			<!--<button id="welcomeOption" onclick="showWelcome()">Welcome</button>      MAYBE NOT NEEDED--> 
-			<button id="homeOption" onclick="showHome()">Home</button>
-			<button id="settingsOption" onclick="showSettings()">Settings</button>
-			<button id="aboutOption" onclick="showAbout()">About</button>
-			<button id="gameOption" onclick="showGame()">Game</button>
+				<button id="homeOption" onclick="showHome()">Home</button>
+				<button id="settingsOption" onclick="showSettings()">Settings</button>
+				<button id="aboutOption" onclick="showAbout()">About</button>
+				<button id="gameOption" onclick="showGame()">Game</button>
+			</div>
 		</nav>
 
 
@@ -25,8 +28,10 @@
 		<section>
 			<!-- Welcome Page -->
 			<div id="welcome">
+				<div class="menu">
 				<button id="registerOption" onclick="showRegister()">Registration</button>
 				<button id="loginOption" onclick="showLogin()">Login</button>
+				</div>
 			</div>
 
 			<!-- Registration Page -->
@@ -57,7 +62,7 @@
 					<input id="loginUsername" type="text" placeholder="Enter username"> <br>
 					<label>Password: </label>
 					<input id="loginPassword" type="password" placeholder="Enter Password"> <br>
-					<button id="loginSubmit" onclick="loginCheck()" >Log In</button>
+					<button id="loginSubmit" type="button" onclick="loginCheck()" >Log In</button>
 				</form>
 			</div>
 
@@ -67,8 +72,14 @@
 			</div>
 
 			<!-- About Page  -->
-			<div id="about">
-
+			<div id="about" class="modal">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<p>Presenters: Noam Cohen Maguri, Shiri Itach</p><br>
+					<p>What was in jQuery Plugin use: </p><br>
+					<p>What Template had been used: </p><br>
+					<p>The difficulties we encountered in the exercise: </p><br>
+				</div>
 			</div>
 
 			<!-- Game Page -->
