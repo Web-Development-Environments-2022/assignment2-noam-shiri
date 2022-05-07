@@ -30,11 +30,21 @@
 		<!-- body -->
 		<section>
 			<!-- Welcome Page -->
-			<div id="welcome">
-				<div class="menu">
-				<button id="registerOption" onclick="showRegister()">Registration</button>
-				<button id="loginOption" onclick="showLogin()">Login</button>
-				</div>
+			<div class="homePage" id="welcome">
+				<!-- <button id="registerOption" onclick="showRegister()">Registration</button> -->
+				<!-- <button id="loginOption" onclick="showLogin()">Login</button> -->
+			<!-- Login Page -->
+				<p id="login">
+					<form id="loginForm">
+						<label>Username: </label>
+						<input id="loginUsername" type="text" placeholder="Enter username"> <br>
+						<label>Password: </label>
+						<input id="loginPassword" type="password" placeholder="Enter Password"> <br>
+						<p>Are you new here ? <a class="link" onclick=showRegister()>register here</a></p>
+						<button id="loginSubmit" type="button" onclick="loginCheck()" >Log In</button>
+						
+					</form>
+				</p>
 			</div>
 
 			<!-- Registration Page -->
@@ -58,16 +68,7 @@
 				</form>
 			</div>
 
-			<!-- Login Page -->
-			<div id="login">
-				<form id="loginForm">
-					<label>Username: </label>
-					<input id="loginUsername" type="text" placeholder="Enter username"> <br>
-					<label>Password: </label>
-					<input id="loginPassword" type="password" placeholder="Enter Password"> <br>
-					<button id="loginSubmit" type="button" onclick="loginCheck()" >Log In</button>
-				</form>
-			</div>
+
 
 			<!-- Settings Page  -->
 			<div id="settings">
@@ -103,7 +104,7 @@
 
 
 		<footer>
-			
+			<p class="copyrights">&copy; Shiri Itach & Noam Cohen Maguri </p>
 		</footer>
 	</body>
 </html>
