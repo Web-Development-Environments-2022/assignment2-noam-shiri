@@ -18,6 +18,10 @@ $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();
 	$("#welcome").show();
+	$('#homeOption').hide();
+	//register submit button
+	$("#registerForm").on("submit", registerCheck());
+	//$("#loginForm").on("loginSubmit", loginCheck());
 	// this is from the original code:
 	context = canvas.getContext("2d");
 	Start();
@@ -193,39 +197,46 @@ function hideAllPages(){
 }
 
 // set hide and show functions for menu:
-function showWelcome(){
+function showHome(){
 	hideAllPages();
+	$('#homeOption').hide();
 	$("#welcome").show();
 }
 
 function showRegister(){
 	hideAllPages();
+	$('#homeOption').show();
 	$("#register").show();
 	$("#register").find('span,select').each(function(){$(this).hide();}); //hide error messages on fields as default
 }
 
 function showLogin(){
 	hideAllPages();
+	$('#homeOption').show();
 	$("#login").show();
 }
 
 function showSettings(){
 	hideAllPages();
+	$('#homeOption').show();
 	$("#settings").show();
 }
 
 function showAbout(){
 	hideAllPages();
+	$('#homeOption').show();
 	$("#about").show();
 }
 
 function showGame(){
 	hideAllPages();
+	$('#homeOption').show();
 	$("#game").show();
 }
 
 //register check inputs validation:
 function registerCheck(){
+	//console.log("TEST AGAIN");
 	$("#register").find('span,select').each(function(){$(this).hide();});
 	var isValid = true;
 	$("#registerForm").find('input[type!=submit],select').each(function(){ // check if all inputs contain data
@@ -274,4 +285,28 @@ function checkEmail(email){
 	if(emailPattern.test(email))
 		return true;
 	return false;
+}
+
+
+//login check validation:
+function loginCheck(){
+	var u = $('#loginUsername').val()
+	var p = $('#loginPassword').val()
+	var found = false;
+	for (i in users){
+		if(users[i].username==u){
+			if(users[i].password==p){
+				found = true;
+				showGame();//GO TOGAME
+			}
+			if (!found){
+				alert("Wrong password. Please try again.")
+				return ;
+			}
+		}
+	}
+	if (!found){
+		alert("Username not found. Please try again.")
+		return ;
+	}
 }

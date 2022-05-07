@@ -13,9 +13,8 @@
 
 		<!-- menu -->
 		<nav>
-			<button id="welcomeOption" onclick="showWelcome()">Welcome</button>
-			<button id="registerOption" onclick="showRegister()">Registration</button>
-			<button id="loginOption" onclick="showLogin()">Login</button>
+			<!--<button id="welcomeOption" onclick="showWelcome()">Welcome</button>      MAYBE NOT NEEDED--> 
+			<button id="homeOption" onclick="showHome()">Home</button>
 			<button id="settingsOption" onclick="showSettings()">Settings</button>
 			<button id="aboutOption" onclick="showAbout()">About</button>
 			<button id="gameOption" onclick="showGame()">Game</button>
@@ -26,7 +25,8 @@
 		<section>
 			<!-- Welcome Page -->
 			<div id="welcome">
-				
+				<button id="registerOption" onclick="showRegister()">Registration</button>
+				<button id="loginOption" onclick="showLogin()">Login</button>
 			</div>
 
 			<!-- Registration Page -->
@@ -45,14 +45,20 @@
 					<span class="errorMsg" id="erroremail">*Please provide valid Email.</span> <br>
 					<label>Date of Birth: </label>
 					<input id="regDate" type="date"> <br>
+					<input type="submit" class="button" value="Submit"> <!--onclick="registerCheck()"--> 
 					<span class="errorMsg" id="errormissing">*Please fill all the data.</span> <br>
-					<button type="button" onclick="registerCheck()">Register</button>
 				</form>
 			</div>
 
 			<!-- Login Page -->
 			<div id="login">
-
+				<form id="loginForm">
+					<label>Username: </label>
+					<input id="loginUsername" type="text" placeholder="Enter username"> <br>
+					<label>Password: </label>
+					<input id="loginPassword" type="password" placeholder="Enter Password"> <br>
+					<button id="loginSubmit" onclick="loginCheck()" >Log In</button>
+				</form>
 			</div>
 
 			<!-- Settings Page  -->
