@@ -19,9 +19,6 @@ $(document).ready(function() {
 	hideAllPages();
 	$("#welcome").show();
 	$('#homeOption').hide();
-	//register submit button
-	$("#registerForm").on("submit", registerCheck());
-	//$("#loginForm").on("loginSubmit", loginCheck());
 	// this is from the original code:
 	context = canvas.getContext("2d");
 	Start();
