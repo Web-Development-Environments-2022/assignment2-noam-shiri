@@ -108,4 +108,5 @@ function saveSettings(){
         }
     }
     setColors(chosen5,chosen15,chosen25);
+    showGame();
 }

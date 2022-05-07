@@ -8,7 +8,7 @@
 body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;
-	font-size: 15px;
+	font-size: 13px;
 	line-height: 1.7;
 	color: #c4c3ca;
 	background-color: #1f2029;
@@ -25,22 +25,25 @@ a:hover {
   color: #c4c3ca;
 }
 .link:hover {
-  color: #ffeba7;
+  color: #bf9bdd;
 }
 p {
   font-weight: 500;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.7;
 }
-h4 {
-  font-weight: 600;
-}
-h6 span{
-  padding: 0 20px;
-  text-transform: uppercase;
-  font-weight: 700;
-}
+h6{
+  position: relative;
+  padding-left:50rem;
+  display: block;
+  }
 
+h6 span{
+    font-size: 20px;
+    padding: 0 40px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
 .section{
   position: relative;
   width: 100%;
@@ -65,7 +68,7 @@ h6 span{
   padding: 0;
   margin: 10px auto;
   cursor: pointer;
-  background-color: #ffeba7;
+  background-color: #bf9bdd;
 }
 .checkbox:checked + label:before,
 .checkbox:not(:checked) + label:before{
@@ -74,10 +77,11 @@ h6 span{
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  color: #ffeba7;
-  background-color: #102770;
+  color: #bf9bdd;
+  background-color: #331455;
   font-family: 'unicons';
-  content: '\eb4f';
+  content: '\e84f';
+  font-weight: 900;
   z-index: 20;
   top: -10px;
   left: -10px;
@@ -93,9 +97,9 @@ h6 span{
 
 .card-3d-wrap {
   position: relative;
-  width: 640px;
+  width: 600px;
   max-width: 100%;
-  height: 640px;
+  height: 600px;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   perspective: 800px;
@@ -105,7 +109,7 @@ h6 span{
 }
 .card-3d-wrapper {
   width: 100%;
-  height: 100%;
+  height: 90%;
   position:absolute;    
   top: 0;
   left: 0;  
@@ -124,7 +128,7 @@ h6 span{
   position: absolute;
   border-radius: 6px;
   left: 0;
-  top: 0;
+  top: 30;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
@@ -157,13 +161,13 @@ h6 span{
 }
 .form-style {
     padding: 1rem;
-    margin-top: 1rem;
+    margin-top:10px;
     padding-left: 20px;
     height: 18px;
     width: 30%;
     font-weight: 500;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 22px;
     letter-spacing: 0.5px;
     outline: none;
@@ -184,10 +188,10 @@ h6 span{
   top: 0;
   left: 18px;
   height: 48px;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 48px;
   text-align: left;
-  color: #ffeba7;
+  color: #bf9bdd;
   -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
 }
@@ -241,7 +245,7 @@ h6 span{
 margin-top: 1rem;
   border-radius: 4px;
   height: 44px;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   -webkit-transition : all 200ms linear;
@@ -262,19 +266,19 @@ margin-top: 1rem;
   -ms-flex-pack: center;
   text-align: center;
   border: none;
-  background-color: #ffeba7;
+  background-color: #bf9bdd;
   color: #102770;
-  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+  box-shadow: 0 4px 24px 0 #a07aaa;
 }
 .btn:active,
 .btn:focus{  
   background-color: #102770;
-  color: #ffeba7;
+  color: #bf9bdd;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 .btn:hover{  
-  background-color: #102770;
-  color: #ffeba7;
+  background-color: #5c4272;
+  color: #bf9bdd;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 
