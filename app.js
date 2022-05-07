@@ -18,8 +18,6 @@ $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();
 	$("#welcome").show();
-	//register submit button
-	$("#registerForm").on("submit", registerCheck);
 	// this is from the original code:
 	context = canvas.getContext("2d");
 	Start();
