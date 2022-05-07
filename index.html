@@ -20,10 +20,10 @@
 		<nav>
 			<div class="menu">
 			<!--<button id="welcomeOption" onclick="showWelcome()">Welcome</button>      MAYBE NOT NEEDED--> 
-				<button id="homeOption" onclick="showHome()">Home</button>
-				<button id="settingsOption" onclick="showSettings()">Settings</button>
-				<button id="aboutOption" onclick="showAbout()">About</button>
-				<button id="gameOption" onclick="showGame()">Game</button>
+				<button class="menubtn" id="homeOption" onclick="showHome()">Home</button>
+				<button class="menubtn" id="settingsOption" onclick="showSettings()">Settings</button>
+				<button class="menubtn" id="aboutOption" onclick="showAbout()">About</button>
+				<button class="menubtn" id="gameOption" onclick="showGame()">Game</button>
 			</div>
 		</nav>
 
@@ -32,21 +32,9 @@
 		<section>
 			<!-- Welcome Page -->
 			<div class="homePage" id="welcome">
-				<!-- <button id="registerOption" onclick="showRegister()">Registration</button> -->
-				<!-- <button id="loginOption" onclick="showLogin()">Login</button> -->
-			<!-- Login Page -->
-				<p id="login">
-					<form id="loginForm">
-						<label>Username: </label>
-						<input id="loginUsername" type="text" placeholder="Enter username"> <br>
-						<label>Password: </label>
-						<input id="loginPassword" type="password" placeholder="Enter Password"> <br>
-						<p>Are you new here ? <a class="link" onclick=showRegister()>register here</a></p>
-						<button id="loginSubmit" type="button" onclick="loginCheck()" >Log In</button>
-						
-					</form>
-				</p>
-			</div>
+				<button id="registerOption" onclick="showRegister()">Registration</button>
+				<button id="loginOption" onclick="showLogin()">Login</button>
+				</div>
 
 			<!-- Registration Page -->
 			<div id="register">
@@ -69,7 +57,16 @@
 				</form>
 			</div>
 
-
+			<!-- Login Page -->
+			<div id="login">
+				<form id="loginForm">
+					<label>Username: </label>
+					<input id="loginUsername" type="text" placeholder="Enter username"> <br>
+					<label>Password: </label>
+					<input id="loginPassword" type="password" placeholder="Enter Password"> <br>
+					<button id="loginSubmit" type="button" onclick="loginCheck()" >Log In</button>
+				</form>
+			</div>
 
 			<!-- Settings Page  -->
 			<div id="settings">

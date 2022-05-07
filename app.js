@@ -45,7 +45,6 @@ function showHome(){
 	else
 		$("#gameOption").show();
 	$("#welcome").show();
-	$("#login").show();
 }
 
 function showRegister(){
@@ -55,10 +54,11 @@ function showRegister(){
 	$("#register").find('span,select').each(function(){$(this).hide();}); //hide error messages on fields as default
 }
 
-// function showLogin(){
-// 	hideAllPages();
-// 	$('#homeOption').show();
-// }
+function showLogin(){
+	hideAllPages();
+	$('#homeOption').show();
+	$("#login").show();
+}
 
 function showSettings(){
 	hideAllPages();
