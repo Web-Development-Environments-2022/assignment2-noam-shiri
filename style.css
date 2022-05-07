@@ -1,14 +1,19 @@
 *{
-
+    background-color:#FFE4E1
+    ;
     font-family: Arial, Verdana, sans-serif;
 }
-/*
+
 .menu {
-	position: fixed;
-	background: #00CCFF;
-	color: white;
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial;
+    padding: 14px 16px;
   }
-  */
+.menu .menubtn{
+    font-size: 16px;
+}
+
 .copyrights{
     position: absolute;
     bottom: 8px;
@@ -24,7 +29,7 @@
   }
   
 .link{
-    color: pink;
+    color: darksalmon;
     cursor: pointer;
 }
 /* The Modal (background) */
