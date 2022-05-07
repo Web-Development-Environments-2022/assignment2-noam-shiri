@@ -3,7 +3,7 @@ function registerCheck(){
 	//console.log("TEST AGAIN");
 	$("#register").find('span,select').each(function(){$(this).hide();});
 	var isValid = true;
-	$("#registerForm").find('input[type!=submit],select').each(function(){ // check if all inputs contain data
+	$("#registerForm").find('input,select').each(function(){ // check if all inputs contain data
 		if($(this).val() ===""){
 			isValid = false;
 			$("#errormissing").show();
@@ -27,6 +27,9 @@ function registerCheck(){
 			password: $('#regPassword').val()
 			});
 		alert("successful");
+        $("#registerForm").find('input,select').each(function(){ $(this).val("")});
+        showHome();
+
 	}
 }
 
