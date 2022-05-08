@@ -132,16 +132,3 @@ function saveSettings(){
         showGame();
     }
 }
-
-
-// changeBallNum(val){
-//     document.getElementById('ballnumVal').innerHTML = val;
-//     food_requested = val;
-// }
-
-// function setGameTime(val){
-//     document.getElementById('gametimeVal').innerHTML = val + " seconds";
-//     maxGameTime = val;
-// }
-
-// function setMonsters(val){
