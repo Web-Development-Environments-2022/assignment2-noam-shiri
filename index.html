@@ -20,10 +20,10 @@
 		<nav>
 			<div class="menu" >
 			<!--<button id="welcomeOption" onclick="showWelcome()">Welcome</button>      MAYBE NOT NEEDED--> 
-				<button class="menubtn" id="homeOption" onclick="showHome()">Home</button>
+				<button type="button" class="btn mt-4" id="homeOption" onclick="showHome()" disabled>Home</button>
 				<!-- <button class="menubtn" id="settingsOption" onclick="showSettings()">Settings</button> -->
-				<button class="menubtn" id="aboutOption" onclick="showAbout()">About</button>
-				<button class="menubtn" id="gameOption" onclick="showSettings()">New Game</button>
+				<button type="button" class="btn mt-4" id="aboutOption" onclick="showAbout()">About</button>
+				<button type="button" class="btn mt-4" id="gameOption" onclick="showSettings()" disabled>New Game</button>
 			</div>
 		</nav>
 		<!-- body -->
@@ -90,7 +90,7 @@
 												<span class="errorMsg" id="errorloginpassword">*Please enter password.</span>
 											</div>
 											<a onclick="loginCheck()" class="btn mt-4">Log In</a>
-                            				<p class="mb-0 mt-4 text-center"></p>
+                            				<!-- <p class="mb-0 mt-4 text-center"></p> -->
 				      					</div>
 			      					</div>
 			      				</div>
