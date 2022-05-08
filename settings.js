@@ -94,7 +94,7 @@ function randomSettings(){
 
 function saveSettings(){
     //check if all fields are filled
-    var isValid = true;
+    var isValid = true; 
     $("#settings").find('span,select').each(function(){$(this).hide();}); //hide all error messages
     let movementKeys = document.getElementsByClassName("movement");
     for (var i = 0; i < movementKeys.length; i++) {
@@ -129,6 +129,30 @@ function saveSettings(){
     setMonsters(document.getElementById("monstersNum").value);
     if (isValid){
         setColors(points5radio[chosen5].value,points15radio[chosen15].value,points25radio[chosen25].value);
+        // loginUser = "Shiri";
+        document.getElementById("userlogged").textContent += loginUser;
+        setSettingsInfo(chosen5, chosen15, chosen25);
         showGame();
     }
+}
+
+function setSettingsInfo(chosen5, chosen15, chosen25){
+    var settingsLable = document.getElementById("settingsInfo");
+    let points5radio = document.getElementsByName("ballcolor5")[chosen5];
+    let points15radio = document.getElementsByName("ballcolor15")[chosen15];
+    let points25radio = document.getElementsByName("ballcolor25")[chosen25];
+    settingsLable.textContent = "";
+    $("#settingsInfo").html("Up: &emsp;" + document.getElementById("upSelect").value + "<br/>" +
+                            "Down: &emsp;" + document.getElementById("downSelect").value + "<br/>" +
+                            "Left: &emsp;" + document.getElementById("leftSelect").value + "<br/>" +
+                            "Right: &emsp;" + document.getElementById("rightSelect").value + "<br/>" +
+                            "Food Amount: &emsp;" + food_requested + "<br/>" + 
+                            "5 Points food: &emsp;" + points5radio.value + "<br/>" +
+                            "15 Points food: &emsp;" + points15radio.value + "<br/>" +
+                            "25 Points food: &emsp;" + points25radio.value + "<br/>" + 
+                            "Max Game Time: &emsp;" + maxGameTime + " sec <br/>" + 
+                            "Number of Monsters: &emsp;" + monsters );
+    // settingsLable.textContent += "Up: " + document.getElementById("upSelect").value + "\n" +
+    // "Up: " + document.getElementById("upSelect").value + "\n";
+
 }
