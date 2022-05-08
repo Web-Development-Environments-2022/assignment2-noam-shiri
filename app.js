@@ -55,7 +55,6 @@ function showRegister(){
 	hideAllPages();
 	$('#homeOption').show();
 	$("#register").show();
-	$("#register").find('span,select').each(function(){$(this).hide();}); //hide error messages on fields as default
 }
 
 function showLogin(){

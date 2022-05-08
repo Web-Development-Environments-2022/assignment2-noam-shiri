@@ -1,7 +1,7 @@
 //register check inputs validation:
 function registerCheck(){
 	//console.log("TEST AGAIN");
-	$("#register").find('span,select').each(function(){$(this).hide();});
+	$("#register").find('span,select').each(function(){$(this).hide();}); //hide all error messages
 	var isValid = true;
 	$("#registerForm").find('input,select').each(function(){ // check if all inputs contain data
 		if($(this).val() ===""){
@@ -27,7 +27,7 @@ function registerCheck(){
 			password: $('#regPassword').val()
 			});
 		alert("successful");
-        $("#registerForm").find('input,select').each(function(){ $(this).val("")});
+        $("#registerForm").find('input,select').each(function(){ $(this).val("")}); //restart form
         showHome();
 
 	}

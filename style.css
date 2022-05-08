@@ -194,3 +194,9 @@
 #settings{
   font-size: 20px;
 }
+
+.errorMsg{
+  display: none;
+  color: red;
+  font-size: 13px;
+}

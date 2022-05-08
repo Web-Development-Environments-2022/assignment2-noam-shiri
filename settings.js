@@ -77,12 +77,15 @@ function randomSettings(){
     document.getElementById("monstersNum").value = rand;
     setMonsters(rand);
     //default colors for food
-    rand = getRandomInt(1,5)
-    let points5 = document.getElementsByName("ballcolor5")[rand];
-    rand = getRandomInt(1,5)
-    let points15 = document.getElementsByName("ballcolor15")[rand];
-    rand = getRandomInt(1,5)
-    let points25 = document.getElementsByName("ballcolor25")[rand];
+    var rand1, rand2, rand3;
+    while(rand1==rand2 || rand1==rand3 || rand2==rand3){
+        rand1 = getRandomInt(1,5);
+        rand2 = getRandomInt(1,5);
+        rand3 = getRandomInt(1,5);
+    }
+    let points5 = document.getElementsByName("ballcolor5")[rand1];
+    let points15 = document.getElementsByName("ballcolor15")[rand2];
+    let points25 = document.getElementsByName("ballcolor25")[rand3];
     points5.checked = true;
     points15.checked = true;
     points25.checked = true;
@@ -90,23 +93,39 @@ function randomSettings(){
 }
 
 function saveSettings(){
-    var chosen5;
-    var chosen15;
-    var chosen25;
+    //check if all fields are filled
+    var isValid = true;
+    $("#settings").find('span,select').each(function(){$(this).hide();}); //hide all error messages
+    let movementKeys = document.getElementsByClassName("movement");
+    for (var i = 0; i < movementKeys.length; i++) {
+        if(movementKeys[0].value==""){
+            $("#errormovement").show();
+            isValid = false;
+            break;
+        }
+        $("#errormovement").hide();
+    }
+    var chosen5, chosen15, chosen25;
     let points5radio = document.getElementsByName("ballcolor5");
     let points15radio = document.getElementsByName("ballcolor15");
     let points25radio = document.getElementsByName("ballcolor25");
     for (var i = 0; i < points5radio.length; i++) {
         if(points5radio[i].checked){
-            chosen5 = points5radio[i].value;
+            chosen5 = i;
         }
         if(points15radio[i].checked){
-            chosen15 = points15radio[i].value;
+            chosen15 = i;
         }
         if(points25radio[i].checked){
-            chosen25 = points25radio[i].value;
+            chosen25 = i;
         }
     }
-    setColors(chosen5,chosen15,chosen25);
-    showGame();
+    if (chosen5==chosen15 || chosen15==chosen25 || chosen5==chosen25){ //there's always something checked as default, so invalid only when at least 2 colors are the same
+        $("#errorballcolors").show();
+        isValid = false;
+    }
+    if (isValid){
+        setColors(points5radio[chosen5].value,points15radio[chosen15].value,points25radio[chosen25].value);
+        showGame();
+    }
 }
