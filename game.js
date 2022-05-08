@@ -103,7 +103,7 @@ function Draw() {
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
-			center.x = i * 60 + 30;
+			center.x = i * 120 + 30;
 			center.y = j * 60 + 30;
 			if (board[i][j] == 2) {
 				var pacmanimg = new Image();
