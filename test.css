@@ -5,6 +5,14 @@
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
+#pacman {
+    height: 470px;
+    width: 382px;
+    border-radius: 5px;
+    margin: 20px auto;
+  }
+
+  
 body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;
