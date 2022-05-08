@@ -124,8 +124,24 @@ function saveSettings(){
         $("#errorballcolors").show();
         isValid = false;
     }
+    changeBallNum(document.getElementById("ballnumRange").value);
+    setGameTime(document.getElementById("gametime").value);
+    setMonsters(document.getElementById("monstersNum").value);
     if (isValid){
         setColors(points5radio[chosen5].value,points15radio[chosen15].value,points25radio[chosen25].value);
         showGame();
     }
 }
+
+
+// changeBallNum(val){
+//     document.getElementById('ballnumVal').innerHTML = val;
+//     food_requested = val;
+// }
+
+// function setGameTime(val){
+//     document.getElementById('gametimeVal').innerHTML = val + " seconds";
+//     maxGameTime = val;
+// }
+
+// function setMonsters(val){
