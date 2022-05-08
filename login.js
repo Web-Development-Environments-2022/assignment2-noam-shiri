@@ -3,11 +3,12 @@ function loginCheck(){
 	var u = $('#loginUsername').val()
 	var p = $('#loginPassword').val()
 	var found = false;
+	$("#loginform").find('span,select').each(function(){$(this).hide();}); //hide all error messages
 	if(u==="") { //if one of the fields are empty
-		
+		$("#errorloginusername").show();
 	}
-	else if (p===""){
-
+	if (p===""){
+		$("#errorloginpassword").show();
 	}
 	else{ //check in database
 		for (i in users){
