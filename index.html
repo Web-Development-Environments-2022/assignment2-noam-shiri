@@ -127,7 +127,7 @@
 
 
 			<!-- Settings Page  -->
-			<div id="settings">
+			<!-- <div id="settings">
 				<label>Up: </label>
 				<input id="upSelect" class="movement" type="text" autocomplete="off"/> <br>
 				<label>Down: </label>
@@ -186,9 +186,158 @@
 				<lable>Number of Monsters: </lable>
 				<input type="range" id="monstersNum" min="1" max="4" class="rangebars" value="1" oninput="setMonsters(this.value)">
 				<lable id="monstersNumVal">1</lable><br>
-
 				<button class="animationBtn" onclick="randomSettings()"><span></span><span></span><span></span><span></span>Random Settings</button><br>
-				<button class="animationBtn" onclick="saveSettings()"><span></span><span></span><span></span><span></span>Start Game</button>
+				<button class="animationBtn" onclick="saveSettings()"><span></span><span></span><span></span><span></span>Start Game</button> -->
+								  
+
+				
+
+				<div class="card-3d-wrap mx-auto" id="settings">
+					<div class="card-3d-wrapper" >
+						<div class="card-front">
+							<div class="center-wrap">
+								<div class="section text-center" id="loginform">
+									<p>Settings</p>
+									<!-- <div class="form-group">
+										<input type="text" name="userName" class="form-style" placeholder="Enter username" id="loginUsername"><br>
+										<span class="errorMsg" id="errorloginusername">*Please enter username.</span>
+									</div>	 -->
+									<!-- <div class="form-group mt-2">
+										<input type="password" name="password" class="form-style" placeholder="Enter Password" id="loginPassword" autocomplete="off"><br>
+										<span class="errorMsg" id="errorloginpassword">*Please enter password.</span>
+									</div> -->
+									<div>
+										<table>
+											<tr>
+												<td>
+													<label>Up: </label>
+												</td>
+												<td>
+													<input id="upSelect" class="movement" type="text" autocomplete="off"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>Down: </label>
+												</td>
+												<td>
+													<input id="downSelect" class="movement" type="text" autocomplete="off"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>Left: </label>
+												</td>
+												<td>
+													<input id="leftSelect" class="movement" type="text" autocomplete="off"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>Right: </label>
+												</td>
+												<td>
+													<input id="rightSelect" class="movement" type="text" autocomplete="off"/>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2">
+													<span class="errorMsg" id="errormovement">*Please choose movement keys.</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="1">
+													<label>Number of balls: </label>
+												</td>
+												<td colspan="1">
+													<input type="range" id="ballnumRange" class="rangebars" min="50" max="90" value="70" oninput="changeBallNum(this.value)">
+													<lable id="ballnumVal">70</lable>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="1">
+													<label>Color of balls - 5 points: </label>
+												</td>
+												<td colspan="1">
+													<input name="ballcolor5" id="yellow5" value="#FFFD98" type="radio" checked> 
+													<label style="color: #FFFD98;">Yellow</label>
+													<input name="ballcolor5" id="green5" value="#D0F3B8" type="radio">
+													<label style="color: #D0F3B8;">Green</label>
+													<input name="ballcolor5" id="blue5" value="#B8D7F3" type="radio"> 
+													<label style="color: #B8D7F3;">Blue</label>
+													<input name="ballcolor5" id="pink5" value="#F3B8F1" type="radio"> 
+													<label style="color: #F3B8F1;">Pink</label>
+													<input name="ballcolor5" id="purple5" value="#D6B8F3" type="radio"> 
+													<label style="color: #c5a6f8;">Purple</label>
+
+												</td>
+											</tr>
+											<tr>
+												<td colspan="1">
+													<label>Color of balls - 15 points: </label>
+												</td>
+												<td colspan="1">
+													<input name="ballcolor15" id="yellow15" value="#FFFD98" type="radio"> 
+													<label style="color: #FFFD98;">Yellow</label>
+													<input name="ballcolor15" id="green15" value="#D0F3B8" type="radio" checked>
+													<label style="color: #D0F3B8;">Green</label>
+													<input name="ballcolor15" id="blue15" value="#B8D7F3" type="radio"> 
+													<label style="color: #B8D7F3;">Blue</label>
+													<input name="ballcolor15" id="pink15" value="#F3B8F1" type="radio"> 
+													<label style="color: #F3B8F1;">Pink</label>
+													<input name="ballcolor15" id="purple15" value="#D6B8F3" type="radio"> 
+													<label style="color: #D6B8F3;">Purple</label>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="1">
+													<label>Color of balls - 25 points: </label>
+												</td>
+												<td colspan="1">
+													<input name="ballcolor25" id="yellow25" value="#FFFD98" type="radio"> 
+													<label style="color: #FFFD98;">Yellow</label>
+													<input name="ballcolor25" id="green25" value="#D0F3B8" type="radio">
+													<label style="color: #D0F3B8;">Green</label>
+													<input name="ballcolor25" id="blue25" value="#B8D7F3" type="radio" checked> 
+													<label style="color: #B8D7F3;">Blue</label>
+													<input name="ballcolor25" id="pink25" value="#F3B8F1" type="radio"> 
+													<label style="color: #F3B8F1;">Pink</label>
+													<input name="ballcolor25" id="purple25" value="#D6B8F3" type="radio">  
+													<label style="color: #D6B8F3;">Purple</label>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2">
+													<span class="errorMsg" id="errorballcolors">*Please choose different food colors.</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="1">
+													<lable>Max Game Time: </lable>
+												</td>
+												<td colspan="1">
+													<input type="range" id="gametime" min="60" max="600" class="rangebars" value="60" oninput="setGameTime(this.value)">
+													<lable id="gametimeVal">60 seconds</lable><br>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="1">
+													<lable>Number of Monsters: </lable>
+												</td>
+												<td colspan="1">
+													<input type="range" id="monstersNum" min="1" max="4" class="rangebars" value="1" oninput="setMonsters(this.value)">
+													<lable id="monstersNumVal">1</lable><br>
+												</td>
+											</tr>
+										</table>
+										
+									<button class="animationBtn" onclick="randomSettings()"><span></span><span></span><span></span><span></span>Random Settings</button>
+									<button class="animationBtn" onclick="saveSettings()"><span></span><span></span><span></span><span></span>Start Game</button>
+								  </div>
+							  </div>
+						  </div>
+					</div>
+				</div>
 			</div>
 
 			<!-- About Page  -->
