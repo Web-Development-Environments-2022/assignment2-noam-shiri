@@ -8,7 +8,7 @@ var monsters;
 var color5points;
 var color15points;
 var color25points;
-
+var pacmanDirection='pacmanRight'
 function Start() {
 	board = new Array();
 	score = 0;
@@ -66,7 +66,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 120);
+	interval = setInterval(UpdatePosition, 140);
 }
 
 function findRandomEmptyCell(board) {
@@ -98,27 +98,25 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
-	
 
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
-			center.x = i * 120 + 30;
-			center.y = j * 60 + 30;
+			center.x = i * 120 + 20;
+			center.y = j * 60 + 20;
 			if (board[i][j] == 2) {
 				var pacmanimg = new Image();
-				pacmanimg.src = './pictures/pacman.png';
-				console.log( center.x, center.y)
-				context.drawImage(pacmanimg, center.x-15, center.y-15,30, 30);
+				pacmanimg.src = './pictures/'+pacmanDirection+'.png';
+				context.drawImage(pacmanimg, center.x-10, center.y-10,20, 20);
 				context.draw
 			} else if (board[i][j] == 1) {
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color food
 				context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
+				context.rect(center.x - 20, center.y - 20, 40, 60);
 				context.fillStyle = "grey"; //color wall
 				context.fill();
 			}
@@ -129,24 +127,28 @@ function Draw() {
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
-	if (x == 1) {
+	if (x == 1) { //up
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
+			pacmanDirection='pacmanUp'
 		}
 	}
-	if (x == 2) {
+	if (x == 2) { //down
 		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
+			pacmanDirection='pacmanDown'
 		}
 	}
-	if (x == 3) {
+	if (x == 3) { //left
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
+			pacmanDirection='pacmanLeft'
 		}
 	}
-	if (x == 4) {
+	if (x == 4) { //right
 		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
+			pacmanDirection='pacmanRight'
 		}
 	}
 	if (board[shape.i][shape.j] == 1) {
@@ -155,10 +157,7 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
-	}
-	if (score == 50) {
+	if (score == 100) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	}
