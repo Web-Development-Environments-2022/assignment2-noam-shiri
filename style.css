@@ -210,9 +210,10 @@
 }
 
 #settings{
+  position: flex;
   font-size: 15px;
   height: 700px;
-  width: 800px;
+  width: 600px;
 }
 
 table input[type=text] {
@@ -243,7 +244,8 @@ input[type=text]:active {
 table{
   border: 0;
   text-align: left;
-  padding-left: 20%;
+  padding-left: 7%;
+  padding-right: 7%;
   font-size: 12px;
 }
 
