@@ -109,7 +109,7 @@ function Draw() {
 				var pacmanimg = new Image();
 				pacmanimg.src = './pictures/pacman.png';
 				console.log( center.x, center.y)
-				context.drawImage(pacmanimg, center.x-15, center.y-15, 30, 30);
+				context.drawImage(pacmanimg, center.x-15, center.y-15,30, 30);
 				context.draw
 			} else if (board[i][j] == 1) {
 				context.beginPath();
