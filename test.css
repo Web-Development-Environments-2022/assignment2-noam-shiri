@@ -282,8 +282,11 @@ margin-top: 1rem;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
 
-
-
+.btn:disabled{
+  background-color: #412E51;
+  color: #5f3e7b;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
 
 .logo {
 	position: absolute;

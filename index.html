@@ -20,10 +20,10 @@
 		<nav>
 			<div class="menu" >
 			<!--<button id="welcomeOption" onclick="showWelcome()">Welcome</button>      MAYBE NOT NEEDED--> 
-				<button class="menubtn" id="homeOption" onclick="showHome()">Home</button>
-				<button class="menubtn" id="settingsOption" onclick="showSettings()">Settings</button>
-				<button class="menubtn" id="aboutOption" onclick="showAbout()">About</button>
-				<button class="menubtn" id="gameOption" onclick="showGame()">Game</button>
+				<button type="button" class="btn mt-4" id="homeOption" onclick="showHome()" disabled>Home</button>
+				<!-- <button class="menubtn" id="settingsOption" onclick="showSettings()">Settings</button> -->
+				<button type="button" class="btn mt-4" id="aboutOption" onclick="showAbout()">About</button>
+				<button type="button" class="btn mt-4" id="gameOption" onclick="showSettings()" disabled>New Game</button>
 			</div>
 		</nav>
 		<!-- body -->
@@ -79,16 +79,18 @@
 							<div class="card-3d-wrapper" >
 								<div class="card-front">
 									<div class="center-wrap">
-										<div class="section text-center">
+										<div class="section text-center" id="loginform">
 											<p>Log In</p>
 											<div class="form-group">
-												<input type="text" name="userName" class="form-style" placeholder="Enter username" id="loginUsername">
+												<input type="text" name="userName" class="form-style" placeholder="Enter username" id="loginUsername"><br>
+												<span class="errorMsg" id="errorloginusername">*Please enter username.</span>
 											</div>	
 											<div class="form-group mt-2">
-												<input type="password" name="password" class="form-style" placeholder="Enter Password" id="loginPassword" autocomplete="off">
+												<input type="password" name="password" class="form-style" placeholder="Enter Password" id="loginPassword" autocomplete="off"><br>
+												<span class="errorMsg" id="errorloginpassword">*Please enter password.</span>
 											</div>
 											<a onclick="loginCheck()" class="btn mt-4">Log In</a>
-                            				<p class="mb-0 mt-4 text-center"></p>
+                            				<!-- <p class="mb-0 mt-4 text-center"></p> -->
 				      					</div>
 			      					</div>
 			      				</div>
@@ -127,15 +129,17 @@
 			<!-- Settings Page  -->
 			<div id="settings">
 				<label>Up: </label>
-				<input id="upSelect" type="text" autocomplete="off"/> <br>
+				<input id="upSelect" class="movement" type="text" autocomplete="off"/> <br>
 				<label>Down: </label>
-				<input id="downSelect" type="text" autocomplete="off"/><br>
+				<input id="downSelect" class="movement" type="text" autocomplete="off"/><br>
 				<label>Left: </label>
-				<input id="leftSelect" type="text" autocomplete="off"/><br>
+				<input id="leftSelect" class="movement" type="text" autocomplete="off"/><br>
 				<label>Right: </label>
-				<input id="rightSelect" type="text" autocomplete="off"/><br>
+				<input id="rightSelect" class="movement" type="text" autocomplete="off"/><br>
+				<span class="errorMsg" id="errormovement">*Please choose movement keys.</span>
+				<br>
 				<label>Number of balls: </label>
-				<input type="range" id="ballnumRange" min="50" max="90" value="70" oninput="changeBallNum(this.value)">
+				<input type="range" id="ballnumRange" class="rangebars" min="50" max="90" value="70" oninput="changeBallNum(this.value)">
 				<lable id="ballnumVal">70</lable>
 				<br>
 				<label>Color of balls - 5 points: </label>
@@ -151,9 +155,9 @@
 				<label style="color: #D6B8F3; font-size: 25px;">●</label>
 				<br>
 				<label>Color of balls - 15 points: </label>
-				<input name="ballcolor15" id="yellow15" value="#FFFD98" type="radio" checked> 
+				<input name="ballcolor15" id="yellow15" value="#FFFD98" type="radio"> 
 				<label style="color: #FFFD98; font-size: 25px;">●</label>
-				<input name="ballcolor15" id="green15" value="#D0F3B8" type="radio">
+				<input name="ballcolor15" id="green15" value="#D0F3B8" type="radio" checked>
 				<label style="color: #D0F3B8; font-size: 25px;">●</label>
 				<input name="ballcolor15" id="blue15" value="#B8D7F3" type="radio"> 
 				<label style="color: #B8D7F3; font-size: 25px;">●</label>
@@ -163,26 +167,28 @@
 				<label style="color: #D6B8F3; font-size: 25px;">●</label>
 				<br>
 				<label>Color of balls - 25 points: </label>
-				<input name="ballcolor25" id="yellow25" value="#FFFD98" type="radio" checked> 
+				<input name="ballcolor25" id="yellow25" value="#FFFD98" type="radio"> 
 				<label style="color: #FFFD98; font-size: 25px;">●</label>
 				<input name="ballcolor25" id="green25" value="#D0F3B8" type="radio">
 				<label style="color: #D0F3B8; font-size: 25px;">●</label>
-				<input name="ballcolor25" id="blue25" value="#B8D7F3" type="radio"> 
+				<input name="ballcolor25" id="blue25" value="#B8D7F3" type="radio" checked> 
 				<label style="color: #B8D7F3; font-size: 25px;">●</label>
 				<input name="ballcolor25" id="pink25" value="#F3B8F1" type="radio"> 
 				<label style="color: #F3B8F1; font-size: 25px;">●</label>
 				<input name="ballcolor25" id="purple25" value="#D6B8F3" type="radio">  
 				<label style="color: #D6B8F3; font-size: 25px;">●</label>
 				<br>
+				<span class="errorMsg" id="errorballcolors">*Please choose different food colors.</span>
+				<br>
 				<lable>Max Game Time: </lable>
-				<input type="range" id="gametime" min="60" max="600" value="60" oninput="setGameTime(this.value)">
+				<input type="range" id="gametime" min="60" max="600" class="rangebars" value="60" oninput="setGameTime(this.value)">
 				<lable id="gametimeVal">60 seconds</lable><br>
 				<lable>Number of Monsters: </lable>
-				<input type="range" id="monstersNum" min="1" max="4" value="1" oninput="setMonsters(this.value)">
+				<input type="range" id="monstersNum" min="1" max="4" class="rangebars" value="1" oninput="setMonsters(this.value)">
 				<lable id="monstersNumVal">1</lable><br>
 
-				<button  class="animationBtn" onclick="randomSettings()"><span></span><span></span><span></span><span></span>Random Settings</button><br>
-				<button  class="animationBtn" onclick="saveSettings()"><span></span><span></span><span></span><span></span>Start Game</button>
+				<button class="animationBtn" onclick="randomSettings()"><span></span><span></span><span></span><span></span>Random Settings</button><br>
+				<button class="animationBtn" onclick="saveSettings()"><span></span><span></span><span></span><span></span>Start Game</button>
 			</div>
 
 			<!-- About Page  -->

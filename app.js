@@ -21,8 +21,6 @@ $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();
 	$("#welcome").show();
-	$('#homeOption').hide();
-	$("#gameOption").hide();
 	//set listeners
 	addSettingsListeners();
 	// this is from the original code:
@@ -43,42 +41,45 @@ function hideAllPages(){
 // set hide and show functions for menu:
 function showHome(){
 	hideAllPages();
-	$('#homeOption').hide();
+	document.getElementById("homeOption").disabled = true;
 	if(userLogged == false)
-		$("#gameOption").hide();
+		document.getElementById("gameOption").disabled = true;
 	else
-		$("#gameOption").show();
+		document.getElementById("gameOption").disabled = false;
 	$("#welcome").show();
 }
 
 function showRegister(){
 	hideAllPages();
-	$('#homeOption').show();
+	document.getElementById("homeOption").disabled = false;
 	$("#register").show();
-	$("#register").find('span,select').each(function(){$(this).hide();}); //hide error messages on fields as default
 }
 
 function showLogin(){
 	hideAllPages();
-	$('#homeOption').show();
+	document.getElementById("homeOption").disabled = false;
 	$("#login").show();
 }
 
 function enterGame(){
 	hideAllPages();
-	$('#homeOption').show();
-	$("#enter").show();
+	document.getElementById("homeOption").disabled = false;
+	if(userLogged == false)
+		$("#enter").show();
+	else // user logged in
+		showSettings();
 }
 
 function showSettings(){
 	hideAllPages();
-	$('#homeOption').show();
+	document.getElementById("homeOption").disabled = false;
+	document.getElementById("gameOption").disabled = true;
 	$("#settings").show();
 }
 
 function showAbout(){
 	//hideAllPages();
-	$('#homeOption').show();
+	// $('#homeOption').show();
 	$("#about").show();
 	// Get the modal
 	var modal = document.getElementById("about");
@@ -106,7 +107,7 @@ function showAbout(){
 
 function showGame(){
 	hideAllPages();
-	$('#homeOption').show();
+	document.getElementById("homeOption").disabled = false;
 	$("#game").show();
 	Start();
 }

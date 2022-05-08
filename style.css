@@ -9,8 +9,10 @@
  
 
 #logoimage{
-    position:relative;
-    top: 10px;
+  position:relative;
+  top: 10px;
+  border: 5px solid #555;
+  border-radius: 50px;
 }
 
 .homePagebtn{
@@ -23,10 +25,16 @@
     background-color: #333;
     font-family: Arial;
     padding: 14px 16px;
-  }
-.menu .menubtn{
     font-size: 16px;
-}
+    text-align: center;
+    width: 100%;
+  }
+  
+  .menu .btn{
+    width: 15%;
+    margin-top: 0rem;
+    margin-left: 2%;
+  }
 
 
 
@@ -134,7 +142,7 @@
     position: absolute;
     bottom: 5px;
     left: 16px;
-    font-size: 18px;
+    font-size: 13px;
   }
 
 #welcome {
@@ -194,3 +202,10 @@
 #settings{
   font-size: 20px;
 }
+
+.errorMsg{
+  display: none;
+  color: red;
+  font-size: 13px;
+}
+
