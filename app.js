@@ -23,6 +23,7 @@ $(document).ready(function() {
 	$("#welcome").show();
 	$('#homeOption').hide();
 	$("#gameOption").hide();
+	// $("#settingsOption").hide();
 	//set listeners
 	addSettingsListeners();
 	// this is from the original code:
@@ -66,18 +67,22 @@ function showLogin(){
 function enterGame(){
 	hideAllPages();
 	$('#homeOption').show();
-	$("#enter").show();
+	if(userLogged == false)
+		$("#enter").show();
+	else // user logged in
+		showSettings();
 }
 
 function showSettings(){
 	hideAllPages();
 	$('#homeOption').show();
+	$("#gameOption").hide();
 	$("#settings").show();
 }
 
 function showAbout(){
 	//hideAllPages();
-	$('#homeOption').show();
+	// $('#homeOption').show();
 	$("#about").show();
 	// Get the modal
 	var modal = document.getElementById("about");
