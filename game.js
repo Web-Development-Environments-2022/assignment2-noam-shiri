@@ -195,8 +195,14 @@ function UpdatePosition() {
 			pacmanDirection='pacmanRight'
 		}
 	}
-	if (board[shape.i][shape.j] == 1) { //TODO : change score according to food
-		score++;
+	if (board[shape.i][shape.j] == 1) { 
+		score+=5;
+	}
+	if (board[shape.i][shape.j] == 2) { 
+		score+=15;
+	}
+	if (board[shape.i][shape.j] == 3) { 
+		score+=25;
 	}
 	wasHereBefore = board[shape.i][shape.j]
 	if(wasHereBefore >= 6 && wasHereBefore <= 9){ //monster
@@ -211,7 +217,8 @@ function UpdatePosition() {
 	checkLoss();
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score == 100) {
+	var score2win = Math.floor(food_requested*0.6*5)
+	if (score == score2win) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	}
