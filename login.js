@@ -1,3 +1,4 @@
+var loginUser;
 //login check validation:
 function loginCheck(){
 	var u = $('#loginUsername').val()
@@ -15,6 +16,7 @@ function loginCheck(){
 			if(users[i].username==u){
 				if(users[i].password==p){
 					found = true;
+					loginUser = u;
 					loggedIn();//GO TOGAME
 				}
 				if (!found){

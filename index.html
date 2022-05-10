@@ -66,8 +66,6 @@
 
 					<div class="page" id="welcome">
 						<img id="logoimage" src="./pictures/background.png" width="800"><br>
-						<!-- <button class="homePagebtn"  id="registerOption" onclick="showRegister()">Registration</button>
-						<button class="homePagebtn"  id="loginOption" onclick="showLogin()">Login</button> -->
 						<button class="animationBtn" onclick="enterGame()">
 							<span></span><span></span><span></span><span></span>Enter Game</button>
 					</div>
@@ -207,7 +205,7 @@
 										<span class="errorMsg" id="errorloginpassword">*Please enter password.</span>
 									</div> -->
 									<div>
-										<table>
+										<table id="settTable">
 											<tr>
 												<td>
 													<label>Up: </label>
@@ -247,7 +245,7 @@
 											</tr>
 											<tr>
 												<td colspan="1">
-													<label>Number of balls: </label>
+													<label>Food Amount: </label>
 												</td>
 												<td colspan="1">
 													<input type="range" id="ballnumRange" class="rangebars" min="50" max="90" value="70" oninput="changeBallNum(this.value)">
@@ -259,15 +257,15 @@
 													<label>Color of balls - 5 points: </label>
 												</td>
 												<td colspan="1">
-													<input name="ballcolor5" id="yellow5" value="#FFFD98" type="radio" checked> 
+													<input name="ballcolor5" id="yellow5" value="Yellow" type="radio" checked> 
 													<label style="color: #FFFD98;">Yellow</label>
-													<input name="ballcolor5" id="green5" value="#D0F3B8" type="radio">
+													<input name="ballcolor5" id="green5" value="Green" type="radio">
 													<label style="color: #D0F3B8;">Green</label>
-													<input name="ballcolor5" id="blue5" value="#B8D7F3" type="radio"> 
+													<input name="ballcolor5" id="blue5" value="Blue" type="radio"> 
 													<label style="color: #B8D7F3;">Blue</label>
-													<input name="ballcolor5" id="pink5" value="#F3B8F1" type="radio"> 
+													<input name="ballcolor5" id="pink5" value="Pink" type="radio"> 
 													<label style="color: #F3B8F1;">Pink</label>
-													<input name="ballcolor5" id="purple5" value="#D6B8F3" type="radio"> 
+													<input name="ballcolor5" id="purple5" value="Purple" type="radio"> 
 													<label style="color: #c5a6f8;">Purple</label>
 
 												</td>
@@ -277,15 +275,15 @@
 													<label>Color of balls - 15 points: </label>
 												</td>
 												<td colspan="1">
-													<input name="ballcolor15" id="yellow15" value="#FFFD98" type="radio"> 
+													<input name="ballcolor15" id="yellow15" value="Yellow" type="radio"> 
 													<label style="color: #FFFD98;">Yellow</label>
-													<input name="ballcolor15" id="green15" value="#D0F3B8" type="radio" checked>
+													<input name="ballcolor15" id="green15" value="Green" type="radio" checked>
 													<label style="color: #D0F3B8;">Green</label>
-													<input name="ballcolor15" id="blue15" value="#B8D7F3" type="radio"> 
+													<input name="ballcolor15" id="blue15" value="Blue" type="radio"> 
 													<label style="color: #B8D7F3;">Blue</label>
-													<input name="ballcolor15" id="pink15" value="#F3B8F1" type="radio"> 
+													<input name="ballcolor15" id="pink15" value="Pink" type="radio"> 
 													<label style="color: #F3B8F1;">Pink</label>
-													<input name="ballcolor15" id="purple15" value="#D6B8F3" type="radio"> 
+													<input name="ballcolor15" id="purple15" value="Purple" type="radio"> 
 													<label style="color: #D6B8F3;">Purple</label>
 												</td>
 											</tr>
@@ -294,15 +292,15 @@
 													<label>Color of balls - 25 points: </label>
 												</td>
 												<td colspan="1">
-													<input name="ballcolor25" id="yellow25" value="#FFFD98" type="radio"> 
+													<input name="ballcolor25" id="yellow25" value="Yellow" type="radio"> 
 													<label style="color: #FFFD98;">Yellow</label>
-													<input name="ballcolor25" id="green25" value="#D0F3B8" type="radio">
+													<input name="ballcolor25" id="green25" value="Green" type="radio">
 													<label style="color: #D0F3B8;">Green</label>
-													<input name="ballcolor25" id="blue25" value="#B8D7F3" type="radio" checked> 
+													<input name="ballcolor25" id="blue25" value="Blue" type="radio" checked> 
 													<label style="color: #B8D7F3;">Blue</label>
-													<input name="ballcolor25" id="pink25" value="#F3B8F1" type="radio"> 
+													<input name="ballcolor25" id="pink25" value="Pink" type="radio"> 
 													<label style="color: #F3B8F1;">Pink</label>
-													<input name="ballcolor25" id="purple25" value="#D6B8F3" type="radio">  
+													<input name="ballcolor25" id="purple25" value="Purple" type="radio">  
 													<label style="color: #D6B8F3;">Purple</label>
 												</td>
 											</tr>
@@ -317,7 +315,7 @@
 												</td>
 												<td colspan="1">
 													<input type="range" id="gametime" min="60" max="600" class="rangebars" value="60" oninput="setGameTime(this.value)">
-													<lable id="gametimeVal">60 seconds</lable><br>
+													<lable id="gametimeVal">60 sec</lable><br>
 												</td>
 											</tr>
 											<tr>
@@ -354,18 +352,42 @@
 			</div>
 
 			<!-- Game Page -->
-			<div  class="page" id="game"> 
-				<div id="score">
-					<label for="lblScore">SCORE:</label>
-					<input id="lblScore" type="text" />
+			<div  class="page" id="gamepage"> 
+				<div>
+					<table id="gameTable">
+						<tr>
+							<td colspan="4">
+								<div id="score">
+									<label id="userlogged">Username: </label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="score">
+									<label for="lblScore">SCORE:</label>
+									<input id="lblScore" type="text" />
+								</div>
+							</td>
+							<td>
+								<div id="time">
+									<label for="lblTime">TIME:</label>
+									<input id="lblTime" type="text" />
+								</div>
+							</td>
+						</tr>
+					</table>
 				</div>
-				<div id="time">
-					<label for="lblTime">TIME:</label>
-					<input id="lblTime" type="text" />
+
+				<div id="wrapper">
+					<div id="left">
+						<canvas id="canvas" height="600" width="600"></canvas>
+					</div>
+					<div id="right">
+						<lable id="settingsInfo" class="tab2"></lable>
+					</div>
 				</div>
-				<div id="game">
-					<canvas id="canvas" height="600" width="1200"></canvas>
-				</div>
+
 			</div>
 		</section>
 
