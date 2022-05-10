@@ -34,7 +34,6 @@ function Start() {
 		[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]];
 	for (var i = 0; i < 15; i++) {
 		board[i] = new Array();
-		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 30; j++) {
 			var randomNum = Math.random();
 			if (randomNum <= (1.0 * food_remain) / cnt) {
