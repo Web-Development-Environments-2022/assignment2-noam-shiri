@@ -17,7 +17,6 @@ function Start() {
 	console.log(color5points, color15points ,color25points)
 	console.log(points5radio, points15radio ,points25radio)
 	score = 0;
-	var food_remain = food_requested;
 	var ball5 = Math.floor(food_requested*0.6);
 	var ball15 = Math.floor(food_requested*0.3);
 	var ball25 = Math.floor(food_requested*0.1);
@@ -168,13 +167,20 @@ function UpdatePosition() {
 			pacmanDirection='pacmanRight'
 		}
 	}
-	if (board[shape.i][shape.j] == 1) { //TODO : change score according to food
-		score++;
+	if (board[shape.i][shape.j] == 1) { 
+		score+=5;
+	}
+	if (board[shape.i][shape.j] == 2) { 
+		score+=15;
+	}
+	if (board[shape.i][shape.j] == 3) { 
+		score+=25;
 	}
 	board[shape.i][shape.j] = 5;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score == 100) {
+	var score2win = Math.floor(food_requested*0.6*5)
+	if (score == score2win) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	}
