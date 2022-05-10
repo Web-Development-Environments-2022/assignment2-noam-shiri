@@ -20,8 +20,8 @@ var userLogged = false;
 $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();
-	$("#welcome").show();
-	// $("#settings").show();
+	// $("#welcome").show();
+	$("#settings").show();
 	//set listeners
 	addSettingsListeners();
 	// this is from the original code:
