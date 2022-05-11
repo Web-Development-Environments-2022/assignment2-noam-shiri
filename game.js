@@ -10,14 +10,16 @@ var color25points;
 var colors = {"Yellow": "#FFFD98" , "Green": "#D0F3B8" , "Blue": "#B8D7F3" , "Pink": "#F3B8F1" , "Purple": "#D6B8F3"}
 var addons; //for each addon: [name, x, y, isOnBoard, boardnumber]
 var addonsCount;
-var totalLoss;
+var lives;
 var isLoss;
 var isStarCollected;
 // var starInfo;
 
 function Start() {
 	score = 0;
-	totalLoss = 0;
+	lives = 5;
+	livesPic = new Image();
+	livesPic.src = "./pictures/5lives.png";
 	isLoss = false;
 	characters = {	'pink': {direction: 'pinkUp', x:1, y:1, isOnBoard:true, prevInCell:0 },
 					'blue': {direction: 'blueUp', x:1, y:28, isOnBoard:false, prevInCell:0 },
@@ -234,8 +236,8 @@ function UpdatePosition() {
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	var score2win = Math.floor(food_requested*0.6*5)
-	if (maxGameTime <= time_elapsed || totalLoss>=5) { // end game senarios
-		if (totalLoss>=5)
+	if (maxGameTime <= time_elapsed || lives <= 0) { // end game senarios
+		if (lives<=0)
 			window.alert("Loser!");
 		else if (maxGameTime <= time_elapsed){
 			if	(score < 100)
@@ -403,11 +405,16 @@ function getBestDirection(xindex,yindex){
 function checkLoss(){
 	if(!isLoss)
 		return;
-	totalLoss++;
+	lives--;
 	score -= 10;
 	board[characters['pacman'].x][characters['pacman'].y] = 0;
 	setCharactersOnBoard();
 	isLoss = false;
+	// update lives photo
+	livesPic = new Image();
+	livesPic.src = "./pictures/" + lives + "lives.png";
+	// document["currLives"].src = livesPic;
+	// $("#currLives").attr("src", livesPic);
 }
 
 function checkStar(){
