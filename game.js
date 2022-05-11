@@ -359,12 +359,12 @@ function setCharactersOnBoard(){
 
 function UpdateMonsterPosition(){
 	var currMonster = 6;
-	for ([monsterColor, monsterDetails] of Object.entries(characters)) {
+	for ([monsterColor, characters] of Object.entries(characters)) {
 		var isStar = false;
-		if (!monsterDetails.isOnBoard) //if monster is not on board
+		if (!characters.isOnBoard) //if monster is not on board
 			continue;
-		var i = monsterDetails.x;
-		var j=monsterDetails.y;
+		var i = characters.x;
+		var j=characters.y;
 		if (monsterColor=='marioStar'){
 			isStar = true;
 			x = getRandomInt(1,5);
@@ -374,7 +374,7 @@ function UpdateMonsterPosition(){
 		}
 		if (x == 1) { //up
 			if (i > 0 && board[i - 1][j] != 4 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10)) {
-				board[i][j] = monsterDetails.prevInCell;
+				board[i][j] = characters.prevInCell;
 				characters[monsterColor].prevInCell = board[i-1][j];
 				characters[monsterColor].x--;
 				characters[monsterColor].direction=monsterColor+'Up'
@@ -382,7 +382,7 @@ function UpdateMonsterPosition(){
 			}
 		if (x == 2) { //down
 			if (i < 14 && board[i + 1][j] != 4 && (board[i + 1][j]<=5 || board[i + 1][j] >= 10)) {
-				board[i][j] = monsterDetails.prevInCell;
+				board[i][j] = characters.prevInCell;
 				characters[monsterColor].prevInCell = board[i+1][j];
 				characters[monsterColor].x++;
 				characters[monsterColor].direction=monsterColor+'Down'
@@ -391,7 +391,7 @@ function UpdateMonsterPosition(){
 			}
 		if (x == 3) { //left
 			if (j > 0 && board[i][j - 1] != 4 && (board[i][j - 1]<=5 || board[i][j - 1] >= 10)) {
-				board[i][j] = monsterDetails.prevInCell;
+				board[i][j] = characters.prevInCell;
 				characters[monsterColor].prevInCell = board[i][j-1];
 				characters[monsterColor].y--;
 				characters[monsterColor].direction=monsterColor+'Left'
@@ -400,7 +400,7 @@ function UpdateMonsterPosition(){
 			}
 		if (x == 4) { //right
 			if (j < 29 && board[i][j + 1] != 4 && (board[i][j + 1]<=5 || board[i][j + 1] >= 10)) {
-				board[i][j] = monsterDetails.prevInCell;
+				board[i][j] = characters.prevInCell;
 				characters[monsterColor].prevInCell = board[i][j+1];
 				characters[monsterColor].y++;
 				characters[monsterColor].direction=monsterColor+'Right'
