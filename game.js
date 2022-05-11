@@ -303,7 +303,7 @@ function addCharacter(addonsCount){ //for each addon: [name, x, y, isOnBoard, bo
 	if (addonsCount==1){
 		characters['marioStar'].prevInCell = board[addons[1][1]][addons[1][2]];
 		board[addons[1][1]][addons[1][2]] = 13; //star number
-		characters['marioStar']isOnBoard = true;
+		characters['marioStar'].isOnBoard = true;
 	}
 	else{
 		emptyCell = findRandomEmptyCell(board);
