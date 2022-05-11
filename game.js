@@ -391,7 +391,9 @@ function UpdateMonsterPosition(){
 	}
 }
 
-function getBestDirection(x,y){
+
+function getBestDirection(xindex,yindex){
+	//TO DO
 	number = getRandomInt(1,5);
 	return number;
 }
