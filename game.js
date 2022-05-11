@@ -2,15 +2,14 @@ var left;
 var up;
 var right;
 var down;
-// var food_requested;
 var maxGameTime;
 var monsters;
 var color5points;
 var color15points;
 var color25points;
 var colors = {"Yellow": "#FFFD98" , "Green": "#D0F3B8" , "Blue": "#B8D7F3" , "Pink": "#F3B8F1" , "Purple": "#D6B8F3"}
-var addons
-var addonsCount = 0
+var addons; //for each addon: [name, x, y, isOnBoard, boardnumber]
+var addonsCount;
 var totalLoss;
 var isLoss;
 var starInfo;
@@ -26,7 +25,8 @@ function Start() {
 					'marioStar': {direction: 'marioStarUp', x:8, y:15, isOnBoard:false, prevInCell:0 } ,
 					'pacman': {direction: 'pacmanRight', x:0,y:0}
 					}
-	addons = {0:["candy",false],1:["marioStar",false],2:["clock",false],3:["medicine",false]};
+	addons = {0:["candy",0,0,false,11,0],1:["marioStar",8,15,false,13],2:["clock",0,0,false,10],3:["medicine",0,0,false,12]};
+	addonsCount = 1;
 	var ball5 = Math.floor(food_requested*0.6);
 	var ball15 = Math.floor(food_requested*0.3);
 	var ball25 = Math.floor(food_requested*0.1);
@@ -81,6 +81,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 140); //140
 	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000);
+	interval3 = setInterval(candyOnOff, 5000); //every 5 seconds
 }
 
 function findRandomEmptyCell(board) {
@@ -142,7 +143,7 @@ function Draw() {
 		} else if (board[i][j] == 4) {
 			context.beginPath();
 			context.rect(center.x - 15, center.y - 15, 30, 30);
-			context.fillStyle = "grey"; //color wall
+			context.fillStyle = "#3E3247"; //color wall
 			context.fill();
 		}
 		else if (board[i][j] == 6){
@@ -235,8 +236,9 @@ function UpdatePosition() {
 	if (board[characters['pacman'].x][characters['pacman'].y] == 10) { // clock
 		maxGameTime+=20;
 	}
+
 	if (board[characters['pacman'].x][characters['pacman'].y] == 11) { // candy
-		//score+=50;
+		//score+=30; //plus heart
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 12) { // medicine
 		//score+=50;
@@ -273,36 +275,48 @@ function UpdatePosition() {
 	}
 }	
 
-function checkAddons(){
-	if(addons[addonsCount][1]==false){
-		addons[addonsCount][1]=true;
-		console.log(addons[addonsCount] , time_elapsed)
-		addCharacter(addons[addonsCount][0]);
+function checkAddons(){ //for each addon: [name, x, y, isOnBoard, boardnumber]
+	if(addons[addonsCount][3]==false){
+		addCharacter(addonsCount);
+	}
+	else{
+		removeCharacter(addonsCount);
 	}
 	addonsCount++;
 	if (addonsCount>=(Object.entries(addons).length))
-		addonsCount=0;
+		addonsCount=1;
 }
 
-function addCharacter(name){ //,false],1:["clock",false],2:["medicine",false],3:["marioStar"
-	
-	if (name=='marioStar'){
-		characters['marioStar'].prevInCell = board[8][15];
-		board[8][15] = 13; //star number
-		characters['marioStar'].isOnBoard = true;
+function candyOnOff(){
+	if(addons[0][3]==false){
+		num = getRandomInt(1,6);
+		addCharacter(0);
+		addons[0][5]=num;
 	}
-	
-	else if (name=="clock"){
-		emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 10;
+	else{
+		removeCharacter(0);
 	}
-	else if (name=="medicine"){
-		emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 12;
+}
+
+function addCharacter(addonsCount){ //for each addon: [name, x, y, isOnBoard, boardnumber]
+	addons[addonsCount][3]=true;
+	if (addonsCount==1){
+		characters['marioStar'].prevInCell = board[addons[1][1]][addons[1][2]];
+		board[addons[1][1]][addons[1][2]] = 13; //star number
+		characters['marioStar']isOnBoard = true;
 	}
-	else if (name=="candy"){
+	else{
 		emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 11;
+		board[emptyCell[0]][emptyCell[1]] = addons[addonsCount][4];
+		addons[addonsCount][1]=emptyCell[0];
+		addons[addonsCount][2]=emptyCell[1];
+	}
+}
+
+function removeCharacter(addonsCount){ //for each addon: [name, x, y, isOnBoard, boardnumber]
+	if (addonsCount!=1){
+		addons[addonsCount][3]=false;
+		board[addons[addonsCount][1]][addons[addonsCount][2]]=0;
 	}
 }
 function setCharactersOnBoard(){
