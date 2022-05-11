@@ -14,8 +14,8 @@ var points25radio;
 var pacmanDirection='pacmanRight';
 var monsterInfo; //for each monster: [direction, x, y, isOnBoard, lastCellInfo]
 var colors = {"Yellow": "#FFFD98" , "Green": "#D0F3B8" , "Blue": "#B8D7F3" , "Pink": "#F3B8F1" , "Purple": "#D6B8F3"}
-var addons
-var addonsCount = 0
+var addons; //for each addon: [name, x, y, isOnBoard, boardnumber]
+var addonsCount;
 var totalLoss;
 var isLoss;
 var starInfo;
@@ -25,7 +25,8 @@ function Start() {
 	totalLoss = 0;
 	isLoss = false;
 	monsterInfo = {'pink': ['pinkUp',1,1,true,0] , 'blue': ['blueUp',1,28,false,0], 'orange':['orangeUp',13,1,false,0] , 'red': ['redUp',13,28,false,0], 'marioStar':['marioStarUp',8,15,false,0]};
-	addons = {0:["candy",false],1:["marioStar",false],2:["clock",false],3:["medicine",false]};
+	addons = {0:["candy",0,0,false,11,0],1:["marioStar",8,15,false,13],2:["clock",0,0,false,10],3:["medicine",0,0,false,12]};
+	addonsCount = 1;
 	var ball5 = Math.floor(food_requested*0.6);
 	var ball15 = Math.floor(food_requested*0.3);
 	var ball25 = Math.floor(food_requested*0.1);
@@ -80,6 +81,7 @@ function Start() {
 	);
 	interval = setInterval(UpdatePosition, 140); //140
 	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000);
+	interval3 = setInterval(candyOnOff, 5000); //every 5 seconds
 }
 
 function findRandomEmptyCell(board) {
@@ -140,7 +142,7 @@ function Draw() {
 			} else if (board[i][j] == 4) {
 			context.beginPath();
 			context.rect(center.x - 15, center.y - 15, 30, 30);
-			context.fillStyle = "grey"; //color wall
+			context.fillStyle = "#3E3247"; //color wall
 			context.fill();
 			}
 			else if (board[i][j] == 6){
@@ -175,7 +177,7 @@ function Draw() {
 			}
 			else if (board[i][j] == 11){
 				var candy = new Image();
-				candy.src = './pictures/candy.png';
+				candy.src = './pictures/candy'+addons[0][5]+'.png'; // different colors for candies
 				context.drawImage(candy, center.x-15, center.y-15,30, 30);
 				context.draw;
 			}
@@ -242,10 +244,10 @@ function UpdatePosition() {
 		maxGameTime+=20;
 	}
 	if (board[shape.i][shape.j] == 11) { // candy
-		//score+=50;
+		score+=30;
 	}
 	if (board[shape.i][shape.j] == 12) { // medicine
-		//score+=50;
+		//score+=50; //plus heart
 	}
 	if (board[shape.i][shape.j] == 13) {  // star 
 		score+=50;
@@ -279,36 +281,48 @@ function UpdatePosition() {
 	}
 }	
 
-function checkAddons(){
-	if(addons[addonsCount][1]==false){
-		addons[addonsCount][1]=true;
-		console.log(addons[addonsCount] , time_elapsed)
-		addCharacter(addons[addonsCount][0]);
+function checkAddons(){ //for each addon: [name, x, y, isOnBoard, boardnumber]
+	if(addons[addonsCount][3]==false){
+		addCharacter(addonsCount);
+	}
+	else{
+		removeCharacter(addonsCount);
 	}
 	addonsCount++;
 	if (addonsCount>=(Object.entries(addons).length))
-		addonsCount=0;
+		addonsCount=1;
 }
 
-function addCharacter(name){ //,false],1:["clock",false],2:["medicine",false],3:["marioStar"
-	
-	if (name=='marioStar'){
-		monsterInfo['marioStar'][4] = board[8][15];
-		board[8][15] = 13; //star number
+function candyOnOff(){
+	if(addons[0][3]==false){
+		num = getRandomInt(1,6);
+		addCharacter(0);
+		addons[0][5]=num;
+	}
+	else{
+		removeCharacter(0);
+	}
+}
+
+function addCharacter(addonsCount){ //for each addon: [name, x, y, isOnBoard, boardnumber]
+	addons[addonsCount][3]=true;
+	if (addonsCount==1){
+		monsterInfo['marioStar'][4] = board[addons[1][1]][addons[1][2]];
+		board[addons[1][1]][addons[1][2]] = 13; //star number
 		monsterInfo['marioStar'][3] = true;
 	}
-	
-	else if (name=="clock"){
+	else{
 		emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 10;
+		board[emptyCell[0]][emptyCell[1]] = addons[addonsCount][4];
+		addons[addonsCount][1]=emptyCell[0];
+		addons[addonsCount][2]=emptyCell[1];
 	}
-	else if (name=="medicine"){
-		emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 12;
-	}
-	else if (name=="candy"){
-		emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 11;
+}
+
+function removeCharacter(addonsCount){ //for each addon: [name, x, y, isOnBoard, boardnumber]
+	if (addonsCount!=1){
+		addons[addonsCount][3]=false;
+		board[addons[addonsCount][1]][addons[addonsCount][2]]=0;
 	}
 }
 function setCharactersOnBoard(){
