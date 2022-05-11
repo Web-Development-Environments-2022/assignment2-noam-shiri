@@ -14,9 +14,13 @@ var addonsCount;
 var totalLoss;
 var isLoss;
 var isStarCollected;
+var bgMusic;
 // var starInfo;
 
 function Start() {
+	bgMusic = new Audio('pictures/files/Remix.mp3');
+	bgMusic.loop = true;
+	bgMusic.play();
 	score = 0;
 	totalLoss = 0;
 	isLoss = false;
@@ -234,15 +238,20 @@ function UpdatePosition() {
 	checkStar();
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	var score2win = Math.floor(food_requested*0.6*5)
 	if (maxGameTime <= time_elapsed || totalLoss>=5) { // end game senarios
-		if (totalLoss>=5)
-			window.alert("Loser!");
+		bgMusic.pause();
+		bgMusic.currentTime = 0;
+		if (totalLoss>=5){
+			bgMusic = new Audio('pictures/files/Lose.mp3');
+			window.alert("Loser!");}
 		else if (maxGameTime <= time_elapsed){
-			if	(score < 100)
-				window.alert("You are better than " + score + " points!");
-			else // score >= 100
-				window.alert("Winner!!!");
+			if	(score < 100){
+				bgMusic = new Audio('pictures/files/Lose.mp3');
+				window.alert("You are better than " + score + " points!");}
+			else{ // score >= 100
+				bgMusic = new Audio('pictures/files/Win.mp3');
+				window.alert("Winner!!!");}
+			bgMusic.play();
 		}
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
