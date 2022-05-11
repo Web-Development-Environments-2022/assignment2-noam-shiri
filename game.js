@@ -18,8 +18,7 @@ var isStarCollected;
 function Start() {
 	score = 0;
 	lives = 5;
-	livesPic = new Image();
-	livesPic.src = "./pictures/5lives.png";
+	document.getElementById("currLives").src=  "./pictures/5lives.png";
 	isLoss = false;
 	characters = {	'pink': {direction: 'pinkUp', x:1, y:1, isOnBoard:true, prevInCell:0 },
 					'blue': {direction: 'blueUp', x:1, y:28, isOnBoard:false, prevInCell:0 },
@@ -124,7 +123,6 @@ function Draw() {
 		  center.x = j * 30 + 15;
 		  var img = new Image();
 		  if (board[i][j] == 5) {
-			var img = new Image();
 			img.src = './pictures/'+characters['pacman'].direction+'.png';
 			context.drawImage(img, center.x-15, center.y-15,30, 30);
 			context.draw;
@@ -217,7 +215,10 @@ function UpdatePosition() {
 		score+=30;
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 12) { // medicine
-		//score+=50; //plus heart
+		if(lives<5){
+			lives++;
+			updateLivesImg();
+		}
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 13) {  // star 
 		// will update the score later
@@ -410,11 +411,11 @@ function checkLoss(){
 	board[characters['pacman'].x][characters['pacman'].y] = 0;
 	setCharactersOnBoard();
 	isLoss = false;
-	// update lives photo
-	livesPic = new Image();
-	livesPic.src = "./pictures/" + lives + "lives.png";
-	// document["currLives"].src = livesPic;
-	// $("#currLives").attr("src", livesPic);
+	updateLivesImg();
+}
+
+function updateLivesImg(){
+	document.getElementById("currLives").src=  "./pictures/" + lives + "lives.png";
 }
 
 function checkStar(){
