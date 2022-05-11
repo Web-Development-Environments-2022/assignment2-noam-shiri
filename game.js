@@ -7,6 +7,7 @@ var monsters;
 var color5points;
 var color15points;
 var color25points;
+var boardDictionary = {0:"Empty", 1:"ball5", 2:"ball15", 3:"ball25", 4:"wall", 5:"pacman", 6:"pink", 7:"blue", 8:"orange", 9:"red", 10:"clock", 11:"candy", 12:"medicine", 13:"marioStar"}
 var colors = {"Yellow": "#FFFD98" , "Green": "#D0F3B8" , "Blue": "#B8D7F3" , "Pink": "#F3B8F1" , "Purple": "#D6B8F3"}
 var addons; //for each addon: [name, x, y, isOnBoard, boardnumber]
 var addonsCount;
@@ -343,7 +344,7 @@ function UpdateMonsterPosition(){
 		}
 
 		if (x == 1) { //up
-			if (i > 0 && board[i - 1][j] != 4 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10)) {
+			if (i > 0 && board[i - 1][j] != 4 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10) && board[i - 1][j] != 13) {
 				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i-1][j];
 				characters[monsterColor].x--;
@@ -351,7 +352,7 @@ function UpdateMonsterPosition(){
 				}
 			}
 		if (x == 2) { //down
-			if (i < 14 && board[i + 1][j] != 4 && (board[i + 1][j]<=5 || board[i + 1][j] >= 10)) {
+			if (i < 14 && board[i + 1][j] != 4 && (board[i + 1][j]<=5 || board[i + 1][j] >= 10) && board[i + 1][j] != 13) {
 				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i+1][j];
 				characters[monsterColor].x++;
@@ -359,7 +360,7 @@ function UpdateMonsterPosition(){
 				}
 			}
 		if (x == 3) { //left
-			if (j > 0 && board[i][j - 1] != 4 && (board[i][j - 1]<=5 || board[i][j - 1] >= 10)) {
+			if (j > 0 && board[i][j - 1] != 4 && (board[i][j - 1]<=5 || board[i][j - 1] >= 10) && board[i][j - 1] != 13) {
 				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i][j-1];
 				characters[monsterColor].y--;
@@ -367,7 +368,7 @@ function UpdateMonsterPosition(){
 				}
 			}
 		if (x == 4) { //right
-			if (j < 29 && board[i][j + 1] != 4 && (board[i][j + 1]<=5 || board[i][j + 1] >= 10)) {
+			if (j < 29 && board[i][j + 1] != 4 && (board[i][j + 1]<=5 || board[i][j + 1] >= 10) && board[i][j + 1] != 13) {
 				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i][j+1];
 				characters[monsterColor].y++;
