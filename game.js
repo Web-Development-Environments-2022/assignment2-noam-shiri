@@ -172,7 +172,7 @@ function Draw() {
 			context.draw;
 		}
 		else if (board[i][j] == 11){
-			img.src = './pictures/candy.png';
+			img.src = './pictures/candy'+addons[0][5]+'.png'; // different colors for candies
 			context.drawImage(img, center.x-15, center.y-15,30, 30);
 			context.draw;
 		}
@@ -238,10 +238,10 @@ function UpdatePosition() {
 	}
 
 	if (board[characters['pacman'].x][characters['pacman'].y] == 11) { // candy
-		//score+=30; //plus heart
+		score+=30;
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 12) { // medicine
-		//score+=50;
+		//score+=50; //plus heart
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 13) {  // star 
 		score+=50;
@@ -359,12 +359,12 @@ function setCharactersOnBoard(){
 
 function UpdateMonsterPosition(){
 	var currMonster = 6;
-	for ([monsterColor, monsterData] of Object.entries(characters)) {
+	for ([monsterColor, monsterDetails] of Object.entries(characters)) {
 		var isStar = false;
-		if (!monsterData.isOnBoard) //if monster is not on board
+		if (!monsterDetails.isOnBoard) //if monster is not on board
 			continue;
-		var i = monsterData.x;
-		var j=monsterData.y;
+		var i = monsterDetails.x;
+		var j=monsterDetails.y;
 		if (monsterColor=='marioStar'){
 			isStar = true;
 			x = getRandomInt(1,5);
@@ -374,7 +374,7 @@ function UpdateMonsterPosition(){
 		}
 		if (x == 1) { //up
 			if (i > 0 && board[i - 1][j] != 4 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10)) {
-				board[i][j] = monsterData.prevInCell;
+				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i-1][j];
 				characters[monsterColor].x--;
 				characters[monsterColor].direction=monsterColor+'Up'
@@ -382,7 +382,7 @@ function UpdateMonsterPosition(){
 			}
 		if (x == 2) { //down
 			if (i < 14 && board[i + 1][j] != 4 && (board[i + 1][j]<=5 || board[i + 1][j] >= 10)) {
-				board[i][j] = monsterData.prevInCell;
+				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i+1][j];
 				characters[monsterColor].x++;
 				characters[monsterColor].direction=monsterColor+'Down'
@@ -391,7 +391,7 @@ function UpdateMonsterPosition(){
 			}
 		if (x == 3) { //left
 			if (j > 0 && board[i][j - 1] != 4 && (board[i][j - 1]<=5 || board[i][j - 1] >= 10)) {
-				board[i][j] = monsterData.prevInCell;
+				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i][j-1];
 				characters[monsterColor].y--;
 				characters[monsterColor].direction=monsterColor+'Left'
@@ -400,7 +400,7 @@ function UpdateMonsterPosition(){
 			}
 		if (x == 4) { //right
 			if (j < 29 && board[i][j + 1] != 4 && (board[i][j + 1]<=5 || board[i][j + 1] >= 10)) {
-				board[i][j] = monsterData.prevInCell;
+				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i][j+1];
 				characters[monsterColor].y++;
 				characters[monsterColor].direction=monsterColor+'Right'
