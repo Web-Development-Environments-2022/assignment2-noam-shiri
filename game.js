@@ -14,7 +14,7 @@ var points25radio;
 var pacmanDirection='pacmanRight';
 var monsterInfo; //for each monster: [direction, x, y, isOnBoard, lastCellInfo]
 var colors = {"Yellow": "#FFFD98" , "Green": "#D0F3B8" , "Blue": "#B8D7F3" , "Pink": "#F3B8F1" , "Purple": "#D6B8F3"}
-var addons = {0:["candy",false],1:["marioStar",false],2:["clock",false],3:["medicine",false]};
+var addons
 var addonsCount = 0
 var totalLoss;
 var isLoss;
@@ -25,7 +25,7 @@ function Start() {
 	totalLoss = 0;
 	isLoss = false;
 	monsterInfo = {'pink': ['pinkUp',1,1,true,0] , 'blue': ['blueUp',1,28,false,0], 'orange':['orangeUp',13,1,false,0] , 'red': ['redUp',13,28,false,0], 'marioStar':['marioStarUp',8,15,false,0]};
-	var food_remain = food_requested;
+	addons = {0:["candy",false],1:["marioStar",false],2:["clock",false],3:["medicine",false]};
 	var ball5 = Math.floor(food_requested*0.6);
 	var ball15 = Math.floor(food_requested*0.3);
 	var ball25 = Math.floor(food_requested*0.1);
@@ -78,8 +78,8 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 140);
-	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/5));
+	interval = setInterval(UpdatePosition, 140); //140
+	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000);
 }
 
 function findRandomEmptyCell(board) {
@@ -187,7 +187,7 @@ function Draw() {
 			}
 			else if (board[i][j] == 13){
 				var star = new Image();
-				star.src = './pictures/'+starInfo[0]+'.png';
+				star.src = './pictures/'+monsterInfo['marioStar'][0]+'.png';
 				context.drawImage(star, center.x-15, center.y-15,30, 30);
 				context.draw;
 			}
@@ -238,9 +238,17 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 3) { 
 		score+=25;
 	}
-	if (board[shape.i][shape.j] == 13) { 
+	if (board[shape.i][shape.j] == 10) { // clock
+		maxGameTime+=20;
+	}
+	if (board[shape.i][shape.j] == 11) { // candy
+		//score+=50;
+	}
+	if (board[shape.i][shape.j] == 12) { // medicine
+		//score+=50;
+	}
+	if (board[shape.i][shape.j] == 13) {  // star 
 		score+=50;
-
 	}
 	wasHereBefore = board[shape.i][shape.j]
 	if(wasHereBefore >= 6 && wasHereBefore <= 9){ //monster
@@ -253,26 +261,28 @@ function UpdatePosition() {
 	checkLoss();
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	checkAddons();
 	var score2win = Math.floor(food_requested*0.6*5)
-	if (score >= score2win) {
+	if (score >= 500) { //TODO : change to correct score
 		window.clearInterval(interval);
+		window.clearInterval(interval2);
 		window.alert("Game completed");
 		document.getElementById("gameOption").disabled = false;
 	}
 	if(maxGameTime <= time_elapsed || totalLoss>=5){
 		window.clearInterval(interval);
+		window.clearInterval(interval2);
 		window.alert("You lost!");
 		document.getElementById("gameOption").disabled = false;
 	}
 	else {
 		Draw();
 	}
-}
+}	
 
 function checkAddons(){
 	if(addons[addonsCount][1]==false){
 		addons[addonsCount][1]=true;
+		console.log(addons[addonsCount] , time_elapsed)
 		addCharacter(addons[addonsCount][0]);
 	}
 	addonsCount++;
@@ -281,9 +291,11 @@ function checkAddons(){
 }
 
 function addCharacter(name){ //,false],1:["clock",false],2:["medicine",false],3:["marioStar"
-	if (name=="marioStar"){
-		monsterInfo["marioStar"][3] = true;
-		return;
+	
+	if (name=='marioStar'){
+		monsterInfo['marioStar'][4] = board[8][15];
+		board[8][15] = 13; //star number
+		monsterInfo['marioStar'][3] = true;
 	}
 	
 	else if (name=="clock"){
@@ -298,8 +310,6 @@ function addCharacter(name){ //,false],1:["clock",false],2:["medicine",false],3:
 		emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 11;
 	}
-
-
 }
 function setCharactersOnBoard(){
 	//pacman
@@ -343,13 +353,13 @@ function setCharactersOnBoard(){
 
 function UpdateMonsterPosition(){
 	var currMonster = 6;
-	var isStar = false;
 	for ([monsterColor, monsterDetails] of Object.entries(monsterInfo)) {
+		var isStar = false;
 		if (!monsterDetails[3]) //if monster is not on board
 			continue;
 		var i = monsterDetails[1];
 		var j=monsterDetails[2];
-		if (monsterColor==='marioStar'){
+		if (monsterColor=='marioStar'){
 			isStar = true;
 			x = getRandomInt(1,5);
 		}
@@ -357,53 +367,63 @@ function UpdateMonsterPosition(){
 			x = getBestDirection(i,j); // TODO : change to smart x
 		}
 		if (x == 1) { //up
-			if (i > 0 && board[i - 1][j] != 4 && board[i - 1][j] != 13 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10)) {
+			if (i > 0 && board[i - 1][j] != 4 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10)) {
 				board[i][j] = monsterDetails[4];
 				monsterInfo[monsterColor][4] = board[i-1][j];
 				monsterInfo[monsterColor][1]--;
 				monsterInfo[monsterColor][0]=monsterColor+'Up'
+				//console.log(monsterColor, "11111111");
 				}
 			}
 		if (x == 2) { //down
-			if (i < 14 && board[i + 1][j] != 4 &&board[i + 1][j] != 13 && (board[i + 1][j]<=5 || board[i + 1][j] >= 10)) {
+			if (i < 14 && board[i + 1][j] != 4 && (board[i + 1][j]<=5 || board[i + 1][j] >= 10)) {
 				board[i][j] = monsterDetails[4];
 				monsterInfo[monsterColor][4] = board[i+1][j];
 				monsterInfo[monsterColor][1]++;
 				monsterInfo[monsterColor][0]=monsterColor+'Down'
+				//console.log(monsterColor, "222222222");
 				}
 				
 			}
 		if (x == 3) { //left
-			if (j > 0 && board[i][j - 1] != 4 && board[i][j - 1] != 13 && (board[i][j - 1]<=5 || board[i][j - 1] >= 10)) {
+			if (j > 0 && board[i][j - 1] != 4 && (board[i][j - 1]<=5 || board[i][j - 1] >= 10)) {
 				board[i][j] = monsterDetails[4];
 				monsterInfo[monsterColor][4] = board[i][j-1];
 				monsterInfo[monsterColor][2]--;
 				monsterInfo[monsterColor][0]=monsterColor+'Left'
+				//console.log(monsterColor, "3333333");
 				}
 
 			}
 		if (x == 4) { //right
-			if (j < 29 && board[i][j + 1] != 4 && board[i][j + 1] != 13 && (board[i][j + 1]<=5 || board[i][j + 1] >= 10)) {
+			if (j < 29 && board[i][j + 1] != 4 && (board[i][j + 1]<=5 || board[i][j + 1] >= 10)) {
 				board[i][j] = monsterDetails[4];
 				monsterInfo[monsterColor][4] = board[i][j+1];
 				monsterInfo[monsterColor][2]++;
 				monsterInfo[monsterColor][0]=monsterColor+'Right'
+				//console.log(monsterColor , "444444444");
 				}
 			}
 		if(board[monsterInfo[monsterColor][1]][monsterInfo[monsterColor][2]]==5 && !isStar){ //pacman met monster -> 1 loss
 			monsterInfo[monsterColor][4] = 0;
 			isLoss = true;
+			//console.log(monsterColor, "KILL");
 		}
-		if(board[monsterInfo[monsterColor][1]][monsterInfo[monsterColor][2]]==5 && isStar){ //pacman met star -> 1 loss
+		if(board[monsterInfo[monsterColor][1]][monsterInfo[monsterColor][2]]==5 && isStar){ //pacman met star -> 50 points
 			board[i][j]=monsterInfo[monsterColor][4];
 			monsterInfo[monsterColor][4]=0;
 			monsterInfo[monsterColor][3] = false;
 			score+=50;
+			//console.log(monsterColor, "50 POINTS");
 			//[direction, x, y, isOnBoard, lastCellInfo]
 		} 
 		else{
-			board[monsterInfo[monsterColor][1]][monsterInfo[monsterColor][2]] = currMonster; //update monster location on board
+			if (isStar)
+				board[monsterInfo[monsterColor][1]][monsterInfo[monsterColor][2]] = 13; //update monster location on board
+			else
+				board[monsterInfo[monsterColor][1]][monsterInfo[monsterColor][2]] = currMonster; //update monster location on board
 			currMonster++; //next monster sirial number
+			//console.log(monsterColor ,x  , "7777777777");
 		}
 	// TO DO:  check if collapsed and if so decrease points and restart
 	}
