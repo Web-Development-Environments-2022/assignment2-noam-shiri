@@ -130,11 +130,12 @@ function saveSettings(){
     if (isValid){
         setColors(points5radio[chosen5].value,points15radio[chosen15].value,points25radio[chosen25].value);
         // loginUser = "Shiri";
-        document.getElementById("userlogged").textContent += loginUser;
+        document.getElementById("userlogged").textContent = "Username: " + loginUser;
         setSettingsInfo(chosen5, chosen15, chosen25);
         showGame();
     }
 }
+
 
 function setSettingsInfo(chosen5, chosen15, chosen25){
     var settingsLable = document.getElementById("settingsInfo");
