@@ -251,8 +251,8 @@ function UpdatePosition() {
 			else{ // score >= 100
 				bgMusic = new Audio('pictures/files/Win.mp3');
 				window.alert("Winner!!!");}
-			bgMusic.play();
 		}
+		bgMusic.play();
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
 		document.getElementById("gameOption").disabled = false;
