@@ -263,11 +263,18 @@ input[type=radio]{
 }
 
 #left {
-  flex: 0 0 80%;
+  width: 50%; 
+}
+
+#middle {
+  float: left; 
+  width: 70%; 
 }
 
 #right {
-  flex: 1;
+  float: left; 
+  width: 50%; 
+  font-size: 14px;
 }
 
 #lblTime, #lblScore{
@@ -286,6 +293,7 @@ background-color: #1f2029;
 #gamepage{
   font-family: 'Poppins';
   font-size: 20px;
+  /* overflow: hidden */
 }
 
 #gameTable{
@@ -294,8 +302,11 @@ background-color: #1f2029;
   padding-left: 2%;
   padding-right: 2%;
   font-size: 15px;
+  
 }
 
-.tab2 {
-  tab-size: 4;
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden
 }
