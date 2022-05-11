@@ -385,9 +385,10 @@ function UpdateMonsterPosition(){
 		else{
 			if (isStar)
 				board[characters[monsterColor].x][characters[monsterColor].y] = 13; //update monster location on board
-			else
+			else{
 				board[characters[monsterColor].x][characters[monsterColor].y] = currMonster; //update monster location on board
-			currMonster++; //next monster sirial number
+				currMonster++; //next monster sirial number
+			} 
 		}
 	// TO DO:  check if collapsed and if so decrease points and restart
 	}
