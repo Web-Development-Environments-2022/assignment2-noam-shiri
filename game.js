@@ -12,7 +12,8 @@ var addons; //for each addon: [name, x, y, isOnBoard, boardnumber]
 var addonsCount;
 var totalLoss;
 var isLoss;
-var starInfo;
+var isStarCollected;
+// var starInfo;
 
 function Start() {
 	score = 0;
@@ -23,7 +24,7 @@ function Start() {
 					'orange': {direction: 'orangeUp', x:13, y:1, isOnBoard:false, prevInCell:0 },
 					'red': {direction: 'redUp', x:13, y:28, isOnBoard:false, prevInCell:0 } ,
 					'marioStar': {direction: 'marioStarUp', x:8, y:15, isOnBoard:false, prevInCell:0 } ,
-					'pacman': {direction: 'pacmanRight', x:0,y:0}
+					'pacman': {direction: 'pacmanRight', x:0, y:0}
 					}
 	addons = {0:["candy",0,0,false,11,0],1:["marioStar",8,15,false,13],2:["clock",0,0,false,10],3:["medicine",0,0,false,12]};
 	addonsCount = 1;
@@ -197,46 +198,19 @@ function Draw() {
 	}
 
 function UpdatePosition() {
-	board[characters['pacman'].x][characters['pacman'].y] = 0;
-	var x = GetKeyPressed();
-	var wasHereBefore = 0;
-	if (x == 1) { //up
-		if (characters['pacman'].x > 0 && board[characters['pacman'].x - 1][characters['pacman'].y] != 4) {
-			characters['pacman'].x--;
-			characters['pacman'].direction='pacmanUp'
-		}
-	}
-	if (x == 2) { //down
-		if (characters['pacman'].x < 14 && board[characters['pacman'].x + 1][characters['pacman'].y] != 4) {
-			characters['pacman'].x++;
-			characters['pacman'].direction='pacmanDown'
-		}
-	}
-	if (x == 3) { //left
-		if (characters['pacman'].y > 0 && board[characters['pacman'].x][characters['pacman'].y - 1] != 4) {
-			characters['pacman'].y--;
-			characters['pacman'].direction='pacmanLeft'
-		}
-	}
-	if (x == 4) { //right
-		if (characters['pacman'].y < 29 && board[characters['pacman'].x][characters['pacman'].y + 1] != 4) {
-			characters['pacman'].y++;
-			characters['pacman'].direction='pacmanRight'
-		}
-	}
-	if (board[characters['pacman'].x][characters['pacman'].y] == 1) { 
+	movePacman();
+	if (board[characters['pacman'].x][characters['pacman'].y] == 1) { // 5 points
 		score+=5;
 	}
-	if (board[characters['pacman'].x][characters['pacman'].y] == 2) { 
+	if (board[characters['pacman'].x][characters['pacman'].y] == 2) { // 15 points
 		score+=15;
 	}
-	if (board[characters['pacman'].x][characters['pacman'].y] == 3) { 
+	if (board[characters['pacman'].x][characters['pacman'].y] == 3) { // 25 points
 		score+=25;
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 10) { // clock
 		maxGameTime+=20;
 	}
-
 	if (board[characters['pacman'].x][characters['pacman'].y] == 11) { // candy
 		score+=30;
 	}
@@ -244,17 +218,19 @@ function UpdatePosition() {
 		//score+=50; //plus heart
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 13) {  // star 
-		score+=50;
+		// will update the score later
+		isStarCollected = true;
 	}
-	wasHereBefore = board[characters['pacman'].x][characters['pacman'].y]
+	var wasHereBefore = board[characters['pacman'].x][characters['pacman'].y] //before moving pacman, check if there's a monster there
 	if(wasHereBefore >= 6 && wasHereBefore <= 9){ //monster
 		isLoss = true;
 	}
-	if (!isLoss){
+	if (!isLoss){ // move pacman if game continues
 		board[characters['pacman'].x][characters['pacman'].y] = 5;
-		UpdateMonsterPosition();
+		UpdateMonsterPosition(); // isLoss can be updated here to true
 	}
 	checkLoss();
+	checkStar();
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	var score2win = Math.floor(food_requested*0.6*5)
@@ -264,7 +240,7 @@ function UpdatePosition() {
 		window.alert("Game completed");
 		document.getElementById("gameOption").disabled = false;
 	}
-	if(maxGameTime <= time_elapsed || totalLoss>=5){
+	else if(maxGameTime <= time_elapsed || totalLoss>=5){
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
 		window.alert("You lost!");
@@ -319,41 +295,32 @@ function removeCharacter(addonsCount){ //for each addon: [name, x, y, isOnBoard,
 		board[addons[addonsCount][1]][addons[addonsCount][2]]=0;
 	}
 }
+
+function restartCharacter(cName, newx, newy, boardVal){
+	if (boardVal != 5){ //not pacman: keep the value that was in the cell before. pacman: 0
+		board [characters[cName].x][characters[cName].y] = characters[cName].prevInCell;
+		characters[cName].prevInCell = board[newx][newy];
+		characters[cName].isOnBoard = true;
+	}
+	characters[cName].x = newx;
+	characters[cName].y = newy;
+	board[newx][newy] = boardVal;
+}
+
 function setCharactersOnBoard(){
 	//pacman
 	var emptyCell = findRandomEmptyCell(board);
-	characters['pacman'].x = emptyCell[0];
-	characters['pacman'].y = emptyCell[1];
-	board[emptyCell[0]][emptyCell[1]] = 5;
+	restartCharacter('pacman', emptyCell[0], emptyCell[1], 5);
 	//monsters
-	board [characters['pink'].x][characters['pink'].y] = characters['pink'].prevInCell;
-	characters['pink'].x = 1;
-	characters['pink'].y = 1;
-	characters['pink'].prevInCell = board[1][1];
-	board[1][1] = 6; //pink monster
+	restartCharacter('pink', 1, 1, 6);
 	if (monsters >= 2){
-		board [characters['blue'].x][characters['blue'].y] = characters['blue'].prevInCell;
-		characters['blue'].x = 1;
-		characters['blue'].y = board[0].length-2;
-		characters['blue'].prevInCell = board[1][board[0].length-2] ;
-		board[1][board[0].length-2] = 7; //blue monster
-		characters['blue'].isOnBoard = true;
+		restartCharacter('blue', 1, board[0].length-2, 7);
 	}
 	if (monsters >= 3){
-		board [characters['orange'].x][characters['orange'].y] = characters['orange'].prevInCell;
-		characters['orange'].x = board.length-2;
-		characters['orange'].y = 1;
-		characters['orange'].prevInCell = board[board.length-2][1];
-		board[board.length-2][1] = 8; //orange monster
-		characters['orange'].isOnBoard = true;
+		restartCharacter('orange', board.length-2, 1, 8);
 		}
 	if (monsters == 4){
-		board [characters['red'].x][characters['red'].y] = characters['red'].prevInCell;
-		characters['red'].x = board.length-2;
-		characters['red'].y = board[0].length-2;
-		characters['red'].prevInCell = board[board.length-2][board[0].length-2] ;
-		board[board.length-2][board[0].length-2] = 9; //red monster
-		characters['red'].isOnBoard = true;
+		restartCharacter('red', board.length-2, board[0].length-2, 9);
 		}
 }
 
@@ -361,17 +328,19 @@ function UpdateMonsterPosition(){
 	var currMonster = 6;
 	for ([monsterColor, monsterDetails] of Object.entries(characters)) {
 		var isStar = false;
-		if (!monsterDetails.isOnBoard) //if monster is not on board
+		if (!monsterDetails.isOnBoard || monsterColor === 'pacman') //if monster is not on board or it's a pacman (was updated already)
 			continue;
 		var i = monsterDetails.x;
-		var j=monsterDetails.y;
+		var j = monsterDetails.y;
+		var x; // direction
 		if (monsterColor=='marioStar'){
 			isStar = true;
-			x = getRandomInt(1,5);
+			x = getRandomInt(1,5); //gets a number between 1 to 4 represents direction
 		}
 		else{
 			x = getBestDirection(i,j); // TODO : change to smart x
 		}
+
 		if (x == 1) { //up
 			if (i > 0 && board[i - 1][j] != 4 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10)) {
 				board[i][j] = monsterDetails.prevInCell;
@@ -387,7 +356,6 @@ function UpdateMonsterPosition(){
 				characters[monsterColor].x++;
 				characters[monsterColor].direction=monsterColor+'Down'
 				}
-				
 			}
 		if (x == 3) { //left
 			if (j > 0 && board[i][j - 1] != 4 && (board[i][j - 1]<=5 || board[i][j - 1] >= 10)) {
@@ -396,7 +364,6 @@ function UpdateMonsterPosition(){
 				characters[monsterColor].y--;
 				characters[monsterColor].direction=monsterColor+'Left'
 				}
-
 			}
 		if (x == 4) { //right
 			if (j < 29 && board[i][j + 1] != 4 && (board[i][j + 1]<=5 || board[i][j + 1] >= 10)) {
@@ -406,15 +373,12 @@ function UpdateMonsterPosition(){
 				characters[monsterColor].direction=monsterColor+'Right'
 				}
 			}
-		if(board[characters[monsterColor].x][characters[monsterColor].y]==5 && !isStar){ //pacman met monster -> 1 loss
+		if(board[characters[monsterColor].x][characters[monsterColor].y]==5 && !isStar){ // pacman met monster -> 1 loss
 			characters[monsterColor].prevInCell = 0;
 			isLoss = true;
 		}
-		if(board[characters[monsterColor].x][characters[monsterColor].y]==5 && isStar){ //pacman met star -> 50 points
-			board[i][j]=characters[monsterColor].prevInCell;
-			characters[monsterColor].prevInCell=0;
-			characters[monsterColor].isOnBoard = false;
-			score+=50;
+		if(board[characters[monsterColor].x][characters[monsterColor].y]==5 && isStar){ // pacman met star -> 50 points
+			isStarCollected = true;
 		} 
 		else{
 			if (isStar)
@@ -436,8 +400,47 @@ function checkLoss(){
 	if(!isLoss)
 		return;
 	totalLoss++;
-	score-=10;
+	score -= 10;
 	board[characters['pacman'].x][characters['pacman'].y] = 0;
 	setCharactersOnBoard();
 	isLoss = false;
+}
+
+function checkStar(){
+	if(!isStarCollected)
+		return;
+	board[characters['marioStar'].x][characters['marioStar'].y]=characters['marioStar'].prevInCell;
+	characters['marioStar'].prevInCell=0;
+	characters['marioStar'].isOnBoard = false;
+	score+=50;
+	isStarCollected = false;
+}
+
+function movePacman(){
+	board[characters['pacman'].x][characters['pacman'].y] = 0;
+	var x = GetKeyPressed();
+	if (x == 1) { //up
+		if (characters['pacman'].x > 0 && board[characters['pacman'].x - 1][characters['pacman'].y] != 4) {
+			characters['pacman'].x--;
+			characters['pacman'].direction='pacmanUp'
+		}
+	}
+	if (x == 2) { //down
+		if (characters['pacman'].x < 14 && board[characters['pacman'].x + 1][characters['pacman'].y] != 4) {
+			characters['pacman'].x++;
+			characters['pacman'].direction='pacmanDown'
+		}
+	}
+	if (x == 3) { //left
+		if (characters['pacman'].y > 0 && board[characters['pacman'].x][characters['pacman'].y - 1] != 4) {
+			characters['pacman'].y--;
+			characters['pacman'].direction='pacmanLeft'
+		}
+	}
+	if (x == 4) { //right
+		if (characters['pacman'].y < 29 && board[characters['pacman'].x][characters['pacman'].y + 1] != 4) {
+			characters['pacman'].y++;
+			characters['pacman'].direction='pacmanRight'
+		}
+	}
 }
