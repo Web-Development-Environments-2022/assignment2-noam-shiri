@@ -234,16 +234,17 @@ function UpdatePosition() {
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	var score2win = Math.floor(food_requested*0.6*5)
-	if (score >= 500) { //TODO : change to correct score
+	if (maxGameTime <= time_elapsed || totalLoss>=5) { // end game senarios
+		if (totalLoss>=5)
+			window.alert("Loser!");
+		else if (maxGameTime <= time_elapsed){
+			if	(score < 100)
+				window.alert("You are better than " + score + " points!");
+			else // score >= 100
+				window.alert("Winner!!!");
+		}
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
-		window.alert("Game completed");
-		document.getElementById("gameOption").disabled = false;
-	}
-	else if(maxGameTime <= time_elapsed || totalLoss>=5){
-		window.clearInterval(interval);
-		window.clearInterval(interval2);
-		window.alert("You lost!");
 		document.getElementById("gameOption").disabled = false;
 	}
 	else {
