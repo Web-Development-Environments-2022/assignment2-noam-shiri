@@ -11,7 +11,7 @@ var boardDictionary = {0:"Empty", 1:"ball5", 2:"ball15", 3:"ball25", 4:"wall", 5
 var colors = {"Yellow": "#FFFD98" , "Green": "#D0F3B8" , "Blue": "#B8D7F3" , "Pink": "#F3B8F1" , "Purple": "#D6B8F3"}
 var addons; //for each addon: [name, x, y, isOnBoard, boardnumber]
 var addonsCount;
-var totalLoss;
+var lives;
 var isLoss;
 var isStarCollected;
 var bgMusic;
@@ -22,7 +22,8 @@ function Start() {
 	bgMusic.loop = true;
 	bgMusic.play();
 	score = 0;
-	totalLoss = 0;
+	lives = 5;
+	document.getElementById("currLives").src=  "./pictures/5lives.png";
 	isLoss = false;
 	characters = {	'pink': {direction: 'pinkUp', x:1, y:1, isOnBoard:true, prevInCell:0 },
 					'blue': {direction: 'blueUp', x:1, y:28, isOnBoard:false, prevInCell:0 },
@@ -127,7 +128,6 @@ function Draw() {
 		  center.x = j * 30 + 15;
 		  var img = new Image();
 		  if (board[i][j] == 5) {
-			var img = new Image();
 			img.src = './pictures/'+characters['pacman'].direction+'.png';
 			context.drawImage(img, center.x-15, center.y-15,30, 30);
 			context.draw;
@@ -220,7 +220,10 @@ function UpdatePosition() {
 		score+=30;
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 12) { // medicine
-		//score+=50; //plus heart
+		if(lives<5){
+			lives++;
+			updateLivesImg();
+		}
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 13) {  // star 
 		// will update the score later
@@ -238,10 +241,10 @@ function UpdatePosition() {
 	checkStar();
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (maxGameTime <= time_elapsed || totalLoss>=5) { // end game senarios
+	if (maxGameTime <= time_elapsed || lives <= 0) { // end game senarios
 		bgMusic.pause();
 		bgMusic.currentTime = 0;
-		if (totalLoss>=5){
+		if (lives<=0){
 			bgMusic = new Audio('pictures/files/Lose.mp3');
 			window.alert("Loser!");}
 		else if (maxGameTime <= time_elapsed){
@@ -394,9 +397,10 @@ function UpdateMonsterPosition(){
 		else{
 			if (isStar)
 				board[characters[monsterColor].x][characters[monsterColor].y] = 13; //update monster location on board
-			else
+			else{
 				board[characters[monsterColor].x][characters[monsterColor].y] = currMonster; //update monster location on board
-			currMonster++; //next monster sirial number
+				currMonster++; //next monster sirial number
+			} 
 		}
 	// TO DO:  check if collapsed and if so decrease points and restart
 	}
@@ -412,11 +416,16 @@ function getBestDirection(xindex,yindex){
 function checkLoss(){
 	if(!isLoss)
 		return;
-	totalLoss++;
+	lives--;
 	score -= 10;
 	board[characters['pacman'].x][characters['pacman'].y] = 0;
 	setCharactersOnBoard();
 	isLoss = false;
+	updateLivesImg();
+}
+
+function updateLivesImg(){
+	document.getElementById("currLives").src=  "./pictures/" + lives + "lives.png";
 }
 
 function checkStar(){
