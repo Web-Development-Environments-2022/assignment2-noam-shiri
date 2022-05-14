@@ -7,7 +7,7 @@ var monsters;
 var color5points;
 var color15points;
 var color25points;
-var boardDictionary = {0:"Empty", 1:"ball5", 2:"ball15", 3:"ball25", 4:"wall", 5:"pacman", 6:"pink", 7:"blue", 8:"orange", 9:"red", 10:"clock", 11:"candy", 12:"medicine", 13:"marioStar"}
+//var boardDictionary = {0:"Empty", 1:"ball5", 2:"ball15", 3:"ball25", 4:"wall", 5:"pacman", 6:"pink", 7:"blue", 8:"orange", 9:"red", 10:"clock", 11:"candy", 12:"medicine", 13:"marioStar"}
 var colors = {"Yellow": "#FFFD98" , "Green": "#D0F3B8" , "Blue": "#B8D7F3" , "Pink": "#F3B8F1" , "Purple": "#D6B8F3"}
 var addons; //for each addon: [name, x, y, isOnBoard, boardnumber]
 var addonsCount;
@@ -15,6 +15,9 @@ var lives;
 var isLoss;
 var isStarCollected;
 var bgMusic;
+var pac_i;
+var pac_j;
+
 // var starInfo;
 
 function Start() {
@@ -25,10 +28,10 @@ function Start() {
 	lives = 5;
 	document.getElementById("currLives").src=  "./pictures/5lives.png";
 	isLoss = false;
-	characters = {	'pink': {direction: 'pinkUp', x:1, y:1, isOnBoard:true, prevInCell:0 },
-					'blue': {direction: 'blueUp', x:1, y:28, isOnBoard:false, prevInCell:0 },
-					'orange': {direction: 'orangeUp', x:13, y:1, isOnBoard:false, prevInCell:0 },
-					'red': {direction: 'redUp', x:13, y:28, isOnBoard:false, prevInCell:0 } ,
+	characters = {	'pink': {direction: 'pinkUp', x:1, y:1, isOnBoard:true, prevInCell:0 ,lastStep: null},
+					'blue': {direction: 'blueUp', x:1, y:28, isOnBoard:false, prevInCell:0 ,lastStep: null},
+					'orange': {direction: 'orangeUp', x:13, y:1, isOnBoard:false, prevInCell:0,lastStep: null},
+					'red': {direction: 'redUp', x:13, y:28, isOnBoard:false, prevInCell:0 ,lastStep: null} ,
 					'marioStar': {direction: 'marioStarUp', x:8, y:15, isOnBoard:false, prevInCell:0 } ,
 					'pacman': {direction: 'pacmanRight', x:0, y:0}
 					}
@@ -86,7 +89,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 140); //140
+	interval = setInterval(UpdatePosition, 180); //140
 	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000);
 	interval3 = setInterval(candyOnOff, 5000); //every 5 seconds
 }
@@ -346,19 +349,22 @@ function UpdateMonsterPosition(){
 			continue;
 		var i = monsterDetails.x;
 		var j = monsterDetails.y;
+		pac_i ,pac_j = getPacmenLocation();
 		var x; // direction
 		if (monsterColor=='marioStar'){
 			isStar = true;
 			x = getRandomInt(1,5); //gets a number between 1 to 4 represents direction
 		}
 		else{
-			x = getBestDirection(i,j); // TODO : change to smart x
+			x=getBestMovement(monsterColor, i,j,pac_i,pac_j)[0];// TODO : change to smart x
+			console.log(x)
 		}
 
 		if (x == 1) { //up
 			if (i > 0 && board[i - 1][j] != 4 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10) && board[i - 1][j] != 13) {
 				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i-1][j];
+				characters[monsterColor].lastStep=1;
 				characters[monsterColor].x--;
 				characters[monsterColor].direction=monsterColor+'Up'
 				}
@@ -367,6 +373,7 @@ function UpdateMonsterPosition(){
 			if (i < 14 && board[i + 1][j] != 4 && (board[i + 1][j]<=5 || board[i + 1][j] >= 10) && board[i + 1][j] != 13) {
 				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i+1][j];
+				characters[monsterColor].lastStep=2;
 				characters[monsterColor].x++;
 				characters[monsterColor].direction=monsterColor+'Down'
 				}
@@ -375,6 +382,7 @@ function UpdateMonsterPosition(){
 			if (j > 0 && board[i][j - 1] != 4 && (board[i][j - 1]<=5 || board[i][j - 1] >= 10) && board[i][j - 1] != 13) {
 				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i][j-1];
+				characters[monsterColor].lastStep=3;
 				characters[monsterColor].y--;
 				characters[monsterColor].direction=monsterColor+'Left'
 				}
@@ -383,6 +391,7 @@ function UpdateMonsterPosition(){
 			if (j < 29 && board[i][j + 1] != 4 && (board[i][j + 1]<=5 || board[i][j + 1] >= 10) && board[i][j + 1] != 13) {
 				board[i][j] = monsterDetails.prevInCell;
 				characters[monsterColor].prevInCell = board[i][j+1];
+				characters[monsterColor].lastStep=4;
 				characters[monsterColor].y++;
 				characters[monsterColor].direction=monsterColor+'Right'
 				}
@@ -406,12 +415,45 @@ function UpdateMonsterPosition(){
 	}
 }
 
-
-function getBestDirection(xindex,yindex){
-	//TO DO
-	number = getRandomInt(1,5);
-	return number;
+function getPacmenLocation(){
+	return (characters['pacman'].x ,characters['pacman'].y )
 }
+
+function getNeighbors(monster_name, xindex, yindex){
+	neighbors=[]
+	if (board[xindex - 1][yindex]!=4 && characters[monster_name].lastStep!=2)
+		neighbors.push(1)
+	if (board[xindex + 1][yindex]!=4 && characters[monster_name].lastStep!=1)
+		neighbors.push(2)
+	if (board[xindex][yindex - 1]!=4 && characters[monster_name].lastStep!=4)
+		neighbors.push(3)
+	if (board[xindex][yindex + 1]!=4 && characters[monster_name].lastStep!=3)
+		neighbors.push(4)
+	return neighbors
+}
+
+function getBestMovement(monster_name , mosnt_i, mosnt_j, pac_i, pac_j ){
+	movements=[]
+	delta_x  = mosnt_i-pac_i;
+	delta_y = mosnt_j-pac_j;
+	if (Math.abs(delta_x)>=Math.abs(delta_y)){
+		if(delta_x<0 && characters[monster_name].lastStep!=1 && board[mosnt_i + 1][mosnt_j]!=4)
+			movements.push(2)
+	 	else if(delta_x>0 && characters[monster_name].lastStep!=2 && board[mosnt_i - 1][mosnt_j]!=4)
+			movements.push(1)
+  	} 
+	else{
+		if(delta_y>0 && characters[monster_name].lastStep!=4 && board[mosnt_i][mosnt_j - 1]!=4)
+			movements.push(3)
+	 	else if(delta_y<0 && characters[monster_name].lastStep!=3 && board[mosnt_i][mosnt_j + 1]!=4)
+	 		movements.push(4)
+	}
+	if (movements.length==0){
+		movements=getNeighbors(monster_name, mosnt_i, mosnt_j);
+	}
+	return movements;
+}
+
 
 function checkLoss(){
 	if(!isLoss)
