@@ -20,8 +20,8 @@ var userLogged = false;
 $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();
-	// $("#welcome").show();
-	$("#settings").show();
+	$("#welcome").show();
+	// $("#settings").show();
 	//set listeners
 	addSettingsListeners();
 	// this is from the original code:
@@ -31,8 +31,8 @@ $(document).ready(function() {
 function hideAllPages(){
 	// this function hides all the pages
 	$("#welcome").hide();
-	$("#register").hide();
-	$("#login").hide();
+	// $("#register").hide();
+	// $("#login").hide();
 	$("#settings").hide();
 	$("#about").hide();
 	$("#gamepage").hide();

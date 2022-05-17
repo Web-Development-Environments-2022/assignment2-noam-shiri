@@ -1,9 +1,8 @@
 //register check inputs validation:
 function registerCheck(){
-	//console.log("TEST AGAIN");
 	$("#register").find('span,select').each(function(){$(this).hide();}); //hide all error messages
 	var isValid = true;
-	$("#registerForm").find('input,select').each(function(){ // check if all inputs contain data
+	$("#register").find('input,select').each(function(){ // check if all inputs contain data
 		if($(this).val() ===""){
 			isValid = false;
 			$("#errormissing").show();
@@ -27,21 +26,20 @@ function registerCheck(){
 			password: $('#regPassword').val()
 			});
 		alert("successful");
-        $("#registerForm").find('input,select').each(function(){ $(this).val("")}); //restart form
+        $("#register").find('input,select').each(function(){ $(this).val("")}); //restart form
         showHome();
-
 	}
 }
 
 function checkPassword(password){
-	var passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+	var passwordPattern = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/);
 	if(passwordPattern.test(password))
 		return true;
 	return false;
 	}
 
 function checkFullName(fullName){
-	var usernamePattern = /^[A-Za-z ]{1,20}$/;
+	var usernamePattern = new RegExp(/^[A-Za-z ]{1,20}$/);
 	if(usernamePattern.test(fullName))
 		return true;
 	return false;
