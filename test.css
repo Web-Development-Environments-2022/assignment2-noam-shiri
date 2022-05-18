@@ -70,17 +70,19 @@ input#un-mute:checked ~ .mute img {
 }
 .w h1 {
   color: #fff;
-  font-size: 30px;
+  font-size: 35px;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to left , #ffffff 10%, #000000 80%, #ffffff 10% );
+  background: linear-gradient(to right , #5a1e64,#250729,#5a1e64);
   background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: textclip 3s linear infinite;
+  animation: textclip 2s linear infinite;
   display: inline-block;
+  text-shadow: 0 0 30px #250729;
+
 }
 @keyframes textclip {
   to {
