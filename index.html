@@ -342,12 +342,16 @@
 			<div id="about" class="modal">
 				<div class="modal-content">
 					<span class="close">&times;</span>
-					<p>Presenters: Noam Cohen Maguri, Shiri Itach</p><br>
+					<p><div class="w"><h1>Presenters: Noam Cohen Maguri, Shiri Itach</h1></div></p><br>
 					<p>What was in jQuery Plugin use: </p><br>
-					<p>What Template had been used: </p><br>
-					<p>The difficulties we encountered in the exercise: </p><br>
-					<p>login template : <a href="https://codepen.io/ig_design/pen/KKVQpVP">link</a></p><br>
-					<p>button template hover glow: <a href="https://dev.to/webdeasy/top-20-css-buttons-animations-f41">link</a></p>
+					<p>What Template had been used:<ul><li>login template : <a href="https://codepen.io/ig_design/pen/KKVQpVP">link</a></li>
+						<li>button template hover glow: <a href="https://dev.to/webdeasy/top-20-css-buttons-animations-f41">link</a></li></ul> </p><br>
+					<p>The difficulties we encountered in the exercise: <ul>
+						<li>Create a clever ghost movement towards the Pacman</li>
+						<li>Deal with a clash of ghosts between them or with Pacman</li>
+						<li>Arrange the game board on different screens in different sizes</li>
+						<li>Handle time interval correctly in terms of game schedule (when does each character arrive and at what time?)</li>
+						<li>Disappearance of characters at various intervals ??</li></ul></p><br>
 				</div>
 			</div>
 
@@ -378,6 +382,17 @@
 							<td>
 								<label for="currLives">LIVES:</label>
 								<img id="currLives" src="./pictures/5lives.png" style="height: 20px;">
+							</td>
+							<td>
+								<div id="audio">
+									<input type="checkbox" name="un-mute" id="un-mute">
+										<label for="un-mute" class="unmute">
+											<img src="./pictures/mute.png" alt="Mute_Icon.svg" title="Mute icon" height=7% >
+										</label>
+										<label for="un-mute" class="mute">
+											<img src="./pictures/unmute.png" alt="Speaker_Icon.svg" title="Unmute icon" height=7% >
+										</label>
+								</div>
 							</td>
 						</tr>
 					</table>

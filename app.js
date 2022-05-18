@@ -6,6 +6,7 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var gameOn = false;
 
 // dictionary of users and their passoword, initialize "k" user:
 var users = [
@@ -17,6 +18,8 @@ var users = [
 
 var userLogged = false;
 
+
+
 $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();
@@ -26,6 +29,12 @@ $(document).ready(function() {
 	addSettingsListeners();
 	// this is from the original code:
 	context = canvas.getContext("2d");
+	var un_mute = document.getElementById('un-mute');
+
+	un_mute.onclick = function() {
+		bgMusic.muted = !bgMusic.muted;
+	};
+
 });
 
 function hideAllPages(){
@@ -41,6 +50,11 @@ function hideAllPages(){
 
 // set hide and show functions for menu:
 function showHome(){
+	if(gameOn)
+	{
+		gameStop();
+		gameOn = false;
+	}
 	hideAllPages();
 	document.getElementById("homeOption").disabled = true;
 	if(userLogged == false)
@@ -98,5 +112,6 @@ function showGame(){
 	hideAllPages();
 	document.getElementById("homeOption").disabled = false;
 	$("#gamepage").show();
+	gameOn=true;
 	Start();
 }

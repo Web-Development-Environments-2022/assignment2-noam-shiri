@@ -25,9 +25,13 @@ body{
 a {
 	cursor: pointer;
   transition: all 200ms linear;
+  color:#29082e;
+	font:'Poppins' bold;
+	font-weight: 700;
 }
 a:hover {
 	text-decoration: none;
+  color:#bf9bdd;
 }
 .link {
   color: #c4c3ca;
@@ -40,6 +44,50 @@ p {
   font-size: 18px;
   line-height: 1.7;
 }
+
+input#un-mute {
+  display: none;
+}
+
+.unmute img {
+  display: none;
+  height: 50px;
+}
+.mute img {
+  height: 50px;
+}
+
+input#un-mute:checked ~ .unmute img {
+  display: initial;
+}
+
+input#un-mute:checked ~ .mute img {
+  display: none;
+}
+
+.w {
+  text-align: center;
+}
+.w h1 {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to left , #ffffff 10%, #000000 80%, #ffffff 10% );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 3s linear infinite;
+  display: inline-block;
+}
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+ }
+}
+
 h6{
     display: flex;
     justify-content: center;
