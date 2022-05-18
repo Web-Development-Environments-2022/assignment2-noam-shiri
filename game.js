@@ -15,8 +15,6 @@ var lives;
 var isLoss;
 var isStarCollected;
 var bgMusic;
-var pac_i;
-var pac_j;
 
 // var starInfo;
 
@@ -32,7 +30,7 @@ function Start() {
 					'blue': {direction: 'blueUp', x:1, y:28, isOnBoard:false, prevInCell:0 ,lastStep: null},
 					'orange': {direction: 'orangeUp', x:13, y:1, isOnBoard:false, prevInCell:0,lastStep: null},
 					'red': {direction: 'redUp', x:13, y:28, isOnBoard:false, prevInCell:0 ,lastStep: null} ,
-					'marioStar': {direction: 'marioStarUp', x:8, y:15, isOnBoard:false, prevInCell:0 } ,
+					'marioStar': {direction: 'marioStarUp', x:8, y:15, isOnBoard:false, prevInCell:0 ,lastStep: null} ,
 					'pacman': {direction: 'pacmanRight', x:0, y:0}
 					}
 	addons = {0:["candy",0,0,false,11,0],1:["marioStar",8,15,false,13],2:["clock",0,0,false,10],3:["medicine",0,0,false,12]};
@@ -89,7 +87,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 180); //140
+	interval = setInterval(UpdatePosition, 140); //140
 	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000);
 	interval3 = setInterval(candyOnOff, 5000); //every 5 seconds
 }
@@ -126,81 +124,87 @@ function Draw() {
 
 	for (var i = 0; i < 15; i++) {
 		for (var j = 0; j < 30; j++) {
-		  var center = new Object();
-		  center.y = i * 30 + 15;
-		  center.x = j * 30 + 15;
-		  var img = new Image();
-		  if (board[i][j] == 5) {
-			img.src = './pictures/'+characters['pacman'].direction+'.png';
-			context.drawImage(img, center.x-15, center.y-15,30, 30);
-			context.draw;
-		} else if (board[i][j] == 1) {
-			context.beginPath();
-			context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
-			context.fillStyle = colors[color5points]; //color food 5
-			context.fill();
-		} else if (board[i][j] == 2) {
-			context.beginPath();
-			context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
-			context.fillStyle = colors[color15points]; //color food 15
-			context.fill();
-		} else if (board[i][j] == 3) {
-			context.beginPath();
-			context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
-			context.fillStyle = colors[color25points]; //color food 25
-			context.fill();
-		} else if (board[i][j] == 4) {
-			context.beginPath();
-			context.rect(center.x - 15, center.y - 15, 30, 30);
-			context.fillStyle = "#3E3247"; //color wall
-			context.fill();
-		}
-		else if (board[i][j] == 6){
-			img.src = './pictures/'+characters['pink'].direction+'.png';
-			context.drawImage(img, center.x-15, center.y-15,30, 30);
-			img.draw;
-		}
-		else if (board[i][j] == 7){
-			img.src = './pictures/'+characters['blue'].direction+'.png';
-			context.drawImage(img, center.x-15, center.y-15,30, 30);
-			context.draw;
-		}
-		else if (board[i][j] == 8){
-			img.src = './pictures/'+characters['orange'].direction+'.png';
-			context.drawImage(img, center.x-15, center.y-15,30, 30);
-			context.draw;
-		}
-		else if (board[i][j] == 9){
-			img.src = './pictures/'+characters['red'].direction+'.png';
-			context.drawImage(img, center.x-15, center.y-15,30, 30);
-			context.draw;
-		}
-		else if (board[i][j] == 10){
-			img.src = './pictures/clock.png';
-			context.drawImage(img, center.x-15, center.y-15,30, 30);
-			context.draw;
-		}
-		else if (board[i][j] == 11){
-			img.src = './pictures/candy'+addons[0][5]+'.png'; // different colors for candies
-			context.drawImage(img, center.x-15, center.y-15,30, 30);
-			context.draw;
-		}
-		else if (board[i][j] == 12){
-			img.src = './pictures/medicine.png';
-			context.drawImage(img, center.x-15, center.y-15,30, 30);
-			context.draw;
-		}
-		else if (board[i][j] == 13){
-			img.src = './pictures/'+characters['marioStar'].direction+'.png';
-			context.drawImage(img, center.x-15, center.y-15,30, 30);
-			context.draw;
-		}
-		// else if (board[i][j] == 14){
-		// 	var boom = new Image();
-		// 	boom.src = './pictures/boom.png';
-		// 	context.drawImage(boom, center.x-15, center.y-15,30, 30);
-		// 	context.draw;
-		// }
+			var center = new Object();
+			center.y = i * 30 + 15;
+			center.x = j * 30 + 15;
+			var img = new Image();
+			if (board[i][j] == 0)
+			continue
+			if (board[i][j] == 1) {
+				context.beginPath();
+				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = colors[color5points]; //color food 5
+				context.fill();
+			} else if (board[i][j] == 2) {
+				context.beginPath();
+				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = colors[color15points]; //color food 15
+				context.fill();
+			} else if (board[i][j] == 3) {
+				context.beginPath();
+				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = colors[color25points]; //color food 25
+				context.fill();
+			} else if (board[i][j] == 4) {
+				context.beginPath();
+				context.rect(center.x - 15, center.y - 15, 30, 30);
+				context.fillStyle = "#3E3247"; //color wall
+				context.fill();
+			}
+			else if (board[i][j] == 5) {
+				img.src = './pictures/'+characters['pacman'].direction+'.png';
+				context.drawImage(img, center.x-15, center.y-15,30, 30);
+				context.draw;
+			}
+			else if (board[i][j] == 6){
+				img.src = './pictures/'+characters['pink'].direction+'.png';
+				context.drawImage(img, center.x-15, center.y-15,30, 30);
+				img.draw;
+			}
+			else if (board[i][j] == 7){
+				img.src = './pictures/'+characters['blue'].direction+'.png';
+				context.drawImage(img, center.x-15, center.y-15,30, 30);
+				context.draw;
+			}
+			else if (board[i][j] == 8){
+				img.src = './pictures/'+characters['orange'].direction+'.png';
+				context.drawImage(img, center.x-15, center.y-15,30, 30);
+				context.draw;
+			}
+			else if (board[i][j] == 9){
+				img.src = './pictures/'+characters['red'].direction+'.png';
+				context.drawImage(img, center.x-15, center.y-15,30, 30);
+				context.draw;
+			}
+			else if (board[i][j] == 10){
+				img.src = './pictures/clock.png';
+				context.drawImage(img, center.x-15, center.y-15,30, 30);
+				context.draw;
+			}
+			else if (board[i][j] == 11){
+				img.src = './pictures/candy'+addons[0][5]+'.png'; // different colors for candies
+				context.drawImage(img, center.x-15, center.y-15,30, 30);
+				context.draw;
+			}
+			else if (board[i][j] == 12){
+				img.src = './pictures/medicine.png';
+				context.drawImage(img, center.x-15, center.y-15,30, 30);
+				context.draw;
+			}
+			else if (board[i][j] == 13){
+				img.src = './pictures/'+characters['marioStar'].direction+'.png';
+				context.drawImage(img, center.x-15, center.y-15,30, 30);
+				context.draw;
+			}
+			else{
+				console.log(i,j)
+			}
+			// else if (board[i][j] == 14){
+			// 	var boom = new Image();
+			// 	boom.src = './pictures/boom.png';
+			// 	context.drawImage(boom, center.x-15, center.y-15,30, 30);
+			// 	context.draw;
+			// }
 		}
 	  }
 	}
@@ -248,19 +252,21 @@ function UpdatePosition() {
 		bgMusic.pause();
 		bgMusic.currentTime = 0;
 		if (lives<=0){
-			bgMusic = new Audio('pictures/files/Lose.mp3');
+			bgMusic1 = new Audio('pictures/files/Lose.mp3');
 			window.alert("Loser!");}
 		else if (maxGameTime <= time_elapsed){
 			if	(score < 100){
-				bgMusic = new Audio('pictures/files/Lose.mp3');
+				bgMusic1 = new Audio('pictures/files/Lose.mp3');
 				window.alert("You are better than " + score + " points!");}
 			else{ // score >= 100
-				bgMusic = new Audio('pictures/files/Win.mp3');
+				bgMusic1 = new Audio('pictures/files/Win.mp3');
 				window.alert("Winner!!!");}
 		}
-		bgMusic.play();
+		if (!bgMusic.muted)
+			bgMusic1.play();
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
+		window.clearInterval(interval3);
 		document.getElementById("gameOption").disabled = false;
 	}
 	else {
@@ -349,17 +355,17 @@ function UpdateMonsterPosition(){
 			continue;
 		var i = monsterDetails.x;
 		var j = monsterDetails.y;
-		pac_i ,pac_j = getPacmenLocation();
 		var x; // direction
 		if (monsterColor=='marioStar'){
 			isStar = true;
 			x = getRandomInt(1,5); //gets a number between 1 to 4 represents direction
 		}
 		else{
-			x=getBestMovement(monsterColor, i,j,pac_i,pac_j)[0];// TODO : change to smart x
-			console.log(x)
+			moves = getBestMovement(monsterColor,i,j,characters['pacman'].x ,characters['pacman'].y )
+			x=moves[0];
 		}
 
+		//console.log(monsterDetails.prevInCell)
 		if (x == 1) { //up
 			if (i > 0 && board[i - 1][j] != 4 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10) && board[i - 1][j] != 13) {
 				board[i][j] = monsterDetails.prevInCell;
@@ -403,55 +409,59 @@ function UpdateMonsterPosition(){
 		if(board[characters[monsterColor].x][characters[monsterColor].y]==5 && isStar){ // pacman met star -> 50 points
 			isStarCollected = true;
 		} 
-		else{
-			if (isStar)
-				board[characters[monsterColor].x][characters[monsterColor].y] = 13; //update monster location on board
-			else{
-				board[characters[monsterColor].x][characters[monsterColor].y] = currMonster; //update monster location on board
-				currMonster++; //next monster sirial number
-			} 
-		}
+		if (isStar)
+			board[characters[monsterColor].x][characters[monsterColor].y] = 13; //update monster location on board
+		if (!isStar){
+			board[characters[monsterColor].x][characters[monsterColor].y] = currMonster; //update monster location on board
+			currMonster++; //next monster sirial number
+		} 
+		
+		
+
 	// TO DO:  check if collapsed and if so decrease points and restart
 	}
 }
 
-function getPacmenLocation(){
-	return (characters['pacman'].x ,characters['pacman'].y )
-}
+
 
 function getNeighbors(monster_name, xindex, yindex){
 	neighbors=[]
-	if (board[xindex - 1][yindex]!=4 && characters[monster_name].lastStep!=2)
+	if (board[xindex - 1][yindex]!=4 && (board[xindex - 1][yindex]<=5 || board[xindex - 1][yindex] >= 10))
 		neighbors.push(1)
-	if (board[xindex + 1][yindex]!=4 && characters[monster_name].lastStep!=1)
+	if (board[xindex + 1][yindex]!=4 && (board[xindex + 1][yindex]<=5 || board[xindex + 1][yindex] >= 10))
 		neighbors.push(2)
-	if (board[xindex][yindex - 1]!=4 && characters[monster_name].lastStep!=4)
+	if (board[xindex][yindex - 1]!=4 && (board[xindex][yindex - 1]<=5 || board[xindex][yindex - 1] >= 10))
 		neighbors.push(3)
-	if (board[xindex][yindex + 1]!=4 && characters[monster_name].lastStep!=3)
+	if (board[xindex][yindex + 1]!=4 && (board[xindex][yindex + 1]<=5 || board[xindex][yindex + 1] >= 10))
 		neighbors.push(4)
 	return neighbors
 }
 
-function getBestMovement(monster_name , mosnt_i, mosnt_j, pac_i, pac_j ){
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+	return (array)
+}
+
+function getBestMovement(monster_name , monst_i, monst_j, pac_i, pac_j ){
 	movements=[]
-	delta_x  = mosnt_i-pac_i;
-	delta_y = mosnt_j-pac_j;
-	if (Math.abs(delta_x)>=Math.abs(delta_y)){
-		if(delta_x<0 && characters[monster_name].lastStep!=1 && board[mosnt_i + 1][mosnt_j]!=4)
-			movements.push(2)
-	 	else if(delta_x>0 && characters[monster_name].lastStep!=2 && board[mosnt_i - 1][mosnt_j]!=4)
-			movements.push(1)
-  	} 
-	else{
-		if(delta_y>0 && characters[monster_name].lastStep!=4 && board[mosnt_i][mosnt_j - 1]!=4)
-			movements.push(3)
-	 	else if(delta_y<0 && characters[monster_name].lastStep!=3 && board[mosnt_i][mosnt_j + 1]!=4)
-	 		movements.push(4)
-	}
+	delta_x  = monst_i-pac_i;
+	delta_y = monst_j-pac_j;
+	if(delta_x<0 && characters[monster_name].lastStep!=1 && board[monst_i + 1][monst_j]!=4 && (board[monst_i + 1][monst_j]<=5 || board[monst_i + 1][monst_j] >= 10))
+		movements.push(2)
+	if(delta_x>0 && characters[monster_name].lastStep!=2 && board[monst_i - 1][monst_j]!=4 && (board[monst_i - 1][monst_j]<=5 || board[monst_i - 1][monst_j] >= 10) )
+		movements.push(1)
+	if(delta_y>0 && characters[monster_name].lastStep!=4 && board[monst_i][monst_j - 1]!=4 && (board[monst_i][monst_j - 1]<=5 || board[monst_i][monst_j - 1] >= 10))
+		movements.push(3)
+	if(delta_y<0 && characters[monster_name].lastStep!=3 && board[monst_i][monst_j + 1]!=4 && (board[monst_i][monst_j + 1]<=5 || board[monst_i][monst_j + 1] >= 10))
+		movements.push(4)
 	if (movements.length==0){
-		movements=getNeighbors(monster_name, mosnt_i, mosnt_j);
+		movements=getNeighbors(monster_name, monst_i, monst_j);
 	}
-	return movements;
+	movements_shuffled = shuffleArray(movements)	
+	return movements_shuffled;
 }
 
 
@@ -464,6 +474,9 @@ function checkLoss(){
 	setCharactersOnBoard();
 	isLoss = false;
 	updateLivesImg();
+	if (!bgMusic.muted){
+		bgMusic2 = new Audio('pictures/files/nomnom.mp3');
+		bgMusic2.play();}
 }
 
 function updateLivesImg(){
@@ -507,4 +520,12 @@ function movePacman(){
 			characters['pacman'].direction='pacmanRight'
 		}
 	}
+}
+
+
+function gameStop() {
+	bgMusic.pause();
+	window.clearInterval(interval);
+	window.clearInterval(interval2);
+	window.clearInterval(interval3);
 }
