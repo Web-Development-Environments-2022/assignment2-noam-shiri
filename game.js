@@ -8,7 +8,7 @@ var color5points;
 var color15points;
 var color25points;
 //var boardDictionary = {0:"Empty", 1:"ball5", 2:"ball15", 3:"ball25", 4:"wall", 5:"pacman", 6:"pink", 7:"blue", 8:"orange", 9:"red", 10:"clock", 11:"candy", 12:"medicine", 13:"marioStar"}
-var colors = {"Yellow": "#FFFD98" , "Green": "#D0F3B8" , "Blue": "#B8D7F3" , "Pink": "#F3B8F1" , "Purple": "#D6B8F3"}
+var colors = {"Yellow": "#f3d99d" , "Green": "#7AB495" , "Blue": "#88c4f8" , "Pink": "#e490c3" , "Purple": "#877FD7"}
 var addons; //for each addon: [name, x, y, isOnBoard, boardnumber]
 var addonsCount;
 var lives;
@@ -137,12 +137,12 @@ function Draw() {
 				context.fill();
 			} else if (board[i][j] == 2) {
 				context.beginPath();
-				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 7, 0, 2 * Math.PI); // circle
 				context.fillStyle = colors[color15points]; //color food 15
 				context.fill();
 			} else if (board[i][j] == 3) {
 				context.beginPath();
-				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 9, 0, 2 * Math.PI); // circle
 				context.fillStyle = colors[color25points]; //color food 25
 				context.fill();
 			} else if (board[i][j] == 4) {

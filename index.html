@@ -15,7 +15,11 @@
 
 	<body>
 		<header>
-			
+			<p style="background-image: url('pictures/files/pinkmaze.png');">
+				<img src="pictures/files/logopacman.png" alt="logo" height="70" style="vertical-align:middle">
+				<img src="pictures/files/Copyrights.png" alt="logo" height="80" style="float:right">
+			</p>
+
 		</header>
 		<!-- menu -->
 		<nav>
@@ -151,15 +155,15 @@
 												</td>
 												<td colspan="1">
 													<input name="ballcolor5" id="yellow5" value="Yellow" type="radio" checked> 
-													<label style="color: #FFFD98;">Yellow</label>
+													<label style="color: #f3d99d;">Yellow</label>
 													<input name="ballcolor5" id="green5" value="Green" type="radio">
-													<label style="color: #D0F3B8;">Green</label>
+													<label style="color: #7AB495;">Green</label>
 													<input name="ballcolor5" id="blue5" value="Blue" type="radio"> 
-													<label style="color: #B8D7F3;">Blue</label>
+													<label style="color: #88c4f8;">Blue</label>
 													<input name="ballcolor5" id="pink5" value="Pink" type="radio"> 
-													<label style="color: #F3B8F1;">Pink</label>
+													<label style="color: #e490c3;">Pink</label>
 													<input name="ballcolor5" id="purple5" value="Purple" type="radio"> 
-													<label style="color: #c5a6f8;">Purple</label>
+													<label style="color: #877FD7;">Purple</label>
 												</td>
 											</tr>
 											<tr>
@@ -168,15 +172,15 @@
 												</td>
 												<td colspan="1">
 													<input name="ballcolor15" id="yellow15" value="Yellow" type="radio"> 
-													<label style="color: #FFFD98;">Yellow</label>
+													<label style="color: #f3d99d;">Yellow</label>
 													<input name="ballcolor15" id="green15" value="Green" type="radio" checked>
-													<label style="color: #D0F3B8;">Green</label>
+													<label style="color: #7AB495;">Green</label>
 													<input name="ballcolor15" id="blue15" value="Blue" type="radio"> 
-													<label style="color: #B8D7F3;">Blue</label>
+													<label style="color: #88c4f8;">Blue</label>
 													<input name="ballcolor15" id="pink15" value="Pink" type="radio"> 
-													<label style="color: #F3B8F1;">Pink</label>
+													<label style="color: #e490c3;">Pink</label>
 													<input name="ballcolor15" id="purple15" value="Purple" type="radio"> 
-													<label style="color: #D6B8F3;">Purple</label>
+													<label style="color: #877FD7;">Purple</label>
 												</td>
 											</tr>
 											<tr>
@@ -185,15 +189,15 @@
 												</td>
 												<td colspan="1">
 													<input name="ballcolor25" id="yellow25" value="Yellow" type="radio"> 
-													<label style="color: #FFFD98;">Yellow</label>
+													<label style="color: #f3d99d;">Yellow</label>
 													<input name="ballcolor25" id="green25" value="Green" type="radio">
-													<label style="color: #D0F3B8;">Green</label>
+													<label style="color: #7AB495;">Green</label>
 													<input name="ballcolor25" id="blue25" value="Blue" type="radio" checked> 
-													<label style="color: #B8D7F3;">Blue</label>
+													<label style="color: #88c4f8;">Blue</label>
 													<input name="ballcolor25" id="pink25" value="Pink" type="radio"> 
-													<label style="color: #F3B8F1;">Pink</label>
+													<label style="color: #e490c3;">Pink</label>
 													<input name="ballcolor25" id="purple25" value="Purple" type="radio">  
-													<label style="color: #D6B8F3;">Purple</label>
+													<label style="color: #877FD7;">Purple</label>
 												</td>
 											</tr>
 											<tr>
@@ -235,15 +239,14 @@
 				<div class="modal-content">
 					<span class="close">&times;</span>
 					<p><div class="w"><h1>Presenters: Noam Cohen Maguri, Shiri Itach</h1></div></p>
-					<p>What was in jQuery Plugin use: </p><br>
+					<p>jQuery use: </p><li>We chose not to use jQuery plugins but to make the registration form ourselves using jQuery syntax.</li>
 					<p>What Template had been used:<ul><li>login template : <a href="https://codepen.io/ig_design/pen/KKVQpVP">link</a></li>
-						<li>button template hover glow: <a href="https://dev.to/webdeasy/top-20-css-buttons-animations-f41">link</a></li></ul> </p><br>
-					<p>The difficulties we encountered in the exercise: <ul>
+						<li>button template hover glow: <a href="https://dev.to/webdeasy/top-20-css-buttons-animations-f41">link</a></li></ul> </p>
+					<p>The difficulties we encountered in the assignment: <ul>
 						<li>Create a clever ghost movement towards the Pacman</li>
 						<li>Deal with a clash of ghosts between them or with Pacman</li>
 						<li>Arrange the game board on different screens in different sizes</li>
-						<li>Handle time interval correctly in terms of game schedule (when does each character arrive and at what time?)</li>
-						<li>Disappearance of characters at various intervals ??</li></ul></p><br>
+						<li>Handle time interval correctly in terms of game schedule (when does each character arrive and at what time?)</li></ul></p><br>
 				</div>
 			</div>
 
@@ -282,7 +285,7 @@
 											<img src="./pictures/mute.png" alt="Mute_Icon.svg" title="Mute icon" height=7 >
 										</label>
 										<label for="un-mute" class="mute">
-											<img src="./pictures/unmute.png" alt="Speaker_Icon.svg" title="Unmute icon" height=7 >
+											<img src="./pictures/unmute.png" alt="Speaker_Icon.svg" title="Unmute icon" height=7 id="unmute_img" >
 										</label>
 								</div>
 							</td>
@@ -306,7 +309,8 @@
 
 
 		<footer>
-			<p class="copyrights">&copy; Shiri Itach & Noam Cohen Maguri </p>
+			<p class="copyrights">&copy; Shiri Itach & Noam Cohen Maguri <br>
+			 Mail us and tell us what you think! :  <a href="mailto:shiriit@post.bgu.ac.il">Shiri Itach</a> &nbsp <a href="mailto:noamac@post.bgu.ac.il">Noam Cohen Maguri</a></p>
 		</footer>
 	</body>
 </html>
