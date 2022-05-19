@@ -4,8 +4,10 @@
 # URL:
 ## _need to add url_
 Our details:
-- Shiri Itach 318267895<br/> 
+- Shiri Itach 318267895
 - Noam Cohen Maguri 207777525
+
+
 Functionality:
 - Welcome Page.
 - Registration Page - Using jQuery and RegExp for validation check.
