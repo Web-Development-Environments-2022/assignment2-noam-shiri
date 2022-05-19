@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<!-- <script src="js/jquery.validate.js"></script> -->
 		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="register.js"></script>
 		<script type="text/javascript" src="login.js"></script>
@@ -20,217 +19,214 @@
 				<img src="pictures/files/logopacman.png" alt="logo" height="70" style="vertical-align:middle">
 				<img src="pictures/files/Copyrights.png" alt="logo" height="80" style="float:right">
 			</p>
-
 		</header>
+
 		<!-- menu -->
 		<nav>
 			<div class="menu" >
-			<!--<button id="welcomeOption" onclick="showWelcome()">Welcome</button>      MAYBE NOT NEEDED--> 
 				<button type="button" class="btn mt-4" id="homeOption" onclick="showHome()" disabled>Home</button>
-				<!-- <button class="menubtn" id="settingsOption" onclick="showSettings()">Settings</button> -->
 				<button type="button" class="btn mt-4" id="aboutOption" onclick="showAbout()">About</button>
 				<button type="button" class="btn mt-4" id="gameOption" onclick="showSettings()" disabled>New Game</button>
 			</div>
 		</nav>
+
+		<!-- content -->
 		<section>
-		
+			<!-- Welcome - main page -->
+			<div class="page" id="welcome">
+				<img id="logoimage" src="./pictures/background.png" width="800"><br>
+				<button class="animationBtn" onclick="enterGame()">Enter Game</button>
+			</div>
 
-					<div class="page" id="welcome">
-						<img id="logoimage" src="./pictures/background.png" width="800"><br>
-						<button class="animationBtn" onclick="enterGame()">
-							<span></span><span></span><span></span><span></span>Enter Game</button>
-					</div>
-					<div class="section pb-5 pt-5 pt-sm-2 text-center" id="enter">
-						<h6 class="mb-0 pb-3"><span>Log In</span><span>Sign Up</span></h6>
-			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
-			          	<label for="reg-log"></label>
-						<div class="card-3d-wrap mx-auto">
-							<div class="card-3d-wrapper" >
-								<div class="card-front">
-									<div class="center-wrap">
-										<div class="section text-center" id="loginform">
-											<p>Log In</p>
-											<div class="form-group">
-												<input type="text" name="userName" class="form-style" placeholder="Enter username" id="loginUsername"><br>
-												<span class="errorMsg" id="errorloginusername">*Please enter username.</span>
-											</div>	
-											<div class="form-group mt-2">
-												<input type="password" name="password" class="form-style" placeholder="Enter Password" id="loginPassword" autocomplete="off"><br>
-												<span class="errorMsg" id="errorloginpassword">*Please enter password.</span>
-											</div>
-											<a onclick="loginCheck()" class="btn mt-4">Log In</a>
-                            				<!-- <p class="mb-0 mt-4 text-center"></p> -->
-				      					</div>
-			      					</div>
-			      				</div>
-								<div class="card-back" >
-									<div class="center-wrap">
-										<div class="section text-center" id="register">
-											<p>Registration</p>
-											<div class="form-group">
-												<input type="text" name="logname" class="form-style" placeholder="Enter username" id="regUsername" autocomplete="off" required>
-											</div>	
-											<div class="form-group mt-2">
-												<input type="password" name="logpass" class="form-style" placeholder="Enter Password" id="regPassword"  passwordCheck="passwordCheck" autocomplete="off" required>
-												<br><span class="errorMsg" id="errorpassword">*Please provide valid Password.</span>
-											</div>
-											<div class="form-group">
-												<input type="text" name="logname" class="form-style" placeholder="Enter Full Name" id="regFullName" autocomplete="off" required>
-												<br><span class="errorMsg" id="errorname">*Please provide valid Full Name.</span> 
-											</div>	
-											<div class="form-group mt-2">
-												<input type="email" name="logemail" class="form-style" placeholder="Enter Email Address" id="regEmail" autocomplete="off" required>
-												<br><span class="errorMsg" id="erroremail">*Please provide valid Email.</span> 
-											</div>	
-											<div class="form-group mt-2">
-												<input type="date" name="logpass" class="form-style" placeholder="Your Password" id="regDate" autocomplete="off" required>
-												<br><span class="errorMsg" id="errormissing">*Please fill all the data.</span>
-											</div>
-											<a onclick="registerCheck()" class="btn mt-4">Register</a>
-			      					</div>
-			      				</div>
-			      			</div>
-			      		</div>
-					</div>
-				</div>
-
-
-			
-				<div class="card-3d-wrap mx-auto" id="settings">
+			<!-- Register -->
+			<div class="section pb-5 pt-5 pt-sm-2 text-center" id="enter">
+				<h6 class="mb-0 pb-3"><span>Log In</span><span>Sign Up</span></h6>
+				<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+				<label for="reg-log"></label>
+				<div class="card-3d-wrap mx-auto">
 					<div class="card-3d-wrapper" >
 						<div class="card-front">
 							<div class="center-wrap">
 								<div class="section text-center" id="loginform">
-									<p>Settings</p>
-									<div>
-										<table id="settTable">
-											<tr>
-												<td>
-													<label>Up: </label>
-												</td>
-												<td>
-													<input id="upSelect" class="movement" type="text" autocomplete="off"/>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<label>Down: </label>
-												</td>
-												<td>
-													<input id="downSelect" class="movement" type="text" autocomplete="off"/>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<label>Left: </label>
-												</td>
-												<td>
-													<input id="leftSelect" class="movement" type="text" autocomplete="off"/>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<label>Right: </label>
-												</td>
-												<td>
-													<input id="rightSelect" class="movement" type="text" autocomplete="off"/>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="2">
-													<span class="errorMsg" id="errormovement">*Please choose movement keys.</span>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="1">
-													<label>Food Amount: </label>
-												</td>
-												<td colspan="1">
-													<input type="range" id="ballnumRange" class="rangebars" min="50" max="90" value="70" oninput="changeBallNum(this.value)">
-													<lable id="ballnumVal">70</lable>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="1">
-													<label>Color of balls - 5 points: </label>
-												</td>
-												<td colspan="1">
-													<input name="ballcolor5" id="yellow5" value="Yellow" type="radio" checked> 
-													<label style="color: #f3d99d;">Yellow</label>
-													<input name="ballcolor5" id="green5" value="Green" type="radio">
-													<label style="color: #7AB495;">Green</label>
-													<input name="ballcolor5" id="blue5" value="Blue" type="radio"> 
-													<label style="color: #88c4f8;">Blue</label>
-													<input name="ballcolor5" id="pink5" value="Pink" type="radio"> 
-													<label style="color: #e490c3;">Pink</label>
-													<input name="ballcolor5" id="purple5" value="Purple" type="radio"> 
-													<label style="color: #877FD7;">Purple</label>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="1">
-													<label>Color of balls - 15 points: </label>
-												</td>
-												<td colspan="1">
-													<input name="ballcolor15" id="yellow15" value="Yellow" type="radio"> 
-													<label style="color: #f3d99d;">Yellow</label>
-													<input name="ballcolor15" id="green15" value="Green" type="radio" checked>
-													<label style="color: #7AB495;">Green</label>
-													<input name="ballcolor15" id="blue15" value="Blue" type="radio"> 
-													<label style="color: #88c4f8;">Blue</label>
-													<input name="ballcolor15" id="pink15" value="Pink" type="radio"> 
-													<label style="color: #e490c3;">Pink</label>
-													<input name="ballcolor15" id="purple15" value="Purple" type="radio"> 
-													<label style="color: #877FD7;">Purple</label>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="1">
-													<label>Color of balls - 25 points: </label>
-												</td>
-												<td colspan="1">
-													<input name="ballcolor25" id="yellow25" value="Yellow" type="radio"> 
-													<label style="color: #f3d99d;">Yellow</label>
-													<input name="ballcolor25" id="green25" value="Green" type="radio">
-													<label style="color: #7AB495;">Green</label>
-													<input name="ballcolor25" id="blue25" value="Blue" type="radio" checked> 
-													<label style="color: #88c4f8;">Blue</label>
-													<input name="ballcolor25" id="pink25" value="Pink" type="radio"> 
-													<label style="color: #e490c3;">Pink</label>
-													<input name="ballcolor25" id="purple25" value="Purple" type="radio">  
-													<label style="color: #877FD7;">Purple</label>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="2">
-													<span class="errorMsg" id="errorballcolors">*Please choose different food colors.</span>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="1">
-													<lable>Max Game Time: </lable>
-												</td>
-												<td colspan="1">
-													<input type="range" id="gametime" min="60" max="600" class="rangebars" value="60" oninput="setGameTime(this.value)">
-													<lable id="gametimeVal">60 sec</lable><br>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="1">
-													<lable>Number of Monsters: </lable>
-												</td>
-												<td colspan="1">
-													<input type="range" id="monstersNum" min="1" max="4" class="rangebars" value="1" oninput="setMonsters(this.value)">
-													<lable id="monstersNumVal">1</lable><br>
-												</td>
-											</tr>
-										</table>
-										
+									<p>Log In</p>
+									<div class="form-group">
+										<input type="text" name="userName" class="form-style" placeholder="Enter username" id="loginUsername"><br>
+										<span class="errorMsg" id="errorloginusername">*Please enter username.</span>
+									</div>	
+									<div class="form-group mt-2">
+										<input type="password" name="password" class="form-style" placeholder="Enter Password" id="loginPassword" autocomplete="off"><br>
+										<span class="errorMsg" id="errorloginpassword">*Please enter password.</span>
+									</div>
+									<a onclick="loginCheck()" class="btn mt-4">Log In</a>
+								</div>
+							</div>
+						</div>
+						<div class="card-back" >
+							<div class="center-wrap">
+								<div class="section text-center" id="register">
+									<p>Registration</p>
+									<div class="form-group">
+										<input type="text" name="logname" class="form-style" placeholder="Enter username" id="regUsername" autocomplete="off" required>
+									</div>	
+									<div class="form-group mt-2">
+										<input type="password" name="logpass" class="form-style" placeholder="Enter Password" id="regPassword"  passwordCheck="passwordCheck" autocomplete="off" required>
+										<br><span class="errorMsg" id="errorpassword">*Please provide valid Password.</span>
+									</div>
+									<div class="form-group">
+										<input type="text" name="logname" class="form-style" placeholder="Enter Full Name" id="regFullName" autocomplete="off" required>
+										<br><span class="errorMsg" id="errorname">*Please provide valid Full Name.</span> 
+									</div>	
+									<div class="form-group mt-2">
+										<input type="email" name="logemail" class="form-style" placeholder="Enter Email Address" id="regEmail" autocomplete="off" required>
+										<br><span class="errorMsg" id="erroremail">*Please provide valid Email.</span> 
+									</div>	
+									<div class="form-group mt-2">
+										<input type="date" name="logpass" class="form-style" placeholder="Your Password" id="regDate" autocomplete="off" required>
+										<br><span class="errorMsg" id="errormissing">*Please fill all the data.</span>
+									</div>
+									<a onclick="registerCheck()" class="btn mt-4">Register</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Login -->
+			<div class="card-3d-wrap mx-auto" id="settings">
+				<div class="card-3d-wrapper" >
+					<div class="card-front">
+						<div class="center-wrap">
+							<div class="section text-center" id="loginform">
+								<p>Settings</p>
+								<div>
+									<table id="settTable">
+										<tr>
+											<td>
+												<label>Up: </label>
+											</td>
+											<td>
+												<input id="upSelect" class="movement" type="text" autocomplete="off"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label>Down: </label>
+											</td>
+											<td>
+												<input id="downSelect" class="movement" type="text" autocomplete="off"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label>Left: </label>
+											</td>
+											<td>
+												<input id="leftSelect" class="movement" type="text" autocomplete="off"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label>Right: </label>
+											</td>
+											<td>
+												<input id="rightSelect" class="movement" type="text" autocomplete="off"/>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<span class="errorMsg" id="errormovement">*Please choose movement keys.</span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="1">
+												<label>Food Amount: </label>
+											</td>
+											<td colspan="1">
+												<input type="range" id="ballnumRange" class="rangebars" min="50" max="90" value="70" oninput="changeBallNum(this.value)">
+												<lable id="ballnumVal">70</lable>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="1">
+												<label>Color of balls - 5 points: </label>
+											</td>
+											<td colspan="1">
+												<input name="ballcolor5" id="yellow5" value="Yellow" type="radio" checked> 
+												<label style="color: #f3d99d;">Yellow</label>
+												<input name="ballcolor5" id="green5" value="Green" type="radio">
+												<label style="color: #7AB495;">Green</label>
+												<input name="ballcolor5" id="blue5" value="Blue" type="radio"> 
+												<label style="color: #88c4f8;">Blue</label>
+												<input name="ballcolor5" id="pink5" value="Pink" type="radio"> 
+												<label style="color: #e490c3;">Pink</label>
+												<input name="ballcolor5" id="purple5" value="Purple" type="radio"> 
+												<label style="color: #877FD7;">Purple</label>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="1">
+												<label>Color of balls - 15 points: </label>
+											</td>
+											<td colspan="1">
+												<input name="ballcolor15" id="yellow15" value="Yellow" type="radio"> 
+												<label style="color: #f3d99d;">Yellow</label>
+												<input name="ballcolor15" id="green15" value="Green" type="radio" checked>
+												<label style="color: #7AB495;">Green</label>
+												<input name="ballcolor15" id="blue15" value="Blue" type="radio"> 
+												<label style="color: #88c4f8;">Blue</label>
+												<input name="ballcolor15" id="pink15" value="Pink" type="radio"> 
+												<label style="color: #e490c3;">Pink</label>
+												<input name="ballcolor15" id="purple15" value="Purple" type="radio"> 
+												<label style="color: #877FD7;">Purple</label>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="1">
+												<label>Color of balls - 25 points: </label>
+											</td>
+											<td colspan="1">
+												<input name="ballcolor25" id="yellow25" value="Yellow" type="radio"> 
+												<label style="color: #f3d99d;">Yellow</label>
+												<input name="ballcolor25" id="green25" value="Green" type="radio">
+												<label style="color: #7AB495;">Green</label>
+												<input name="ballcolor25" id="blue25" value="Blue" type="radio" checked> 
+												<label style="color: #88c4f8;">Blue</label>
+												<input name="ballcolor25" id="pink25" value="Pink" type="radio"> 
+												<label style="color: #e490c3;">Pink</label>
+												<input name="ballcolor25" id="purple25" value="Purple" type="radio">  
+												<label style="color: #877FD7;">Purple</label>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<span class="errorMsg" id="errorballcolors">*Please choose different food colors.</span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="1">
+												<lable>Max Game Time: </lable>
+											</td>
+											<td colspan="1">
+												<input type="range" id="gametime" min="60" max="600" class="rangebars" value="60" oninput="setGameTime(this.value)">
+												<lable id="gametimeVal">60 sec</lable><br>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="1">
+												<lable>Number of Monsters: </lable>
+											</td>
+											<td colspan="1">
+												<input type="range" id="monstersNum" min="1" max="4" class="rangebars" value="1" oninput="setMonsters(this.value)">
+												<lable id="monstersNumVal">1</lable><br>
+											</td>
+										</tr>
+									</table>
 									<button class="animationBtn" onclick="randomSettings()"><span></span><span></span><span></span><span></span>Random Settings</button>
 									<button class="animationBtn" onclick="saveSettings()"><span></span><span></span><span></span><span></span>Start Game</button>
-								  </div>
-							  </div>
-						  </div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -307,7 +303,6 @@
 				</div>
 			</div>
 		</section>
-
 
 		<footer>
 			<p class="copyrights">&copy; Shiri Itach & Noam Cohen Maguri <br>
