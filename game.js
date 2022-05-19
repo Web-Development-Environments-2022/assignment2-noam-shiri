@@ -7,16 +7,13 @@ var ghosts;
 var color5points;
 var color15points;
 var color25points;
-//var boardDictionary = {0:"Empty", 1:"ball5", 2:"ball15", 3:"ball25", 4:"wall", 5:"pacman", 6:"pink", 7:"blue", 8:"orange", 9:"red", 10:"clock", 11:"candy", 12:"medicine", 13:"marioStar"}
 var colors = {"Yellow": "#f3d99d" , "Green": "#7AB495" , "Blue": "#88c4f8" , "Pink": "#e490c3" , "Purple": "#877FD7"}
-var addons; //for each addon: [name, x, y, isOnBoard, boardnumber]
+var addons; //for each addon: {counter , [name, x, y, isOnBoard, boardnumber (,candyNumber)]
 var addonsCount;
 var lives;
 var isLoss;
 var isStarCollected;
 var bgMusic;
-
-// var starInfo;
 
 function Start() {
 	bgMusic = new Audio('pictures/files/Remix.mp3');
@@ -148,7 +145,7 @@ function Draw() {
 			} else if (board[i][j] == 4) {
 				context.beginPath();
 				context.rect(center.x - 15, center.y - 15, 30, 30);
-				context.fillStyle = "#3E3247"; //color wall
+				context.fillStyle = "#3E3247"; //wall color
 				context.fill();
 			}
 			else if (board[i][j] == 5) {
@@ -199,12 +196,6 @@ function Draw() {
 			else{
 				console.log(i,j)
 			}
-			// else if (board[i][j] == 14){
-			// 	var boom = new Image();
-			// 	boom.src = './pictures/boom.png';
-			// 	context.drawImage(boom, center.x-15, center.y-15,30, 30);
-			// 	context.draw;
-			// }
 		}
 	  }
 	}
@@ -274,7 +265,7 @@ function UpdatePosition() {
 	}
 }	
 
-function checkAddons(){ //for each addon: [name, x, y, isOnBoard, boardnumber]
+function checkAddons(){ 
 	if(addons[addonsCount][3]==false){
 		addCharacter(addonsCount);
 	}
@@ -297,7 +288,7 @@ function candyOnOff(){
 	}
 }
 
-function addCharacter(addonsCount){ //for each addon: [name, x, y, isOnBoard, boardnumber]
+function addCharacter(addonsCount){ //addes the addons (candy star clock and medicine)
 	addons[addonsCount][3]=true;
 	if (addonsCount==1){
 		characters['marioStar'].prevInCell = board[addons[1][1]][addons[1][2]];
@@ -306,13 +297,13 @@ function addCharacter(addonsCount){ //for each addon: [name, x, y, isOnBoard, bo
 	}
 	else{
 		emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = addons[addonsCount][4];
+		board[emptyCell[0]][emptyCell[1]] = addons[addonsCount][4]; //addon board number
 		addons[addonsCount][1]=emptyCell[0];
 		addons[addonsCount][2]=emptyCell[1];
 	}
 }
 
-function removeCharacter(addonsCount){ //for each addon: [name, x, y, isOnBoard, boardnumber]
+function removeCharacter(addonsCount){ 
 	if (addonsCount!=1){
 		addons[addonsCount][3]=false;
 		board[addons[addonsCount][1]][addons[addonsCount][2]]=0;
@@ -361,11 +352,9 @@ function UpdateGhostPosition(){
 			x = getRandomInt(1,5); //gets a number between 1 to 4 represents direction
 		}
 		else{
-			moves = getBestMovement(ghostColor,i,j,characters['pacman'].x ,characters['pacman'].y )
+			moves = getBestMovement(ghostColor,i,j,characters['pacman'].x ,characters['pacman'].y ) //gets smart direction
 			x=moves[0];
 		}
-
-		//console.log(ghostDetails.prevInCell)
 		if (x == 1) { //up
 			if (i > 0 && board[i - 1][j] != 4 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10) && board[i - 1][j] != 13) {
 				board[i][j] = ghostDetails.prevInCell;
@@ -415,16 +404,13 @@ function UpdateGhostPosition(){
 			board[characters[ghostColor].x][characters[ghostColor].y] = currGhost; //update ghost location on board
 			currGhost++; //next ghost sirial number
 		} 
-		
-		
-
-	// TO DO:  check if collapsed and if so decrease points and restart
 	}
 }
 
 
 
 function getNeighbors(ghost_name, xindex, yindex){
+	// in each "if" check if the next step is not a wall or a ghost
 	neighbors=[]
 	if (board[xindex - 1][yindex]!=4 && (board[xindex - 1][yindex]<=5 || board[xindex - 1][yindex] >= 10))
 		neighbors.push(1)
@@ -445,27 +431,28 @@ function shuffleArray(array) {
 	return (array)
 }
 
-function getBestMovement(ghost_name , monst_i, monst_j, pac_i, pac_j ){
+function getBestMovement(ghost_name , ghost_i, ghost_j, pac_i, pac_j ){
+	// trying to move the ghost towards the pacman without hitting a wall or a ghost an without moving back and fourth.
 	movements=[]
-	delta_x  = monst_i-pac_i;
-	delta_y = monst_j-pac_j;
-	if(delta_x<0 && characters[ghost_name].lastStep!=1 && board[monst_i + 1][monst_j]!=4 && (board[monst_i + 1][monst_j]<=5 || board[monst_i + 1][monst_j] >= 10))
+	delta_x  = ghost_i-pac_i;
+	delta_y = ghost_j-pac_j;
+	if(delta_x<0 && characters[ghost_name].lastStep!=1 && board[ghost_i + 1][ghost_j]!=4 && (board[ghost_i + 1][ghost_j]<=5 || board[ghost_i + 1][ghost_j] >= 10))
 		movements.push(2)
-	if(delta_x>0 && characters[ghost_name].lastStep!=2 && board[monst_i - 1][monst_j]!=4 && (board[monst_i - 1][monst_j]<=5 || board[monst_i - 1][monst_j] >= 10) )
+	if(delta_x>0 && characters[ghost_name].lastStep!=2 && board[ghost_i - 1][ghost_j]!=4 && (board[ghost_i - 1][ghost_j]<=5 || board[ghost_i - 1][ghost_j] >= 10) )
 		movements.push(1)
-	if(delta_y>0 && characters[ghost_name].lastStep!=4 && board[monst_i][monst_j - 1]!=4 && (board[monst_i][monst_j - 1]<=5 || board[monst_i][monst_j - 1] >= 10))
+	if(delta_y>0 && characters[ghost_name].lastStep!=4 && board[ghost_i][ghost_j - 1]!=4 && (board[ghost_i][ghost_j - 1]<=5 || board[ghost_i][ghost_j - 1] >= 10))
 		movements.push(3)
-	if(delta_y<0 && characters[ghost_name].lastStep!=3 && board[monst_i][monst_j + 1]!=4 && (board[monst_i][monst_j + 1]<=5 || board[monst_i][monst_j + 1] >= 10))
+	if(delta_y<0 && characters[ghost_name].lastStep!=3 && board[ghost_i][ghost_j + 1]!=4 && (board[ghost_i][ghost_j + 1]<=5 || board[ghost_i][ghost_j + 1] >= 10))
 		movements.push(4)
 	if (movements.length==0){
-		movements=getNeighbors(ghost_name, monst_i, monst_j);
+		movements=getNeighbors(ghost_name, ghost_i, ghost_j);
 	}
 	movements_shuffled = shuffleArray(movements)	
 	return movements_shuffled;
 }
 
 
-function checkLoss(){
+function checkLoss(){ 
 	if(!isLoss)
 		return;
 	lives--;
