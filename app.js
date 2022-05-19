@@ -17,8 +17,6 @@ var users = [
 
 var userLogged = false;
 
-
-
 $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();

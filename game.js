@@ -310,6 +310,7 @@ function removeCharacter(addonsCount){
 	}
 }
 
+
 function restartCharacter(cName, newx, newy, boardVal){
 	if (boardVal != 5){ //not pacman: keep the value that was in the cell before. pacman: 0
 		board [characters[cName].x][characters[cName].y] = characters[cName].prevInCell;
