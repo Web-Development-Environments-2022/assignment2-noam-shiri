@@ -2,13 +2,13 @@
 # Assignment2
  
 # URL:
-## _need to add url_
-Our details:
+need to add url
+## _Our details:_ 💮
 - Shiri Itach 318267895
 - Noam Cohen Maguri 207777525
 
 
-Functionality:
+## _Functionality:_
 - Welcome Page.
 - Registration Page - Using jQuery and RegExp for validation check.
 - Login Page - Check the users dictionary to see if the user exists and the password matches.
