@@ -19,7 +19,7 @@ function loginCheck(){
 					loginUser = u;
 					loggedIn();//GO TOGAME
 				}
-				if (!found){
+				else{ //passwords doesnt match
 					alert("Wrong password. Please try again.");
 					return;
 				}
@@ -29,7 +29,6 @@ function loginCheck(){
 			alert("Username not found. Please try again.");
 		}
 	}
-	
 }
 
 //login check validation:
