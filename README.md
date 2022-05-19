@@ -2,7 +2,7 @@
 # Assignment2
  
 ## _URL:_
-need to add url
+https://web-development-environments-2022.github.io/assignment2-207777525_318267895/
 ## _Our details:_ 
 - Shiri Itach 318267895
 - Noam Cohen Maguri 207777525
