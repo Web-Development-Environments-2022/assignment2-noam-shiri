@@ -87,8 +87,8 @@ function Start() {
 	interval = setInterval(UpdatePosition, 200); //140
 	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000);
 	interval3 = setInterval(candyOnOff, 5000); //every 5 seconds
+	interval4 = setInterval(UpdateGhostPosition,350); //ghosts move slower than pacman so the game will be possible to win
 }
-
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * 14 + 1);
 	var j = Math.floor(Math.random() * 29 + 1);
@@ -98,7 +98,6 @@ function findRandomEmptyCell(board) {
 	}
 	return [i, j];
 }
-
 function GetKeyPressed() {
 	if (keysDown[up]) {
 		return 1;
@@ -113,12 +112,10 @@ function GetKeyPressed() {
 		return 4;
 	}
 }
-
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
-
 	for (var i = 0; i < 15; i++) {
 		for (var j = 0; j < 30; j++) {
 			var center = new Object();
@@ -199,7 +196,6 @@ function Draw() {
 		}
 	  }
 	}
-
 function UpdatePosition() {
 	movePacman();
 	if (board[characters['pacman'].x][characters['pacman'].y] == 1) { // 5 points
@@ -233,14 +229,14 @@ function UpdatePosition() {
 	}
 	if (!isLoss){ // move pacman if game continues
 		board[characters['pacman'].x][characters['pacman'].y] = 5;
-		UpdateGhostPosition(); // isLoss can be updated here to true
+		//UpdateGhostPosition(); // isLoss can be updated here to true
 	}
 	checkLoss();
 	checkStar();
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if (maxGameTime <= time_elapsed || lives <= 0) { // end game senarios
-		bgMusic.pause();
+		gameStop();
 		bgMusic.currentTime = 0;
 		if (lives<=0){
 			bgMusic1 = new Audio('pictures/files/Lose.mp3');
@@ -255,16 +251,12 @@ function UpdatePosition() {
 		}
 		if (!bgMusic.muted)
 			bgMusic1.play();
-		window.clearInterval(interval);
-		window.clearInterval(interval2);
-		window.clearInterval(interval3);
 		document.getElementById("gameOption").disabled = false;
 	}
 	else {
 		Draw();
 	}
 }	
-
 function checkAddons(){ 
 	if(addons[addonsCount][3]==false){
 		addCharacter(addonsCount);
@@ -276,7 +268,6 @@ function checkAddons(){
 	if (addonsCount>=(Object.entries(addons).length))
 		addonsCount=1;
 }
-
 function candyOnOff(){
 	if(addons[0][3]==false){
 		num = getRandomInt(1,6);
@@ -287,7 +278,6 @@ function candyOnOff(){
 		removeCharacter(0);
 	}
 }
-
 function addCharacter(addonsCount){ //addes the addons (candy star clock and medicine)
 	addons[addonsCount][3]=true;
 	if (addonsCount==1){
@@ -302,15 +292,12 @@ function addCharacter(addonsCount){ //addes the addons (candy star clock and med
 		addons[addonsCount][2]=emptyCell[1];
 	}
 }
-
 function removeCharacter(addonsCount){ 
 	if (addonsCount!=1){
 		addons[addonsCount][3]=false;
 		board[addons[addonsCount][1]][addons[addonsCount][2]]=0;
 	}
 }
-
-
 function restartCharacter(cName, newx, newy, boardVal){
 	if (boardVal != 5){ //not pacman: keep the value that was in the cell before. pacman: 0
 		board [characters[cName].x][characters[cName].y] = characters[cName].prevInCell;
@@ -321,7 +308,6 @@ function restartCharacter(cName, newx, newy, boardVal){
 	characters[cName].y = newy;
 	board[newx][newy] = boardVal;
 }
-
 function setCharactersOnBoard(){
 	//pacman
 	var emptyCell = findRandomEmptyCell(board);
@@ -338,7 +324,6 @@ function setCharactersOnBoard(){
 		restartCharacter('red', board.length-2, board[0].length-2, 9);
 		}
 }
-
 function UpdateGhostPosition(){
 	var currGhost = 6;
 	for ([ghostColor, ghostDetails] of Object.entries(characters)) {
@@ -407,9 +392,6 @@ function UpdateGhostPosition(){
 		} 
 	}
 }
-
-
-
 function getNeighbors(ghost_name, xindex, yindex){
 	// in each "if" check if the next step is not a wall or a ghost
 	neighbors=[]
@@ -423,7 +405,6 @@ function getNeighbors(ghost_name, xindex, yindex){
 		neighbors.push(4)
 	return neighbors
 }
-
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -431,7 +412,6 @@ function shuffleArray(array) {
     }
 	return (array)
 }
-
 function getBestMovement(ghost_name , ghost_i, ghost_j, pac_i, pac_j ){
 	// trying to move the ghost towards the pacman without hitting a wall or a ghost an without moving back and fourth.
 	movements=[]
@@ -451,8 +431,6 @@ function getBestMovement(ghost_name , ghost_i, ghost_j, pac_i, pac_j ){
 	movements_shuffled = shuffleArray(movements)	
 	return movements_shuffled;
 }
-
-
 function checkLoss(){ 
 	if(!isLoss)
 		return;
@@ -466,11 +444,9 @@ function checkLoss(){
 		bgMusic2 = new Audio('pictures/files/nomnom.mp3');
 		bgMusic2.play();}
 }
-
 function updateLivesImg(){
 	document.getElementById("currLives").src=  "./pictures/" + lives + "lives.png";
 }
-
 function checkStar(){
 	if(!isStarCollected)
 		return;
@@ -480,7 +456,6 @@ function checkStar(){
 	score+=50;
 	isStarCollected = false;
 }
-
 function movePacman(){
 	board[characters['pacman'].x][characters['pacman'].y] = 0;
 	var x = GetKeyPressed();
@@ -509,11 +484,11 @@ function movePacman(){
 		}
 	}
 }
-
-
 function gameStop() {
 	bgMusic.pause();
 	window.clearInterval(interval);
 	window.clearInterval(interval2);
 	window.clearInterval(interval3);
+	window.clearInterval(interval4);
+	document.body.style.overflow = 'visible'; //show scrollbar when game ends
 }

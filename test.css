@@ -7,7 +7,6 @@
     border-radius: 5px;
     margin: 20px auto;
   }
-
   
 body{
 	font-family: 'Poppins', sans-serif;
@@ -41,11 +40,9 @@ p {
   font-size: 18px;
   line-height: 1.7;
 }
-
 input#un-mute {
   display: none;
 }
-
 .unmute img {
   display: none;
   height: 50px;
@@ -53,15 +50,12 @@ input#un-mute {
 .mute img {
   height: 50px;
 }
-
 input#un-mute:checked ~ .unmute img {
   display:initial;
 }
-
 input#un-mute:checked ~ .mute img {
   display: none;
 }
-
 .w {
   text-align: center;
 }
@@ -79,20 +73,17 @@ input#un-mute:checked ~ .mute img {
   animation: textclip 2s linear infinite;
   display: inline-block;
   text-shadow: 0 0 30px #250729;
-
 }
 @keyframes textclip {
   to {
     background-position: 200% center;
  }
 }
-
 h6{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 h6 span{
     font-size: 20px;
     padding: 0 40px;
@@ -148,8 +139,6 @@ h6 span{
 .checkbox:checked + label:before {
   transform: translateX(44px) rotate(-270deg);
 }
-
-
 .card-3d-wrap {
   justify-content: center;
   align-items: center;
@@ -257,7 +246,6 @@ h6 span{
   -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
 }
-
 .form-group input:-ms-input-placeholder  {
   color: #c4c3ca;
   opacity: 0.7;
@@ -302,7 +290,6 @@ h6 span{
   -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
 }
-
 .btn{  
 margin-top: 1rem;
   border-radius: 4px;
@@ -343,13 +330,11 @@ margin-top: 1rem;
   color: #bf9bdd;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
-
 .btn:disabled{
   background-color: #412E51;
   color: #5f3e7b;
   box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
 }
-
 .logo {
 	position: absolute;
 	top: 30px;

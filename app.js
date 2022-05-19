@@ -17,6 +17,8 @@ var users = [
 
 var userLogged = false;
 
+
+
 $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();
@@ -30,7 +32,6 @@ $(document).ready(function() {
 	un_mute.onclick = function() {
 		bgMusic.muted = !bgMusic.muted;
 	};
-
 });
 
 function hideAllPages(){
@@ -106,5 +107,6 @@ function showGame(){
 	$("#gamepage").show();
 	gameOn=true;
 	document.getElementById("un-mute").checked = false;
+	document.body.style.overflow = 'hidden'; //hide scrollbar so that the key movement won't interrupt the game
 	Start();
 }

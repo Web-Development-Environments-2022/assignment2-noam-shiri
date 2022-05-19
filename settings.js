@@ -137,6 +137,7 @@ function saveSettings(){
     }
 }
 
+
 function setSettingsInfo(chosen5, chosen15, chosen25){
     var settingsLable = document.getElementById("settingsInfo");
     let points5radio = document.getElementsByName("ballcolor5")[chosen5];
