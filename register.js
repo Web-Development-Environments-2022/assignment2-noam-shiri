@@ -27,7 +27,7 @@ function registerCheck(){
 			});
 		alert("successful");
         $("#register").find('input,select').each(function(){ $(this).val("")}); //restart form
-        showHome();
+		document.getElementById("reg-log").checked = false;
 	}
 }
 

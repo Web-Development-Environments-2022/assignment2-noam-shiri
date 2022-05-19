@@ -40,8 +40,6 @@ $(document).ready(function() {
 function hideAllPages(){
 	// this function hides all the pages
 	$("#welcome").hide();
-	// $("#register").hide();
-	// $("#login").hide();
 	$("#settings").hide();
 	$("#about").hide();
 	$("#gamepage").hide();
@@ -113,5 +111,6 @@ function showGame(){
 	document.getElementById("homeOption").disabled = false;
 	$("#gamepage").show();
 	gameOn=true;
+	document.getElementById("un-mute").checked = false;
 	Start();
 }

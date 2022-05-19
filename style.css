@@ -1,3 +1,8 @@
+.header {
+  background-image: url('./pictures/files/pinkmaze.png');
+  font-size: 30px;
+}
+
 
 .page{
     background-color:#1f2029;
@@ -22,7 +27,6 @@
 }
 .menu {
     overflow: hidden;
-    background-color: #333;
     font-family: Arial;
     padding: 14px 16px;
     font-size: 16px;
@@ -143,7 +147,8 @@
     bottom: 5px;
     left: 16px;
     font-size: 13px;
-  }
+    color:#806597;
+}
 
 #welcome {
     position: absolute;

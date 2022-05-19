@@ -28,6 +28,7 @@ a {
   color:#29082e;
 	font:'Poppins' bold;
 	font-weight: 700;
+  text-shadow: 0 0 15px #bf9bddb7;
 }
 a:hover {
 	text-decoration: none;
@@ -73,7 +74,7 @@ input#un-mute:checked ~ .mute img {
   font-size: 35px;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right , #5a1e64,#250729,#5a1e64);
+  background: linear-gradient(to right , #b703d7,#c343da,#d798e2,#dccfde,#d798e2,#c343da,#b703d7);
   background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
