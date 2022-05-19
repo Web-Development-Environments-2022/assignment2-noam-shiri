@@ -31,6 +31,7 @@ function loginCheck(){
 	}
 }
 
+
 //login check validation:
 function loggedIn(){
 	userLogged = true;

@@ -32,6 +32,7 @@ function registerCheck(){
 	}
 }
 
+
 function checkPassword(password){
 	var passwordPattern = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/);
 	if(passwordPattern.test(password))
