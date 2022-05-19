@@ -1,5 +1,4 @@
 var context;
-// var shape = new Object();
 var board;
 var score;
 var pac_color;
@@ -24,7 +23,6 @@ $(document).ready(function() {
 	// hide all divs except from Welcome
 	hideAllPages();
 	$("#welcome").show();
-	// $("#settings").show();
 	//set listeners
 	addSettingsListeners();
 	// this is from the original code:
@@ -79,8 +77,6 @@ function showSettings(){
 }
 
 function showAbout(){
-	//hideAllPages();
-	// $('#homeOption').show();
 	$("#about").show();
 	// Get the modal
 	var modal = document.getElementById("about");
