@@ -14,6 +14,7 @@ var lives;
 var isLoss;
 var isStarCollected;
 var bgMusic;
+
 function Start() {
 	bgMusic = new Audio('pictures/files/Remix.mp3');
 	bgMusic.loop = true;
@@ -86,6 +87,7 @@ function Start() {
 	interval = setInterval(UpdatePosition, 200); //140
 	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000);
 	interval3 = setInterval(candyOnOff, 5000); //every 5 seconds
+	interval4 = setInterval(UpdateGhostPosition,350); //ghosts move slower than pacman so the game will be possible to win
 }
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * 14 + 1);
@@ -227,7 +229,7 @@ function UpdatePosition() {
 	}
 	if (!isLoss){ // move pacman if game continues
 		board[characters['pacman'].x][characters['pacman'].y] = 5;
-		UpdateGhostPosition(); // isLoss can be updated here to true
+		//UpdateGhostPosition(); // isLoss can be updated here to true
 	}
 	checkLoss();
 	checkStar();
@@ -487,5 +489,6 @@ function gameStop() {
 	window.clearInterval(interval);
 	window.clearInterval(interval2);
 	window.clearInterval(interval3);
-	document.body.style.overflow = 'visible';
+	window.clearInterval(interval4);
+	document.body.style.overflow = 'visible'; //show scrollbar when game ends
 }

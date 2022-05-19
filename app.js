@@ -107,6 +107,6 @@ function showGame(){
 	$("#gamepage").show();
 	gameOn=true;
 	document.getElementById("un-mute").checked = false;
-	document.body.style.overflow = 'hidden';
+	document.body.style.overflow = 'hidden'; //hide scrollbar so that the key movement won't interrupt the game
 	Start();
 }

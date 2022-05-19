@@ -26,7 +26,6 @@
     top: 20px;
 }
 .menu {
-    overflow: hidden;
     font-family: Arial;
     padding: 14px 16px;
     font-size: 16px;
@@ -204,10 +203,6 @@
     margin: 0 0 0 20px;
   }
 
-#settings{
-  font-size: 20px;
-}
-
 .errorMsg{
   display: none;
   color: red;
@@ -219,6 +214,7 @@
   font-size: 15px;
   height: 700px;
   width: 600px;
+  text-align: center;
 }
 
 #settTable input[type=text] {
