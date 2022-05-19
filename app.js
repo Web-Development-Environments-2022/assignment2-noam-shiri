@@ -32,7 +32,6 @@ $(document).ready(function() {
 	un_mute.onclick = function() {
 		bgMusic.muted = !bgMusic.muted;
 	};
-
 });
 
 function hideAllPages(){
@@ -108,5 +107,6 @@ function showGame(){
 	$("#gamepage").show();
 	gameOn=true;
 	document.getElementById("un-mute").checked = false;
+	document.body.style.overflow = 'hidden';
 	Start();
 }

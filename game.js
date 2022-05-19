@@ -234,7 +234,7 @@ function UpdatePosition() {
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if (maxGameTime <= time_elapsed || lives <= 0) { // end game senarios
-		bgMusic.pause();
+		gameStop();
 		bgMusic.currentTime = 0;
 		if (lives<=0){
 			bgMusic1 = new Audio('pictures/files/Lose.mp3');
@@ -249,9 +249,6 @@ function UpdatePosition() {
 		}
 		if (!bgMusic.muted)
 			bgMusic1.play();
-		window.clearInterval(interval);
-		window.clearInterval(interval2);
-		window.clearInterval(interval3);
 		document.getElementById("gameOption").disabled = false;
 	}
 	else {
@@ -490,4 +487,5 @@ function gameStop() {
 	window.clearInterval(interval);
 	window.clearInterval(interval2);
 	window.clearInterval(interval3);
+	document.body.style.overflow = 'visible';
 }

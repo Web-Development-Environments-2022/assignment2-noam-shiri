@@ -298,7 +298,6 @@ background-color: #1f2029;
 #gamepage{
   font-family: 'Poppins';
   font-size: 20px;
-  /* overflow: hidden */
 }
 
 #gameTable{
@@ -313,5 +312,4 @@ background-color: #1f2029;
 html, body {
   margin: 0;
   height: 100%;
-  overflow: hidden
 }
