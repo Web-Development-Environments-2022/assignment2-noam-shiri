@@ -39,9 +39,9 @@ function setGameTime(val){
     maxGameTime = val;
 }
 
-function setMonsters(val){
-    document.getElementById('monstersNumVal').innerHTML = val;
-    monsters = val;
+function setGhosts(val){
+    document.getElementById('ghostsNumVal').innerHTML = val;
+    ghosts = val;
 }
 
 function getRandomInt(min, max) {
@@ -74,8 +74,8 @@ function randomSettings(){
     document.getElementById("gametime").value = rand;
     setGameTime(rand);
     rand = getRandomInt(1,4)
-    document.getElementById("monstersNum").value = rand;
-    setMonsters(rand);
+    document.getElementById("ghostsNum").value = rand;
+    setGhosts(rand);
     //default colors for food
     var rand1, rand2, rand3;
     while(rand1==rand2 || rand1==rand3 || rand2==rand3){
@@ -126,7 +126,7 @@ function saveSettings(){
     }
     changeBallNum(document.getElementById("ballnumRange").value);
     setGameTime(document.getElementById("gametime").value);
-    setMonsters(document.getElementById("monstersNum").value);
+    setGhosts(document.getElementById("ghostsNum").value);
     if (isValid){
         setColors(points5radio[chosen5].value,points15radio[chosen15].value,points25radio[chosen25].value);
         // loginUser = "Shiri";
@@ -152,7 +152,7 @@ function setSettingsInfo(chosen5, chosen15, chosen25){
                             "15 Points food: &emsp;" + points15radio.value + "<br/>" +
                             "25 Points food: &emsp;" + points25radio.value + "<br/>" + 
                             "Max Game Time: &emsp;" + maxGameTime + " sec <br/>" + 
-                            "Number of Monsters: &emsp;" + monsters );
+                            "Number of Ghosts: &emsp;" + ghosts );
     // settingsLable.textContent += "Up: " + document.getElementById("upSelect").value + "\n" +
     // "Up: " + document.getElementById("upSelect").value + "\n";
 

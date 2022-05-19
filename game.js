@@ -3,7 +3,7 @@ var up;
 var right;
 var down;
 var maxGameTime;
-var monsters;
+var ghosts;
 var color5points;
 var color15points;
 var color25points;
@@ -236,13 +236,13 @@ function UpdatePosition() {
 		// will update the score later
 		isStarCollected = true;
 	}
-	var wasHereBefore = board[characters['pacman'].x][characters['pacman'].y] //before moving pacman, check if there's a monster there
-	if(wasHereBefore >= 6 && wasHereBefore <= 9){ //monster
+	var wasHereBefore = board[characters['pacman'].x][characters['pacman'].y] //before moving pacman, check if there's a ghost there
+	if(wasHereBefore >= 6 && wasHereBefore <= 9){ //ghost
 		isLoss = true;
 	}
 	if (!isLoss){ // move pacman if game continues
 		board[characters['pacman'].x][characters['pacman'].y] = 5;
-		UpdateMonsterPosition(); // isLoss can be updated here to true
+		UpdateGhostPosition(); // isLoss can be updated here to true
 	}
 	checkLoss();
 	checkStar();
@@ -334,86 +334,86 @@ function setCharactersOnBoard(){
 	//pacman
 	var emptyCell = findRandomEmptyCell(board);
 	restartCharacter('pacman', emptyCell[0], emptyCell[1], 5);
-	//monsters
+	//ghosts
 	restartCharacter('pink', 1, 1, 6);
-	if (monsters >= 2){
+	if (ghosts >= 2){
 		restartCharacter('blue', 1, board[0].length-2, 7);
 	}
-	if (monsters >= 3){
+	if (ghosts >= 3){
 		restartCharacter('orange', board.length-2, 1, 8);
 		}
-	if (monsters == 4){
+	if (ghosts == 4){
 		restartCharacter('red', board.length-2, board[0].length-2, 9);
 		}
 }
 
-function UpdateMonsterPosition(){
-	var currMonster = 6;
-	for ([monsterColor, monsterDetails] of Object.entries(characters)) {
+function UpdateGhostPosition(){
+	var currGhost = 6;
+	for ([ghostColor, ghostDetails] of Object.entries(characters)) {
 		var isStar = false;
-		if (!monsterDetails.isOnBoard || monsterColor === 'pacman') //if monster is not on board or it's a pacman (was updated already)
+		if (!ghostDetails.isOnBoard || ghostColor === 'pacman') //if ghost is not on board or it's a pacman (was updated already)
 			continue;
-		var i = monsterDetails.x;
-		var j = monsterDetails.y;
+		var i = ghostDetails.x;
+		var j = ghostDetails.y;
 		var x; // direction
-		if (monsterColor=='marioStar'){
+		if (ghostColor=='marioStar'){
 			isStar = true;
 			x = getRandomInt(1,5); //gets a number between 1 to 4 represents direction
 		}
 		else{
-			moves = getBestMovement(monsterColor,i,j,characters['pacman'].x ,characters['pacman'].y )
+			moves = getBestMovement(ghostColor,i,j,characters['pacman'].x ,characters['pacman'].y )
 			x=moves[0];
 		}
 
-		//console.log(monsterDetails.prevInCell)
+		//console.log(ghostDetails.prevInCell)
 		if (x == 1) { //up
 			if (i > 0 && board[i - 1][j] != 4 && (board[i - 1][j]<=5 || board[i - 1][j] >= 10) && board[i - 1][j] != 13) {
-				board[i][j] = monsterDetails.prevInCell;
-				characters[monsterColor].prevInCell = board[i-1][j];
-				characters[monsterColor].lastStep=1;
-				characters[monsterColor].x--;
-				characters[monsterColor].direction=monsterColor+'Up'
+				board[i][j] = ghostDetails.prevInCell;
+				characters[ghostColor].prevInCell = board[i-1][j];
+				characters[ghostColor].lastStep=1;
+				characters[ghostColor].x--;
+				characters[ghostColor].direction=ghostColor+'Up'
 				}
 			}
 		if (x == 2) { //down
 			if (i < 14 && board[i + 1][j] != 4 && (board[i + 1][j]<=5 || board[i + 1][j] >= 10) && board[i + 1][j] != 13) {
-				board[i][j] = monsterDetails.prevInCell;
-				characters[monsterColor].prevInCell = board[i+1][j];
-				characters[monsterColor].lastStep=2;
-				characters[monsterColor].x++;
-				characters[monsterColor].direction=monsterColor+'Down'
+				board[i][j] = ghostDetails.prevInCell;
+				characters[ghostColor].prevInCell = board[i+1][j];
+				characters[ghostColor].lastStep=2;
+				characters[ghostColor].x++;
+				characters[ghostColor].direction=ghostColor+'Down'
 				}
 			}
 		if (x == 3) { //left
 			if (j > 0 && board[i][j - 1] != 4 && (board[i][j - 1]<=5 || board[i][j - 1] >= 10) && board[i][j - 1] != 13) {
-				board[i][j] = monsterDetails.prevInCell;
-				characters[monsterColor].prevInCell = board[i][j-1];
-				characters[monsterColor].lastStep=3;
-				characters[monsterColor].y--;
-				characters[monsterColor].direction=monsterColor+'Left'
+				board[i][j] = ghostDetails.prevInCell;
+				characters[ghostColor].prevInCell = board[i][j-1];
+				characters[ghostColor].lastStep=3;
+				characters[ghostColor].y--;
+				characters[ghostColor].direction=ghostColor+'Left'
 				}
 			}
 		if (x == 4) { //right
 			if (j < 29 && board[i][j + 1] != 4 && (board[i][j + 1]<=5 || board[i][j + 1] >= 10) && board[i][j + 1] != 13) {
-				board[i][j] = monsterDetails.prevInCell;
-				characters[monsterColor].prevInCell = board[i][j+1];
-				characters[monsterColor].lastStep=4;
-				characters[monsterColor].y++;
-				characters[monsterColor].direction=monsterColor+'Right'
+				board[i][j] = ghostDetails.prevInCell;
+				characters[ghostColor].prevInCell = board[i][j+1];
+				characters[ghostColor].lastStep=4;
+				characters[ghostColor].y++;
+				characters[ghostColor].direction=ghostColor+'Right'
 				}
 			}
-		if(board[characters[monsterColor].x][characters[monsterColor].y]==5 && !isStar){ // pacman met monster -> 1 loss
-			characters[monsterColor].prevInCell = 0;
+		if(board[characters[ghostColor].x][characters[ghostColor].y]==5 && !isStar){ // pacman met ghost -> 1 loss
+			characters[ghostColor].prevInCell = 0;
 			isLoss = true;
 		}
-		if(board[characters[monsterColor].x][characters[monsterColor].y]==5 && isStar){ // pacman met star -> 50 points
+		if(board[characters[ghostColor].x][characters[ghostColor].y]==5 && isStar){ // pacman met star -> 50 points
 			isStarCollected = true;
 		} 
 		if (isStar)
-			board[characters[monsterColor].x][characters[monsterColor].y] = 13; //update monster location on board
+			board[characters[ghostColor].x][characters[ghostColor].y] = 13; //update ghost location on board
 		if (!isStar){
-			board[characters[monsterColor].x][characters[monsterColor].y] = currMonster; //update monster location on board
-			currMonster++; //next monster sirial number
+			board[characters[ghostColor].x][characters[ghostColor].y] = currGhost; //update ghost location on board
+			currGhost++; //next ghost sirial number
 		} 
 		
 		
@@ -424,7 +424,7 @@ function UpdateMonsterPosition(){
 
 
 
-function getNeighbors(monster_name, xindex, yindex){
+function getNeighbors(ghost_name, xindex, yindex){
 	neighbors=[]
 	if (board[xindex - 1][yindex]!=4 && (board[xindex - 1][yindex]<=5 || board[xindex - 1][yindex] >= 10))
 		neighbors.push(1)
@@ -445,20 +445,20 @@ function shuffleArray(array) {
 	return (array)
 }
 
-function getBestMovement(monster_name , monst_i, monst_j, pac_i, pac_j ){
+function getBestMovement(ghost_name , monst_i, monst_j, pac_i, pac_j ){
 	movements=[]
 	delta_x  = monst_i-pac_i;
 	delta_y = monst_j-pac_j;
-	if(delta_x<0 && characters[monster_name].lastStep!=1 && board[monst_i + 1][monst_j]!=4 && (board[monst_i + 1][monst_j]<=5 || board[monst_i + 1][monst_j] >= 10))
+	if(delta_x<0 && characters[ghost_name].lastStep!=1 && board[monst_i + 1][monst_j]!=4 && (board[monst_i + 1][monst_j]<=5 || board[monst_i + 1][monst_j] >= 10))
 		movements.push(2)
-	if(delta_x>0 && characters[monster_name].lastStep!=2 && board[monst_i - 1][monst_j]!=4 && (board[monst_i - 1][monst_j]<=5 || board[monst_i - 1][monst_j] >= 10) )
+	if(delta_x>0 && characters[ghost_name].lastStep!=2 && board[monst_i - 1][monst_j]!=4 && (board[monst_i - 1][monst_j]<=5 || board[monst_i - 1][monst_j] >= 10) )
 		movements.push(1)
-	if(delta_y>0 && characters[monster_name].lastStep!=4 && board[monst_i][monst_j - 1]!=4 && (board[monst_i][monst_j - 1]<=5 || board[monst_i][monst_j - 1] >= 10))
+	if(delta_y>0 && characters[ghost_name].lastStep!=4 && board[monst_i][monst_j - 1]!=4 && (board[monst_i][monst_j - 1]<=5 || board[monst_i][monst_j - 1] >= 10))
 		movements.push(3)
-	if(delta_y<0 && characters[monster_name].lastStep!=3 && board[monst_i][monst_j + 1]!=4 && (board[monst_i][monst_j + 1]<=5 || board[monst_i][monst_j + 1] >= 10))
+	if(delta_y<0 && characters[ghost_name].lastStep!=3 && board[monst_i][monst_j + 1]!=4 && (board[monst_i][monst_j + 1]<=5 || board[monst_i][monst_j + 1] >= 10))
 		movements.push(4)
 	if (movements.length==0){
-		movements=getNeighbors(monster_name, monst_i, monst_j);
+		movements=getNeighbors(ghost_name, monst_i, monst_j);
 	}
 	movements_shuffled = shuffleArray(movements)	
 	return movements_shuffled;
