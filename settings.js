@@ -1,3 +1,5 @@
+
+
 function addSettingsListeners(){
     document.getElementById("upSelect").addEventListener("keydown",function(event){
         up = event.keyCode;
@@ -129,7 +131,6 @@ function saveSettings(){
     setGhosts(document.getElementById("ghostsNum").value);
     if (isValid){
         setColors(points5radio[chosen5].value,points15radio[chosen15].value,points25radio[chosen25].value);
-        // loginUser = "Shiri";
         document.getElementById("userlogged").textContent = "Username: " + loginUser;
         setSettingsInfo(chosen5, chosen15, chosen25);
         showGame();
@@ -153,7 +154,4 @@ function setSettingsInfo(chosen5, chosen15, chosen25){
                             "25 Points food: &emsp;" + points25radio.value + "<br/>" + 
                             "Max Game Time: &emsp;" + maxGameTime + " sec <br/>" + 
                             "Number of Ghosts: &emsp;" + ghosts );
-    // settingsLable.textContent += "Up: " + document.getElementById("upSelect").value + "\n" +
-    // "Up: " + document.getElementById("upSelect").value + "\n";
-
 }
