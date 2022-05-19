@@ -84,7 +84,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 140); //140
+	interval = setInterval(UpdatePosition, 200); //140
 	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000);
 	interval3 = setInterval(candyOnOff, 5000); //every 5 seconds
 }

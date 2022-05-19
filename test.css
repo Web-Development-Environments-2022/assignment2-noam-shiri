@@ -1,8 +1,4 @@
 
-
-/* Please ❤ this if you like it! */
-
-
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
 #pacman {
@@ -210,6 +206,14 @@ h6 span{
   display: block;
 }
 
+/* #settings_warp{
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  z-index: 20;
+  display: block;
+} */
 
 .form-group{ 
   position: relative;
