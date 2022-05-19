@@ -2,41 +2,30 @@
 # Assignment2
  
 <div class="page" id="welcome">
-        <li>
-            <h4>URL: <h4>
-            <p> need to add url</p>
-        </li>
-        <li>
+            <h2>URL: <h2>
+            need to add url
             <h4>Our details: <h4>
-            <p> Shiri Itach 318267895 </p> <br/> 
-            <p> Noam Cohen Maguri 207777525 </p>
-        </li>
-        <li>
+            Shiri Itach 318267895<br/> 
+            Noam Cohen Maguri 207777525
             <h4>Functionality: <h4>
             <li>
-                <p>Welcome Page.</p>
+                Welcome Page.
             </li>
             <li>
-                <p>Registration Page - Using jQuery and RegExp for validation check.</p>
+                Registration Page - Using jQuery and RegExp for validation check.
             </li>
             <li>
-                <p>Login Page - Check the users dictionary to see if the user exists and the password matches.</p>
+                Login Page - Check the users dictionary to see if the user exists and the password matches.
             </li>
             <li>
-                <p>
                 Settings Page - Allows you to select settings for the game, such as the color of the food, the game keys and the number of ghosts. The game keys were selected using EventListener that listened to the keyboard according to the wanted direction. 
-                </p>
             </li>
             <li>
-                <p>
                 About Page - A modal dialog that can be opened above each div, includes an animation for the title and contains details on patterns we used and difficulties we faced during the assignment.
-                </p>
             </li>
             <li>
-                <p>
                 Game Page - Sets the food and pacman location randomly. The ghosts move towards the pacman, and when they meet the pacman loses life and the game continues. The game ends when Pacman's life is over, or time's over. The Pacman will win if he has gained over 100 points in time constraints and has not run out of life, otherwise he will lose.
                 During the game elements like clock, candy, medicine and star pop up, each giving points, life or time.
-                </p>                
             </li>
         </li>
 </div>
