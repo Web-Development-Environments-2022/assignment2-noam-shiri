@@ -8,6 +8,7 @@ function registerCheck(){
 			$("#errormissing").show();
 		}
 	})
+	// show error if neccesary
 	if(checkPassword($('#regPassword').val()) == false)  {  
 		isValid = false;
 		$("#errorpassword").show();
@@ -20,14 +21,14 @@ function registerCheck(){
 		isValid = false;
 		$("#erroremail").show();
 	}
-	if(isValid){ 
+	if(isValid){ // user is valid, adds it to users and
 		users.push({
 			username: $('#regUsername').val(),
 			password: $('#regPassword').val()
 			});
 		alert("successful");
         $("#register").find('input,select').each(function(){ $(this).val("")}); //restart form
-		document.getElementById("reg-log").checked = false;
+		document.getElementById("reg-log").checked = false; // go to login
 	}
 }
 
