@@ -234,14 +234,14 @@ function UpdatePosition() {
 	checkLoss();
 	checkStar();
 	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
-	if (maxGameTime <= time_elapsed || lives <= 0) { // end game senarios
+	time_elapsed = Math.floor(maxGameTime-(currentTime - start_time)/ 1000) ;
+	if (0 >= time_elapsed || lives <= 0) { // end game senarios
 		gameStop();
 		bgMusic.currentTime = 0;
 		if (lives<=0){
 			bgMusic1 = new Audio('pictures/files/Lose.mp3');
 			window.alert("Loser!");}
-		else if (maxGameTime <= time_elapsed){
+		else if (0 >= time_elapsed){
 			if	(score < 100){
 				bgMusic1 = new Audio('pictures/files/Lose.mp3');
 				window.alert("You are better than " + score + " points!");}
