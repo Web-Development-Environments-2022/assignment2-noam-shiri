@@ -23,19 +23,19 @@ function Start() {
 	lives = 5;
 	document.getElementById("currLives").src=  "./pictures/5lives.png";
 	isLoss = false;
-	characters = {	'pink': {direction: 'pinkUp', x:1, y:1, isOnBoard:true, prevInCell:0 ,lastStep: null},
-					'blue': {direction: 'blueUp', x:1, y:28, isOnBoard:false, prevInCell:0 ,lastStep: null},
-					'orange': {direction: 'orangeUp', x:13, y:1, isOnBoard:false, prevInCell:0,lastStep: null},
-					'red': {direction: 'redUp', x:13, y:28, isOnBoard:false, prevInCell:0 ,lastStep: null} ,
-					'marioStar': {direction: 'marioStarUp', x:8, y:15, isOnBoard:false, prevInCell:0 ,lastStep: null} ,
-					'pacman': {direction: 'pacmanRight', x:0, y:0}
+	characters = {	'pink': {direction: 'pinkUp', x:1, y:1, isOnBoard:true, prevInCell:0 ,lastStep: null,boardVal:6},
+					'blue': {direction: 'blueUp', x:1, y:28, isOnBoard:false, prevInCell:0 ,lastStep: null,boardVal:7},
+					'orange': {direction: 'orangeUp', x:13, y:1, isOnBoard:false, prevInCell:0,lastStep: null,boardVal:8},
+					'red': {direction: 'redUp', x:13, y:28, isOnBoard:false, prevInCell:0 ,lastStep: null,boardVal:9} ,
+					'marioStar': {direction: 'marioStarUp', x:8, y:15, isOnBoard:false, prevInCell:0 ,lastStep: null,boardVal:13} ,
+					'pacman': {direction: 'pacmanRight', x:0, y:0,boardVal:5}
 					}
 	addons = {0:["candy",0,0,false,11,0],1:["marioStar",8,15,false,13],2:["clock",0,0,false,10],3:["medicine",0,0,false,12]};
 	addonsCount = 1;
 	var ball5 = Math.floor(food_requested*0.6);
 	var ball15 = Math.floor(food_requested*0.3);
 	var ball25 = Math.floor(food_requested*0.1);
-	ball5+=food_requested - (ball5+ball15+ball25)
+	ball5+=food_requested - (ball5+ball15+ball25) // so the num of balls sums up exactly to the requested amount
 	start_time = new Date();
 	board=[[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
 		[4,0,0,0,0,0,0,4,0,0,0,4,4,4,4,4,4,0,0,0,4,0,0,0,0,0,0,0,0,4],
@@ -84,8 +84,8 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 200); //140
-	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000);
+	interval = setInterval(UpdatePosition, 200); 
+	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000); //every 1/10 of the gametime
 	interval3 = setInterval(candyOnOff, 5000); //every 5 seconds
 	interval4 = setInterval(UpdateGhostPosition,350); //ghosts move slower than pacman so the game will be possible to win
 }
@@ -116,8 +116,8 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
-	for (var i = 0; i < 15; i++) {
-		for (var j = 0; j < 30; j++) {
+	for (var i = 0; i < board.length; i++) {
+		for (var j = 0; j < board[0].length; j++) {
 			var center = new Object();
 			center.y = i * 30 + 15;
 			center.x = j * 30 + 15;
@@ -190,9 +190,6 @@ function Draw() {
 				context.drawImage(img, center.x-15, center.y-15,30, 30);
 				context.draw;
 			}
-			else{
-				console.log(i,j)
-			}
 		}
 	  }
 	}
@@ -208,7 +205,7 @@ function UpdatePosition() {
 		score+=25;
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 10) { // clock
-		maxGameTime+=20;
+		maxGameTime=(parseInt(maxGameTime,10) + 20).toString(); //add to a string a number and then return to a string variable
 	}
 	if (board[characters['pacman'].x][characters['pacman'].y] == 11) { // candy
 		score+=30;
@@ -234,7 +231,7 @@ function UpdatePosition() {
 	checkLoss();
 	checkStar();
 	var currentTime = new Date();
-	time_elapsed = Math.floor(maxGameTime-(currentTime - start_time)/ 1000) ;
+	time_elapsed = Math.floor(maxGameTime-(currentTime - start_time)/1000) ;
 	if (0 >= time_elapsed || lives <= 0) { // end game senarios
 		gameStop();
 		bgMusic.currentTime = 0;
@@ -253,9 +250,7 @@ function UpdatePosition() {
 			bgMusic1.play();
 		document.getElementById("gameOption").disabled = false;
 	}
-	else {
-		Draw();
-	}
+	Draw();
 }	
 function checkAddons(){ 
 	if(addons[addonsCount][3]==false){
@@ -270,7 +265,7 @@ function checkAddons(){
 }
 function candyOnOff(){
 	if(addons[0][3]==false){
-		num = getRandomInt(1,6);
+		num = getRandomInt(1,6); //random candy color
 		addCharacter(0);
 		addons[0][5]=num;
 	}
@@ -325,11 +320,10 @@ function setCharactersOnBoard(){
 		}
 }
 function UpdateGhostPosition(){
-	var currGhost = 6;
 	for ([ghostColor, ghostDetails] of Object.entries(characters)) {
 		var isStar = false;
-		if (!ghostDetails.isOnBoard || ghostColor === 'pacman') //if ghost is not on board or it's a pacman (was updated already)
-			continue;
+		if (!ghostDetails.isOnBoard || ghostColor === 'pacman'){ //if ghost is not on board or it's a pacman (was updated already)
+			continue;}
 		var i = ghostDetails.x;
 		var j = ghostDetails.y;
 		var x; // direction
@@ -387,8 +381,7 @@ function UpdateGhostPosition(){
 		if (isStar)
 			board[characters[ghostColor].x][characters[ghostColor].y] = 13; //update ghost location on board
 		if (!isStar){
-			board[characters[ghostColor].x][characters[ghostColor].y] = currGhost; //update ghost location on board
-			currGhost++; //next ghost sirial number
+			board[characters[ghostColor].x][characters[ghostColor].y] = characters[ghostColor].boardVal; //update ghost location on board
 		} 
 	}
 }
