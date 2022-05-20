@@ -84,10 +84,10 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 200); 
+	interval = setInterval(UpdatePosition, 150); 
 	interval2 = setInterval(checkAddons, Math.floor(maxGameTime/10)*1000); //every 1/10 of the gametime
 	interval3 = setInterval(candyOnOff, 5000); //every 5 seconds
-	interval4 = setInterval(UpdateGhostPosition,350); //ghosts move slower than pacman so the game will be possible to win
+	interval4 = setInterval(UpdateGhostPosition,270); //ghosts move slower than pacman so the game will be possible to win
 }
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * 14 + 1);
