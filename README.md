@@ -21,3 +21,22 @@ A modal dialog that can be opened above each div, includes an animation for the 
 - Game Page :  
 Sets the food and pacman location randomly. The ghosts move towards the pacman, and when they meet the pacman loses life and the game continues. The game ends when Pacman's life is over, or time's over. The Pacman will win if he has gained over 100 points in time constraints and has not run out of life, otherwise he will lose.  
 During the game elements like clock, candy, medicine and star pop up, each giving points, life or time.
+
+  
+## _Game Board:_
+We created a game board in the shape of a maze that has no (dead ends). Each path in the maze is a narrow path for one character.
+Each character had a different number so we could map the characters and draw them according to what the array of the board contained.
+0 - blank
+1 - Food that gives 5 points
+2 - Food that gives 15 points
+3 - Food that gives 25 points
+4 - wall
+5 - Pacman
+6 - Pink ghost
+7 - Blue Ghost
+8 - Orange ghost
+9 - Red ghost
+10 - Clock (gives 20 seconds extra playing time)
+11 - Candy in alternating colors that appears and disappears every 5 seconds (gives 30 points)
+12 - Medication (gives extra life if they are under 5)
+13 - Star Mario moves on the board (gives an extra 50 points)
