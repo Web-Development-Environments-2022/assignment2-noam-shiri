@@ -3,7 +3,8 @@
  
 ## _URL:_
 https://web-development-environments-2022.github.io/assignment2-207777525_318267895/
-## _Our details:_ 
+
+## _Our details:_ :woman_technologist: :woman_technologist:
 - Shiri Itach 318267895
 - Noam Cohen Maguri 207777525
 
@@ -23,21 +24,29 @@ Sets the food and pacman location randomly. The ghosts move towards the pacman, 
 During the game elements like clock, candy, medicine and star pop up, each giving points, life or time.
 
   
-## _Game Board:_
+## _Game Board:_ :game_die:
 We created a game board in the shape of a maze that has no dead ends so that the characters can always escape without getting stuck.  
 Each path in the maze is a narrow path for one character.  
 Each character had a different number so we could map the characters and draw them according to what the array of the board contained.  
-0 - blank  
+0 - Blank  
 1 - Food that gives 5 points  
 2 - Food that gives 15 points  
 3 - Food that gives 25 points  
-4 - wall  
+4 - Wall  
 5 - Pacman  
 6 - Pink ghost  
 7 - Blue Ghost  
 8 - Orange ghost  
 9 - Red ghost  
 10 - Clock (gives 20 seconds extra playing time)  
-11 - Candy in alternating colors that appears and disappears every 5 seconds (gives 30 points)  
-12 - Medication (gives extra life if they are under 5)  
-13 - Star Mario moves on the board (gives an extra 50 points)  
+11 - Candy in changing colors that re-appears every 5 seconds (gives 30 points)  
+12 - Medicine (gives extra life if they are under 5)  
+13 - Cute Mario Star that moves on the board (gives an extra 50 points)  
+
+  
+## _About the movement of ghosts:_ :ghost:
+Every ghost moves towards the step that will reduce the distance between her and the Pacman as much as possible.  
+Each step is being checked so that the ghost does not collide with a wall, another ghost or does not return to the previous location she was on.  
+This prevents ping-pong like movements.  
+If no such smart move is found the ghost will choose one of her neighbors.  
+In addition, in order to vary the movements of the ghosts and to prevent them from moving in circles, a shuffle is performed on their list of "possible moves".
