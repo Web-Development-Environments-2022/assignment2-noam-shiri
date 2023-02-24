@@ -5,8 +5,8 @@
 https://web-development-environments-2022.github.io/assignment2-207777525_318267895/
 
 ## _Our details:_ :woman_technologist: :woman_technologist:
-- Shiri Itach 318267895
-- Noam Cohen Maguri 207777525
+- Shiri Itach 
+- Noam Cohen Maguri 
 
 
 ## _Functionality:_
